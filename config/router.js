@@ -1,12 +1,13 @@
 const router = require('express').Router();
 const trips = require('../controllers/trips');
 const days = require('../controllers/days');
+const places = require('../controllers/places');
 
 router.route('/trips')
   .post(trips.create);
 
-router.route('/trips/:id/places/')
-  .post(days.updateDay);
+router.route('/trips/:id/places')
+  .post(places.createPlaceDay); //changed to post as creating new place
 
 router.route('/*')
   .all((req, res) => res.status(404).json({ message: 'Not found' }));
