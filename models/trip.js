@@ -19,6 +19,7 @@ const daySchema = new mongoose.Schema({
 });
 
 const tripSchema = new mongoose.Schema({
+  user: {type: mongoose.Schema.ObjectId, ref: 'User'},
   location: { type: String },
   startDay: { type: Date },
   days: [daySchema]

@@ -4,7 +4,10 @@ const days = require('../controllers/days');
 const places = require('../controllers/places');
 
 router.route('/trips')
-  .post(trips.create);
+  .post(trips.createTrip);
+
+router.route('/trips/:id')
+  .delete(trips.deleteTrip);
 
 router.route('/trips/:id/places')
   .post(places.createPlaceDay); //changed to post as creating new place
