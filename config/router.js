@@ -6,7 +6,7 @@ router.route('/trips')
   .post(trips.create);
 
 router.route('/trips/:id/places/')
-  .put(days.updateDay);
+  .post(days.updateDay);
 
 router.route('/*')
   .all((req, res) => res.status(404).json({ message: 'Not found' }));
