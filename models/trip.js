@@ -27,6 +27,8 @@ const placeSchema = new mongoose.Schema({
 });
 
 
-module.exports = mongoose.model('Trip', tripSchema);
-module.exports = mongoose.model('Day', daySchema);
-module.exports = mongoose.model('Place', placeSchema);
+module.exports = {
+  Trip: mongoose.model('Trip', tripSchema),
+  Day: mongoose.model('Day', daySchema),
+  Place: mongoose.model('Place', placeSchema)
+};
