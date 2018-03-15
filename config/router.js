@@ -9,6 +9,7 @@ router.route('/trips')
 
 router.route('/trips/:id')
   .get(trips.showTrip)
+  .put(trips.updateTrip)
   .delete(trips.deleteTrip);
 
 router.route('/trips/:id/places')
