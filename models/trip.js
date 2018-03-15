@@ -3,7 +3,10 @@ const mongoose = require('mongoose');
 const placeSchema = new mongoose.Schema({
   name: { type: String },
   address: { type: String },
-  location: { type: String },
+  location: {
+    lat: { type: Number },
+    lng: { type: Number }
+  },
   image: { type: String },
   description: { type: String },
   rating: { type: Number, min: 1, max: 5 }
@@ -16,10 +19,7 @@ const daySchema = new mongoose.Schema({
 });
 
 const tripSchema = new mongoose.Schema({
-  location: {
-    lat: { type: Number },
-    lng: { type: Number }
-  },
+  location: { type: String },
   startDay: { type: Date },
   days: [daySchema]
 });
