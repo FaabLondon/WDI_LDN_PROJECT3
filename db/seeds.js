@@ -13,7 +13,6 @@ let tripData = [{
 }];
 
 //sometimes get : MongoError: Use of expired sessions is not permitted message
-//user is not added to trip...
 
 mongoose.connect(dbURI, (err, db) => {
   db.dropDatabase();
