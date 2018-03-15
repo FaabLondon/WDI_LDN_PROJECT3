@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 const { dbURI } = require('../config/environment');
-const Place = require('../models/place');
+const Place = require('../models/trip');
 
 mongoose.connect(dbURI, (err, db) => {
   db.dropDatabase();
