@@ -10,6 +10,23 @@ function createPlaceDayRoute(req, res, next) {
     .catch(next);
 }
 
+function deletePlaceDayRoute(req, res, next){
+  Trip.findById(req.params.id)
+    .then(trip => {
+      const place = trip.days[0].places.id(req.params.placeId);
+      place.remove();
+      return trip.save();
+    })
+    .then(() => res.sendStatus(204)) //check if we should return anything...
+    .catch(next);
+}
+
+//still need to do showPlaceDayRoute
+//and indexplaces
+//no need for updatePlaces
+
+
 module.exports = {
-  createPlaceDay: createPlaceDayRoute
+  createPlaceDay: createPlaceDayRoute,
+  deletePlaceDay: deletePlaceDayRoute
 };
