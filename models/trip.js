@@ -1,19 +1,5 @@
 const mongoose = require('mongoose');
 
-const tripSchema = new mongoose.Schema({
-  location: {
-    lat: { type: Number },
-    lng: { type: Number }
-  },
-  startDay: { type: Date, required: true },
-  days: [daySchema]
-});
-
-const daySchema = new mongoose.Schema({
-  date: { type: Date, required: true },
-  places: [placeSchema]
-});
-
 const placeSchema = new mongoose.Schema({
   name: { type: String, required: true },
   address: { type: String, required: true },
@@ -27,8 +13,21 @@ const placeSchema = new mongoose.Schema({
 });
 
 
-module.exports = {
-  Trip: mongoose.model('Trip', tripSchema),
-  Day: mongoose.model('Day', daySchema),
-  Place: mongoose.model('Place', placeSchema)
-};
+const daySchema = new mongoose.Schema({
+  date: { type: Date, required: true },
+  places: [placeSchema]
+});
+
+const tripSchema = new mongoose.Schema({
+  location: {
+    lat: { type: Number },
+    lng: { type: Number }
+  },
+  startDay: { type: Date, required: true },
+  days: [daySchema]
+});
+
+
+module.exports = mongoose.model('Trip', tripSchema);
+module.exports = mongoose.model('Day', daySchema);
+module.exports = mongoose.model('Place', placeSchema);
