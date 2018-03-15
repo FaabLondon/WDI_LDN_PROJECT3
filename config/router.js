@@ -8,6 +8,7 @@ router.route('/trips')
   .get(trips.indexTrip);
 
 router.route('/trips/:id')
+  .get(trips.showTrip)
   .delete(trips.deleteTrip);
 
 router.route('/trips/:id/places')

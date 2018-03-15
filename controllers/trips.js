@@ -22,8 +22,15 @@ function indexTripRoute(req, res, next){
     .catch(next);
 }
 
+function showTripRoute(req, res, next){
+  Trip.findById(req.params.id)
+    .then(trip => res.status(200).json(trip))
+    .catch(next);
+}
+
 module.exports = {
   createTrip: createTripRoute,
   deleteTrip: deleteTripRoute,
-  indexTrip: indexTripRoute
+  indexTrip: indexTripRoute,
+  showTrip: showTripRoute
 };
