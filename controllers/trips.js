@@ -5,6 +5,7 @@ function createTripRoute(req, res, next) {
   //if we do so, we always need to drop all the trips with dummy users on our landing page...
 
   Trip.create(req.body)
+  //add that on trip creation, the first date in days array is equalto startDay of trip
     .then(trip => res.status(201).json(trip))
     .catch(next);
 }
