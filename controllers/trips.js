@@ -16,12 +16,14 @@ function deleteTripRoute(req, res, next){
     .catch(next);
 }
 
-function showTripRoute(req, res, next){
+function indexTripRoute(req, res, next){
   Trip.find()
-    .
+    .then(trips => res.status(200).json(trips))
+    .catch(next);
 }
 
 module.exports = {
   createTrip: createTripRoute,
-  deleteTrip: deleteTripRoute
+  deleteTrip: deleteTripRoute,
+  indexTrip: indexTripRoute
 };

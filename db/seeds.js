@@ -3,7 +3,7 @@ mongoose.Promise = require('bluebird');
 const { dbURI } = require('../config/environment');
 const { Trip } = require('../models/trip');
 const User = require('../models/user');
-const tripData = [{
+let tripData = [{
   location: 'Barcelona',
   startDay: 'Thu Apr 15 2018 00:00:00 GMT+0100 (CET)',
   days: [{
@@ -13,6 +13,7 @@ const tripData = [{
 }];
 
 //sometimes get : MongoError: Use of expired sessions is not permitted message
+//user is not added to trip...
 
 mongoose.connect(dbURI, (err, db) => {
   db.dropDatabase();
@@ -23,12 +24,17 @@ mongoose.connect(dbURI, (err, db) => {
     password: 'password',
     passwordConfirmation: 'password'
   })
-    .then(user => tripData.user = user);
+    .then(user => {
+      tripData = tripData.map(trip => {
+        trip.user = user;
+        return trip;
+      });
 
-  Trip.create(tripData)
-    .then(trips => console.log(`${trips.length} trip(s) created`))
-    .catch(err => console.log(err))
-    .finally(() => mongoose.connection.close());
+      Trip.create(tripData)
+        .then(trips => console.log(`${trips.length} trip(s) created`))
+        .catch(err => console.log(err))
+        .finally(() => mongoose.connection.close());
+    });
 });
 
 
