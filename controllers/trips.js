@@ -1,9 +1,8 @@
 const Trip = require('../models/trip');
 
 function createTripRoute(req, res, next) {
-  //we should not allow a trip to be created without signing in as we need to assing a user id to each new trip - or we could assign a temporary user id (dummy) and only when user save, it asks for login and then update trip user id thanks to req.body.user = req.currentUser (after authentification)
-  //if we do so, we always need to drop all the trips with dummy users on our landing page...
-
+  //we should not allow a trip to be created without signing in
+  //insert user in create new trip route
   Trip.create(req.body)
   //add that on trip creation, the first date in days array is equalto startDay of trip
     .then(trip => res.status(201).json(trip))
