@@ -10,7 +10,6 @@ function TripsIndexCtrl() {
     vm.isActive = !vm.isActive;
     console.log(vm.showModal);
     if(vm.form.$invalid) return false;
-    // Trip.create(vm.newTrip);
   }
 
 

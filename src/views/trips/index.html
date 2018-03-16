@@ -1,7 +1,6 @@
-
+<!-- MODAL -->
 
 <div class="modal is-active" ng-class="{'is-active': tripsIndex.isActive}">
-<!-- <div class="modal"> -->
   <div class="modal-background"></div>
   <div class="modal-content">
 
@@ -31,5 +30,100 @@
     </section>
 
   </div>
-  <button class="modal-close is-large" aria-label="close"></button>
+</div>
+
+<!-- INDEX PAGE - TOP NAVBARS -->
+
+<nav class="navbar">
+  <div class="navbar-brand">
+  <a class="navbar-item" href="/">
+    <img src="https://images.vexels.com/media/users/3/145136/isolated/preview/94a70b169da2d2f32dc34ead9122ef2d-sun-sharp-rays-big-icon-by-vexels.png" alt="holidayPlanner">
+    &nbsp;
+    Holiday Planner
+  </a>
+<div class="navbar-burger ng-class:clicked ? 'is-active' : 'is-not-active'" data-target="#mobile-menu" ng-click="clicked = !clicked" >
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+</div>
+<div id="mobile-menu" class="navbar-menu ng-class:clicked ? 'is-active' : 'is-not-active'">
+  <div class="navbar-start">
+    <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="placesIndex">City: London</a>
+    <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="placesIndex">15th April: Thursday</a>
+    <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="placesNew" ng-if="main.isAuthenticated()">New Places</a>
+  </div>
+  <div class="navbar-end">
+
+    <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="placesIndex">Daily Plan</a>
+    <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="placesIndex">My Trip</a>
+
+    <a class="navbar-item" ng-click="main.logout()" ng-if="main.isAuthenticated()">Logout</a>
+  </div>
+  </div>
+</div>
+</nav>
+<nav class="navbar">
+  <div class="navbar-brand">
+
+<div class="navbar-burger ng-class:clicked ? 'is-active' : 'is-not-active'" data-target="#mobile-menu" ng-click="clicked = !clicked" >
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+</div>
+<div id="mobile-menu" class="navbar-menu ng-class:clicked ? 'is-active' : 'is-not-active'">
+  <div class="navbar-start">
+    <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="placesIndex">Places</a>
+    <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="placesIndex">Events</a>
+    <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="placesIndex">Restaurants</a>
+    <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="placesIndex">Hotels</a>
+  </div>
+</div>
+</nav>
+
+<!-- SIDEBAR -->
+
+<section class="main-content columns is-fullheight">
+
+  <aside class="column is-sidebar-menu is-2 is-narrow-mobile is-fullheight section is-hidden-mobile">
+    <!-- <p class="menu-label is-hidden-touch">Navigation</p> -->
+    <!-- <ul class="menu-list"> -->
+    <ul>
+      <li>
+        <div class="">
+        <a href="#" class="">
+          <img src="http://www.lonelyplanet.com/news/wp-content/uploads/2017/08/London.jpg" alt="">
+        </a>
+          <h1>Big Ben</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </div>
+      </li>
+      <li>
+        <div class="">
+        <a href="#" class="">
+          <img src="https://www.virginexperiencedays.co.uk/content/img/product/large/sights-of-london-14163305.jpg" alt="">
+        </a>
+          <h1>London Eye</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </div>
+      </li>
+      <li>
+        <div class="">
+        <a href="#" class="">
+          <img src="https://www.virginexperiencedays.co.uk/content/img/product/large/sights-of-london-14163305.jpg" alt="">
+        </a>
+          <h1>London Eye</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </div>
+      </li>
+
+
+    </ul>
+  </aside>
+</section>
+
+<!-- GOOGLE MAPS -->
+<div>
+
 </div>
