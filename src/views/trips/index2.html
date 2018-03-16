@@ -1,6 +1,6 @@
 
 
-<div class="modal is-active" ng-class="{'is-active': tripsIndex.isActive}">
+<div class="modal" ng-init="tripsIndex.showModal=true" ng-class="{'is-active': true}">
 <!-- <div class="modal"> -->
   <div class="modal-background"></div>
   <div class="modal-content">
@@ -17,6 +17,7 @@
               <div class="notification is-danger" ng-message="required">This field is required</div>
             </div> -->
           </div>
+          
           <div class="field">
             <label for="name">When?</label>
             <input class="input" placeholder="when" name="when" ng-model="tripsIndex.newTrip.startDate" required />
