@@ -10,7 +10,7 @@ import Router from './config/router';
 //import Auth from './config/auth';
 
 //controllers
-import PlacesHomeCtrl from './controllers/trips/home';
+import TripsHomeCtrl from './controllers/trips/home';
 import TripsIndexCtrl from './controllers/trips/tripsIndex';
 import MainCtrl from './controllers/trips/main';
 
@@ -19,6 +19,8 @@ import MainCtrl from './controllers/trips/main';
 
 //directives
 
+import googleMap from './directives/google-map';
+import googleAutocomplete from './directives/google-autocomplete';
 
 //sass styling and bulma
 import './assets/scss/style.scss';
@@ -29,5 +31,7 @@ angular
   .module('holidayPlanner', ['ui.router', 'satellizer', 'ngMessages'])
   .config(Router)
   .controller('MainCtrl', MainCtrl)
-  .controller('PlacesHomeCtrl', PlacesHomeCtrl)
-  .controller('TripsIndexCtrl', TripsIndexCtrl);
+  .controller('TripsHomeCtrl', TripsHomeCtrl)
+  .controller('TripsIndexCtrl', TripsIndexCtrl)
+  .directive('googleAutocomplete', googleAutocomplete)
+  .directive('googleMap', googleMap);
