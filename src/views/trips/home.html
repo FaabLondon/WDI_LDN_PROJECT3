@@ -4,27 +4,46 @@
       <h1 class="title is-size-1-desktop is-size-4-touch has-text-white has-text-centered">The new way to plan your next trip</h1>
       <h2 class="subtitle is-size-3-desktop is-size-4-touch has-text-white has-text-centered">Create a fully customized day itinerary for free</h2>
 
+      <!-- registration form  -->
+
       <div class="container homepageForm">
         <section ng-if="!AuthRegisterLogin.registered" class="section">
           <h3 class="subtitle is-size-3-desktop is-size-4-touch has-text-grey has-text-centered">Please register</h2>
 
           <div class="container registrationForm">
-            <form ng-submit="AuthRegisterLogin.handleRegister()">
+            <form name="AuthRegisterLogin.form" ng-submit="AuthRegisterLogin.handleRegister()" novalidate>
               <div class="field">
                 <label for="email">Username</label>
-                <input class="input" placeholder="Username" name="username" ng-model="AuthRegisterLogin.user.username" />
+                <input class="input" placeholder="Username" name="username" ng-model="AuthRegisterLogin.user.username" required />
+                <div ng-messages="AuthRegisterLogin.form.username.$error" ng-if="AuthRegisterLogin.form.username.$dirty || AuthRegisterLogin.form.$submitted">
+                  <div class="has-text-danger" ng-message="required">This field is required
+                  </div>
+                </div>
               </div>
               <div class="field">
                 <label for="email">Email</label>
-                <input class="input" placeholder="Email" name="email" ng-model="AuthRegisterLogin.user.email" />
+                <input class="input" placeholder="Email" name="email" ng-model="AuthRegisterLogin.user.email" required pattern="^\w+@\w+\..{2,3}(.{2,3})?$"/>
+                <div ng-messages="AuthRegisterLogin.form.email.$error" ng-if="AuthRegisterLogin.form.email.$touched || AuthRegisterLogin.form.$submitted">
+                  <div class="has-text-danger" ng-message="required">This field is required
+                  </div>
+                  <div class="has-text-danger" ng-message="pattern">This field must be a valid email</div>
+                </div>
               </div>
               <div class="field">
                 <label for="password">Password</label>
-                <input type="password" class="input" placeholder="Password" name="password" ng-model="AuthRegisterLogin.user.password" />
+                <input type="password" class="input" placeholder="Password" name="password" ng-model="AuthRegisterLogin.user.password" required/>
+                <div ng-messages="AuthRegisterLogin.form.password.$error" ng-if="AuthRegisterLogin.form.password.$dirty || AuthRegisterLogin.form.$submitted">
+                  <div class="has-text-danger" ng-message="required">This field is required
+                  </div>
+                </div>
               </div>
               <div class="field">
                 <label for="passwordConfirmation">Password Confirmation</label>
-                <input type="password" class="input" placeholder="Password Confirmation" name="passwordConfirmation" ng-model="AuthRegisterLogin.user.passwordConfirmation" />
+                <input type="password" class="input" placeholder="Password Confirmation" name="passwordConfirmation" ng-model="AuthRegisterLogin.user.passwordConfirmation" required/>
+                <div ng-messages="AuthRegisterLogin.form.passwordConfirmation.$error" ng-if="AuthRegisterLogin.form.passwordConfirmation.$dirty || AuthRegisterLogin.form.$submitted">
+                  <div class="has-text-danger" ng-message="required">This field is required
+                  </div>
+                </div>
               </div>
               <div class="has-text-centered">
                 <button class="button is-primary">Submit</button>
@@ -38,6 +57,8 @@
         </section>
       </div>
 
+      <!-- login form -->
+
       <div class="container homepageForm">
         <section ng-if="AuthRegisterLogin.registered" class="section homepageForm">
           <h3 class="subtitle is-size-3-desktop is-size-4-touch has-text-grey has-text-centered">Please login</h2>
@@ -45,11 +66,11 @@
             <form ng-submit="AuthRegisterLogin.handleLogin()">
               <div class="field">
                 <label for="email">Email</label>
-                <input class="input" placeholder="Email" name="email" ng-model="AuthRegisterLogin.user.email" />
+                <input class="input" placeholder="Email" name="email" ng-model="AuthRegisterLogin.credentials.email" />
               </div>
               <div class="field">
                 <label for="password">Password</label>
-                <input type="password" class="input" placeholder="Password" name="password" ng-model="AuthRegisterLogin.user.password" />
+                <input type="password" class="input" placeholder="Password" name="password" ng-model="AuthRegisterLogin.credentials.password" />
               </div>
               <div class="has-text-centered">
                 <button class="button is-primary">Submit</button>

@@ -15,6 +15,7 @@ function TripsIndexCtrl() {
   function handleSubmit() {
     vm.isActive = !vm.isActive;
     console.log(vm.showModal);
+    
     if(vm.form.$invalid) return false;
   }
 
