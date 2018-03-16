@@ -4,6 +4,7 @@ function AuthRegisterLoginCtrl($auth, $state){
   const vm = this;
   vm.credentials = {};
   vm.user = {};
+  vm.message = '';
   vm.registered = false;
 
   function handleRegister(){
@@ -13,6 +14,11 @@ function AuthRegisterLoginCtrl($auth, $state){
       .then(() => {
         vm.registered = !vm.registered;
         $state.go('homepage');
+      })
+      .catch(res => {
+        if(res.data.message === 'Unprocessable Entity'){
+          vm.message = 'Passwords do not match';
+        }
       });
   }
 
@@ -26,6 +32,11 @@ function AuthRegisterLoginCtrl($auth, $state){
       .then(res => {
         console.log(res.data.message);
         $state.go('tripsIndex');
+      })
+      .catch(res => {
+        if(res.data.message === 'Unauthorized'){
+          vm.message = 'Invalid credentials - Please try again';
+        }
       });
   }
 
