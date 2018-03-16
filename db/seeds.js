@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 const { dbURI } = require('../config/environment');
-const { Trip } = require('../models/trip');
+const Trip = require('../models/trip');
 const User = require('../models/user');
 let tripData = [{
   location: 'Barcelona',
-  startDay: 'Thu Apr 15 2018 00:00:00 GMT+0100 (CET)',
+  startDate: 'Thu Apr 15 2018 00:00:00 GMT+0100 (CET)',
   days: [{
     date: 'Thu Apr 15 2018 00:00:00 GMT+0100 (CET)',
     places: []

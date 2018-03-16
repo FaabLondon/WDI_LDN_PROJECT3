@@ -1,5 +1,6 @@
 const Trip = require('../models/trip');
 
+//add place
 function createPlaceDayRoute(req, res, next) {
   Trip.findById(req.params.id)
     .then(trip => {
@@ -10,6 +11,7 @@ function createPlaceDayRoute(req, res, next) {
     .catch(next);
 }
 
+//delete place
 function deletePlaceDayRoute(req, res, next){
   Trip.findById(req.params.id)
     .then(trip => {
