@@ -1,10 +1,11 @@
-TripsIndexCtrl.$inject = [];
+TripsIndexCtrl.$inject = ['Trip'];
 
-function TripsIndexCtrl() {
+function TripsIndexCtrl(Trip) {
 
   const vm = this; //ViewModel allows us to use this in function
   vm.isActive = true;
   vm.newTrip = {};
+  vm.locationName = '';
   vm.newPlace = {
     location: {
       lat: 0,
@@ -13,10 +14,11 @@ function TripsIndexCtrl() {
   };
 
   function handleSubmit() {
-    vm.isActive = !vm.isActive;
-    console.log(vm.showModal);
-    
     if(vm.form.$invalid) return false;
+    vm.isActive = !vm.isActive;
+    console.log(vm.newPlace);
+    console.log(vm.locationName);
+
   }
 
 
