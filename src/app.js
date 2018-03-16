@@ -10,13 +10,15 @@ import Router from './config/router';
 //import Auth from './config/auth';
 
 //controllers
-import PlacesHomeCtrl from './controllers/trips/home';
+import TripsHomeCtrl from './controllers/trips/home';
+import TripsIndexCtrl from './controllers/trips/tripsIndex';
 
 //service
 
 
 //directives
 
+import googleAutocomplete from './directives/google-autocomplete';
 
 //sass styling and bulma
 import './assets/scss/style.scss';
@@ -26,4 +28,6 @@ import 'bulma';
 angular
   .module('holidayPlanner', ['ui.router', 'satellizer', 'ngMessages'])
   .config(Router)
-  .controller('PlacesHomeCtrl', PlacesHomeCtrl);
+  .controller('TripsHomeCtrl', TripsHomeCtrl)
+  .controller('TripsIndexCtrl', TripsIndexCtrl)
+  .directive('googleAutocomplete', googleAutocomplete);

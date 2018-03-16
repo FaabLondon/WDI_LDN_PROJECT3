@@ -11,7 +11,11 @@
         <form name="placesNew.form" ng-submit="placesNew.handleSubmit()" novalidate>
           <div class="field">
             <label for="name">Where?</label>
-            <input class="input" placeholder="where" name="where" ng-model="placesNew.newPlace.address" required />
+
+            <!-- <input location="tripsIndex.newPlace.location" class="input googleAutocomplete" placeholder="Address" name="address" ng-model="tripsIndex.newPlace.address" required /> -->
+
+            <input location="tripsIndex.newPlace.location" class="input googleAutocomplete" placeholder="where" name="where" ng-model="tripsIndex.newPlace.address" required />
+            <!-- <input class="input" placeholder="where" name="where" ng-model="placesNew.newPlace.address" required /> -->
             <div ng-messages="placesNew.form.address.$error" ng-if="placesNew.form.address.$dirty || placesNew.form.$submitted">
               <div class="notification is-danger" ng-message="required">This field is required</div>
             </div>

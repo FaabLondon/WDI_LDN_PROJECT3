@@ -1,4 +1,4 @@
-TripsIndexCtrl.$inject = ['Place'];
+TripsIndexCtrl.$inject = [];
 function TripsIndexCtrl() {
 
   const vm = this; //ViewModel allows us to use this in function
