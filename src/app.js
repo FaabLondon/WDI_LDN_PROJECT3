@@ -10,7 +10,7 @@ import Router from './config/router';
 //import Auth from './config/auth';
 
 //controllers
-
+import PlacesHomeCtrl from './controllers/trips/home';
 
 //service
 
@@ -25,4 +25,5 @@ import 'bulma';
 //setup angular module
 angular
   .module('holidayPlanner', ['ui.router', 'satellizer', 'ngMessages'])
-  .config(Router);
+  .config(Router)
+  .controller('PlacesHomeCtrl', PlacesHomeCtrl);
