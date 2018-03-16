@@ -20,6 +20,7 @@ function AuthRegisterLoginCtrl($auth, $state){
   function handleLogin(){
     //send the credentials to server with satelliser and get the token back from server
     //when do login(), sends request to $authProvider.loginUrl = '/api/login'; as defined in config file - //sends login request to server with email and password entered in form and sends back token object from server (see in web tools in local storage)
+    if(this.form.$invalid) return false;
     $auth.login(this.credentials)
     //flash message removed
       .then(res => {
