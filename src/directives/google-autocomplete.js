@@ -22,9 +22,6 @@ function googleAutocomplete() {
         $scope.location.lat = lat;
         $scope.location.lng = lng;
         $scope.address = address;
-        console.log('lat:'+$scope.location.lat);
-        console.log('lng:'+$scope.location.lng);
-        console.log('address: '+$scope.address);
 
       });
     }

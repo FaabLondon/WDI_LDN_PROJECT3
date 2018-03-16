@@ -18,6 +18,7 @@ import TripsIndexCtrl from './controllers/trips/tripsIndex';
 
 //directives
 
+import googleMap from './directives/google-map';
 import googleAutocomplete from './directives/google-autocomplete';
 
 //sass styling and bulma
@@ -30,4 +31,5 @@ angular
   .config(Router)
   .controller('TripsHomeCtrl', TripsHomeCtrl)
   .controller('TripsIndexCtrl', TripsIndexCtrl)
-  .directive('googleAutocomplete', googleAutocomplete);
+  .directive('googleAutocomplete', googleAutocomplete)
+  .directive('googleMap', googleMap);
