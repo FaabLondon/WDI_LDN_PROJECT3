@@ -1,4 +1,4 @@
-const { Trip, Day, Place } = require('../models/trip');
+const Trip = require('../models/trip');
 
 function createPlaceDayRoute(req, res, next) {
   Trip.findById(req.params.id)

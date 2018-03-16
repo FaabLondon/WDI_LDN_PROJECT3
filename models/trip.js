@@ -21,13 +21,9 @@ const daySchema = new mongoose.Schema({
 const tripSchema = new mongoose.Schema({
   user: {type: mongoose.Schema.ObjectId, ref: 'User'},
   location: { type: String },
-  startDay: { type: Date },
+  startDate: { type: Date },
   days: [daySchema]
 });
 
 
-module.exports = {
-  Trip: mongoose.model('Trip', tripSchema),
-  Day: mongoose.model('Day', daySchema),
-  Place: mongoose.model('Place', placeSchema)
-};
+module.exports = mongoose.model('Trip', tripSchema);
