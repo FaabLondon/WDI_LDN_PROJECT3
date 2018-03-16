@@ -7,7 +7,7 @@ function Router($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('homepage', {
       url: '/',
       templateUrl: 'views/trips/home.html',
-      controller: 'PlacesHomeCtrl as PlacesHome'
+      controller: 'AuthRegisterLoginCtrl as AuthRegisterLogin'
     })
     .state('tripsIndex', {
       url: '/trips',

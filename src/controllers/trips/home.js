@@ -1,8 +1,8 @@
 //PlacesHomeCtrl.$inject = [];
 
-function PlacesHomeCtrl() {
+function TripsHomeCtrl() {
 
 
 }
 
-export default PlacesHomeCtrl;
+export default TripsHomeCtrl;
