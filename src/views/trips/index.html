@@ -16,7 +16,7 @@
           </div>
           <div class="field">
             <label for="name">When?</label>
-            <input class="input" placeholder="when" name="when" ng-model="placesNew.newPlace.image" required />
+            <input class="input" type="date" placeholder="when" name="when" ng-model="placesNew.newPlace.image" required />
             <div ng-messages="placesNew.form.image.$error" ng-if="placesNew.form.image.$dirty || placesNew.form.$submitted">
               <div class="notification is-danger" ng-message="required">This field is required</div>
             </div>
