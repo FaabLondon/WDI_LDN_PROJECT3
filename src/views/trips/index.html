@@ -11,15 +11,15 @@
         <form name="tripsIndex.form" ng-submit="tripsIndex.handleSubmit()" novalidate>
           <div class="field">
             <label for="name">Where?</label>
-            <input class="input" placeholder="where" name="where" ng-model="tripsIndex.newTrip.location" required />
-            <!-- <div ng-messages="placesNew.form.address.$error" ng-if="placesNew.form.address.$dirty || placesNew.form.$submitted">
+            <input location="tripsIndex.newPlace.location" class="input googleAutocomplete" placeholder="where" name="where" ng-model="tripsIndex.newPlace.address" required />
+            <div ng-messages="placesNew.form.address.$error" ng-if="placesNew.form.address.$dirty || placesNew.form.$submitted">
               <div class="notification is-danger" ng-message="required">This field is required</div>
             </div> -->
           </div>
           <div class="field">
             <label for="name">When?</label>
-            <input class="input" placeholder="when" name="when" ng-model="tripsIndex.newTrip.startDate" required />
-            <!-- <div ng-messages="placesNew.form.image.$error" ng-if="placesNew.form.image.$dirty || placesNew.form.$submitted">
+            <input class="input" type="date" placeholder="when" name="when" ng-model="placesNew.newPlace.image" required />
+            <div ng-messages="placesNew.form.image.$error" ng-if="placesNew.form.image.$dirty || placesNew.form.$submitted">
               <div class="notification is-danger" ng-message="required">This field is required</div>
             </div> -->
           </div>
@@ -127,3 +127,4 @@
 <div>
 
 </div>
+<div><google-map zoom="14" center="tripsIndex.newPlace.location"></google-map></div>
