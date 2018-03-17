@@ -4,7 +4,11 @@ Trip.$inject = ['$http'];
 
 function Trip($http) {
 
+  function create(trip) {
+    return $http.post('/api/trips', trip);
+  }
 
+  this.create = create;
 
 }
 

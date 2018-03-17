@@ -11,7 +11,7 @@
         <form name="tripsIndex.form" ng-submit="tripsIndex.handleSubmit()" novalidate>
           <div class="field">
             <label for="location">Where?</label>
-            <input coordinates="tripsIndex.coordinates" ng-model="tripsIndex.newPlace.location" class="input googleAutocomplete" placeholder="where do you want to go?" name="location" required />
+            <input coordinates="tripsIndex.coordinates" ng-model="tripsIndex.newTrip.location" class="input googleAutocomplete" placeholder="where do you want to go?" name="location" required />
             <div ng-messages="tripsIndex.form.location.$error" ng-if="tripsIndex.form.location.$dirty || tripsIndex.form.$submitted">
               <div class="has-text-danger" ng-message="required">This field is required
               </div>
@@ -19,7 +19,7 @@
           </div>
           <div class="field">
             <label for="startDate">When?</label>
-            <input class="input" type="date" placeholder="When do you want to go?" name="startDate" ng-model="tripsIndex.newPlace.startDate" required />
+            <input class="input" type="date" placeholder="When do you want to go?" name="startDate" ng-model="tripsIndex.newTrip.startDate" required />
             <div ng-messages="tripsIndex.form.startDate.$error" ng-if="tripsIndex.form.startDate.$dirty || tripsIndex.form.$submitted">
               <div class="has-text-danger" ng-message="required">This field is required</div>
             </div>
@@ -51,7 +51,7 @@
 <div id="mobile-menu" class="navbar-menu ng-class:clicked ? 'is-active' : 'is-not-active'">
   <div class="navbar-start">
     <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="placesIndex">City: {{tripsIndex.locationName}}</a>
-    <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="placesIndex">{{tripsIndex.newPlace.startDate | date:"dd-MMM EEE"}}</a>
+    <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="placesIndex">{{tripsIndex.newTrip.startDate | date:"dd-MMM EEE"}}</a>
     <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="tripsIndex" ng-if="main.isAuthenticated()">New Places</a>
   </div>
   <div class="navbar-end">

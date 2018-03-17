@@ -1,8 +1,10 @@
 const Trip = require('../models/trip');
+const User = require('../models/user');
 
 function createTripRoute(req, res, next) {
   //we should not allow a trip to be created without signing in
   //insert user in create new trip route
+  Object.assign(req.body, { user: req.currentUser._id });
   Trip.create(req.body)
   //add that on trip creation, the first date in days array is equalto startDay of trip
     .then(trip => res.status(201).json(trip))
