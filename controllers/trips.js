@@ -7,7 +7,10 @@ function createTripRoute(req, res, next) {
   Object.assign(req.body, { user: req.currentUser._id });
   Trip.create(req.body)
   //add that on trip creation, the first date in days array is equalto startDay of trip
-    .then(trip => res.status(201).json(trip))
+    .then(trip => {
+      console.log(trip);
+      res.status(201).json(trip);
+    })
     .catch(next);
 }
 

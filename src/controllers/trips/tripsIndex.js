@@ -19,7 +19,7 @@ function TripsIndexCtrl($auth, Trip, $state, $http) {
   vm.userName = Trip.userName;
 
   //create trip function
-  function handleSubmit() {
+  function createTrip() {
     const start = vm.newTrip.startDate;
 
     if(vm.form.$invalid) return false;
@@ -33,16 +33,15 @@ function TripsIndexCtrl($auth, Trip, $state, $http) {
     };
 
     //user will be added to trip on server side
-    //fucntion returns trip and we store tripId
+    //function returns trip and we store tripId
     Trip.create(vm.newTrip)
-      .then(trip => {
-        Trip.tripId = trip._id;
+      .then(res => {
+        Trip.tripId = res.data._id;
         $state.go('tripsIndex');
       });
 
     //this is the google search nearby search results
     vm.searchResult = Trip.searchResult;
-    console.log(vm.searchResult);
 
   }
 
@@ -53,7 +52,7 @@ function TripsIndexCtrl($auth, Trip, $state, $http) {
   }
 
 
-  this.handleSubmit = handleSubmit;
+  this.createTrip = createTrip;
   vm.logout = logout;
 
 }

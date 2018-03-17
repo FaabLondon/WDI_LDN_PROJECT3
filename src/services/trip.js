@@ -6,7 +6,7 @@ function Trip($http) {
 
   const userName = '';
   const searchResult = [];
-  const tripId;
+  const tripId = '';
 
   //function to create a new trip - the user id is added on the server side
   function create(trip) {
@@ -20,7 +20,7 @@ function Trip($http) {
 
 
   this.create = create;
-  this.createPLaceTrip = createPLaceTrip;
+  this.createPlaceTrip = createPlaceTrip;
 
 }
 
