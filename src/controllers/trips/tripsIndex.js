@@ -19,7 +19,6 @@ function TripsIndexCtrl($auth, Trip, $state, $http) {
 
   //create trip function
   function handleSubmit() {
-    console.log(vm);
     const start = vm.newTrip.startDate;
 
     if(vm.form.$invalid) return false;
@@ -36,6 +35,9 @@ function TripsIndexCtrl($auth, Trip, $state, $http) {
     Trip.create(vm.newTrip)
       .then(() => $state.go('tripsIndex'));
 
+    //this is the google search nearby search results  
+    console.log(Trip.searchResult);
+
   }
 
   vm.all = {};
@@ -51,6 +53,7 @@ function TripsIndexCtrl($auth, Trip, $state, $http) {
     $auth.logout(); //removes token from local storage
     $state.go('homepage');
   }
+
 
   this.handleSubmit = handleSubmit;
   vm.logout = logout;
