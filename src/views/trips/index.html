@@ -50,8 +50,8 @@
 </div>
 <div id="mobile-menu" class="navbar-menu ng-class:clicked ? 'is-active' : 'is-not-active'">
   <div class="navbar-start">
-    <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="placesIndex">City: {{tripsIndex.locationName}}</a>
-    <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="placesIndex">{{tripsIndex.newTrip.startDate | date:"dd-MMM EEE"}}</a>
+    <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="placesIndex">City: {{tripsIndex.newTrip.location}}</a>
+    <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="placesIndex">{{tripsIndex.newTrip.startDate | date:"EEE dd-MMM yyyy "}}</a>
     <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="tripsIndex" ng-if="main.isAuthenticated()">New Places</a>
   </div>
   <div class="navbar-end">
