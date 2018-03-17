@@ -10,13 +10,16 @@ function TripsIndexCtrl(Trip, $state) {
     lat: 0,
     lng: 0
   };
+  vm.address;
 
   function handleSubmit() {
+    console.log(vm);
     const start = vm.newTrip.startDate;
 
     if(vm.form.$invalid) return false;
     vm.isActive = !vm.isActive;
 
+    vm.newTrip.location = vm.address;
     //add array of day with 1st day = startDate of trip
     vm.newTrip.days[0] = {
       date: start,
