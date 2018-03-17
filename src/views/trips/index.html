@@ -11,18 +11,19 @@
 
         <form name="tripsIndex.form" ng-submit="tripsIndex.handleSubmit()" novalidate>
           <div class="field">
-            <label for="name">Where?</label>
-            <input location="tripsIndex.newPlace.location" class="input googleAutocomplete" placeholder="where" name="where" ng-model="tripsIndex.newPlace.address" required />
-            <div ng-messages="placesNew.form.address.$error" ng-if="placesNew.form.address.$dirty || placesNew.form.$submitted">
-              <div class="notification is-danger" ng-message="required">This field is required</div>
-            </div> -->
+            <label for="location">Where?</label>
+            <input coordinates="tripsIndex.coordinates" address="tripsIndex.address" class="input googleAutocomplete" placeholder="where do you want to go?" name="location" required />
+            <div ng-messages="tripsIndex.form.location.$error" ng-if="tripsIndex.form.location.$dirty || tripsIndex.form.$submitted">
+              <div class="has-text-danger" ng-message="required">This field is required
+              </div>
+            </div>
           </div>
           <div class="field">
-            <label for="name">When?</label>
-            <input class="input" type="date" placeholder="when" name="when" ng-model="placesNew.newPlace.image" required />
-            <div ng-messages="placesNew.form.image.$error" ng-if="placesNew.form.image.$dirty || placesNew.form.$submitted">
-              <div class="notification is-danger" ng-message="required">This field is required</div>
-            </div> -->
+            <label for="startDate">When?</label>
+            <input class="input" type="date" placeholder="When do you want to go?" name="startDate" ng-model="tripsIndex.newTrip.startDate" required />
+            <div ng-messages="tripsIndex.form.startDate.$error" ng-if="tripsIndex.form.startDate.$dirty || tripsIndex.form.$submitted">
+              <div class="has-text-danger" ng-message="required">This field is required</div>
+            </div>
           </div>
 
           <button class="button is-primary">Create Trip</button>
@@ -37,50 +38,45 @@
 
 <nav class="navbar">
   <div class="navbar-brand">
-  <a class="navbar-item" href="/">
-    <img src="https://images.vexels.com/media/users/3/145136/isolated/preview/94a70b169da2d2f32dc34ead9122ef2d-sun-sharp-rays-big-icon-by-vexels.png" alt="holidayPlanner">
-    &nbsp;
-    Holiday Planner
-  </a>
-<div class="navbar-burger ng-class:clicked ? 'is-active' : 'is-not-active'" data-target="#mobile-menu" ng-click="clicked = !clicked" >
-    <span></span>
-    <span></span>
-    <span></span>
-</div>
-</div>
-<div id="mobile-menu" class="navbar-menu ng-class:clicked ? 'is-active' : 'is-not-active'">
-  <div class="navbar-start">
-    <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="placesIndex">City: London</a>
-    <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="placesIndex">15th April: Thursday</a>
-    <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="placesNew" ng-if="main.isAuthenticated()">New Places</a>
+    <a class="navbar-item" href="/">
+      <img src="https://images.vexels.com/media/users/3/145136/isolated/preview/94a70b169da2d2f32dc34ead9122ef2d-sun-sharp-rays-big-icon-by-vexels.png" alt="holidayPlanner">
+      &nbsp;
+      Holiday Planner
+    </a>
+      <a class="navbar-item">City: {{tripsIndex.address}}</a>
+      <a class="navbar-item">{{tripsIndex.newTrip.startDate | date:"EEE dd-MMM yyyy "}}
+      </a>
+    <div class="navbar-burger ng-class:clicked ? 'is-active' : 'is-not-active'" data-target="#mobile-menu" ng-click="clicked = !clicked" >
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
   </div>
-  <div class="navbar-end">
 
-    <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="placesIndex">Daily Plan</a>
-    <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="placesIndex">My Trip</a>
-
-    <a class="navbar-item" ng-click="main.logout()" ng-if="main.isAuthenticated()">Logout</a>
+  <div id="mobile-menu" class="navbar-menu ng-class:clicked ? 'is-active' : 'is-not-active'">
+    <div class="navbar-end">
+      <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="">Daily Plan</a>
+      <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="">My Trip</a>
+      <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="">See all my Trips</a>
+      <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href=""> <span class="icon is-small"><i class="fas fa-user"></i></span>&nbsp {{tripsIndex.userName}}</a>
+          <div class="navbar-dropdown is-boxed is-right" ng-if="tripsIndex.isAuthenticated()">
+            <a class="navbar-item" ng-click="tripsIndex.logout()">Logout</a>
+          </div>
+      </div>
+    </div>
   </div>
-  </div>
-</div>
 </nav>
-<nav class="navbar">
-  <div class="navbar-brand">
 
-<div class="navbar-burger ng-class:clicked ? 'is-active' : 'is-not-active'" data-target="#mobile-menu" ng-click="clicked = !clicked" >
-    <span></span>
-    <span></span>
-    <span></span>
-</div>
-</div>
-<div id="mobile-menu" class="navbar-menu ng-class:clicked ? 'is-active' : 'is-not-active'">
-  <div class="navbar-start">
-    <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="placesIndex">Places</a>
-    <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="placesIndex">Events</a>
-    <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="placesIndex">Restaurants</a>
-    <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="placesIndex">Hotels</a>
+<nav class="navbar">
+  <div class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" ui-sref="">Places</a>
+      <a class="navbar-item" ui-sref="">Events</a>
+      <a class="navbar-item" ui-sref="">Restaurants</a>
+      <a class="navbar-item" ui-sref="">Hotels</a>
+    </div>
   </div>
-</div>
 </nav>
 
 <!-- SIDEBAR -->
@@ -128,11 +124,4 @@
 <div>
 
 </div>
-<div><google-map zoom="14" center="tripsIndex.newPlace.location"></google-map></div>
-
-
-<div class="places-loop">
-
-
-
-</div>
+<div><google-map zoom="14" center="tripsIndex.coordinates"></google-map></div>

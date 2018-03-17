@@ -3,24 +3,24 @@ const trips = require('../controllers/trips');
 const days = require('../controllers/days');
 const places = require('../controllers/places');
 const auth = require('../controllers/auth');
-//const secureRoute = require('../lib/secureRoute');
+const secureRoute = require('../lib/secureRoute');
 
 router.route('/trips')
-  .post(trips.createTrip)
-  .get(trips.indexTrip);
+  .post(secureRoute, trips.createTrip)
+  .get(secureRoute, trips.indexTrip);
 
 router.route('/trips/:id')
-  .get(trips.showTrip)
-  .put(trips.updateTrip)
-  .delete(trips.deleteTrip);
+  .get(secureRoute, trips.showTrip)
+  .put(secureRoute, trips.updateTrip)
+  .delete(secureRoute, trips.deleteTrip);
 
 //add a new place to trip
 router.route('/trips/:id/places')
-  .post(places.createPlaceDay); //changed to post as creating new place
+  .post(secureRoute, places.createPlaceDay); //changed to post as creating new place
 
 //delete a place from trip
 router.route('/trips/:id/places/:placeId')
-  .delete(places.deletePlaceDay); //changed to post as creating new place
+  .delete(secureRoute,  places.deletePlaceDay); //changed to post as creating new place
 
 //registration
 router.post('/register', auth.register);
