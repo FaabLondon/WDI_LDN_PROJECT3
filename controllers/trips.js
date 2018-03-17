@@ -1,5 +1,5 @@
 const Trip = require('../models/trip');
-const User = require('../models/user');
+//const User = require('../models/user');
 
 function createTripRoute(req, res, next) {
   //we should not allow a trip to be created without signing in

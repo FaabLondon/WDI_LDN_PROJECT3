@@ -1,6 +1,6 @@
-AuthRegisterLoginCtrl.$inject = ['$auth', '$state'];
+AuthRegisterLoginCtrl.$inject = ['$auth', 'Trip', '$state'];
 
-function AuthRegisterLoginCtrl($auth, $state){
+function AuthRegisterLoginCtrl($auth, Trip, $state){
   const vm = this;
   vm.credentials = {};
   vm.user = {};
@@ -31,6 +31,7 @@ function AuthRegisterLoginCtrl($auth, $state){
     //flash message removed
       .then(res => {
         console.log(res.data.message);
+        Trip.userName = res.data.message;
         $state.go('tripsIndex');
       })
       .catch(res => {

@@ -1,16 +1,22 @@
-TripsIndexCtrl.$inject = ['Trip', '$state'];
+TripsIndexCtrl.$inject = ['$auth','Trip', '$state'];
 
-function TripsIndexCtrl(Trip, $state) {
+function TripsIndexCtrl($auth, Trip, $state) {
 
   const vm = this; //ViewModel allows us to use this in function
   vm.isActive = true;
   vm.newTrip = {};
+  vm.userName = '';
   vm.newTrip.days = [];
   vm.coordinates = {
     lat: 0,
     lng: 0
   };
 
+  //need to store wether user is authenticated or not in order to test it in view and hide/show buttons accordingly.
+  vm.isAuthenticated = $auth.isAuthenticated;
+  vm.userName = Trip.userName;
+
+  //create trip function
   function handleSubmit() {
     const start = vm.newTrip.startDate;
 
@@ -29,8 +35,14 @@ function TripsIndexCtrl(Trip, $state) {
 
   }
 
-  this.handleSubmit = handleSubmit;
+  //logs the user out
+  function logout(){
+    $auth.logout(); //removes token from local storage
+    $state.go('homepage');
+  }
 
+  this.handleSubmit = handleSubmit;
+  vm.logout = logout;
 
 }
 

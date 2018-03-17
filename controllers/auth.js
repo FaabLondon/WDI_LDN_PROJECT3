@@ -25,7 +25,7 @@ function login(req, res, next){
       //will return a slightly different token as the time created and expiry would be different
       const token = jwt.sign({sub: user._id}, secret, {expiresIn: '6h'});
       res.json({
-        message: `Welcome back ${user.username}!`,
+        message: user.username,
         token
       });
     })
