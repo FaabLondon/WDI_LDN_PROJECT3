@@ -5,7 +5,6 @@ function TripsIndexCtrl($auth, Trip, $state, $http) {
   const vm = this; //ViewModel allows us to use this in function
   vm.isActive = true;
   vm.newTrip = {};
-  vm.tripId;
   vm.searchResult = [];
   vm.userName = '';
   vm.newTrip.days = [];
@@ -37,8 +36,7 @@ function TripsIndexCtrl($auth, Trip, $state, $http) {
     //fucntion returns trip and we store tripId
     Trip.create(vm.newTrip)
       .then(trip => {
-        vm.tripId = trip._id;
-        console.log(vm.tripId);
+        Trip.tripId = trip._id;
         $state.go('tripsIndex');
       });
 
