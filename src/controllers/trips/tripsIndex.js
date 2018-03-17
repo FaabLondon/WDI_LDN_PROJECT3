@@ -11,6 +11,7 @@ function TripsIndexCtrl($auth, Trip, $state) {
     lat: 0,
     lng: 0
   };
+  vm.address;
 
   //need to store wether user is authenticated or not in order to test it in view and hide/show buttons accordingly.
   vm.isAuthenticated = $auth.isAuthenticated;
@@ -18,11 +19,13 @@ function TripsIndexCtrl($auth, Trip, $state) {
 
   //create trip function
   function handleSubmit() {
+    console.log(vm);
     const start = vm.newTrip.startDate;
 
     if(vm.form.$invalid) return false;
     vm.isActive = !vm.isActive;
 
+    vm.newTrip.location = vm.address;
     //add array of day with 1st day = startDate of trip
     vm.newTrip.days[0] = {
       date: start,

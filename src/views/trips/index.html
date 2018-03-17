@@ -11,7 +11,7 @@
         <form name="tripsIndex.form" ng-submit="tripsIndex.handleSubmit()" novalidate>
           <div class="field">
             <label for="location">Where?</label>
-            <input coordinates="tripsIndex.coordinates" ng-model="tripsIndex.newTrip.location" class="input googleAutocomplete" placeholder="where do you want to go?" name="location" required />
+            <input coordinates="tripsIndex.coordinates" address="tripsIndex.address" class="input googleAutocomplete" placeholder="where do you want to go?" name="location" required />
             <div ng-messages="tripsIndex.form.location.$error" ng-if="tripsIndex.form.location.$dirty || tripsIndex.form.$submitted">
               <div class="has-text-danger" ng-message="required">This field is required
               </div>
@@ -42,7 +42,7 @@
       &nbsp;
       Holiday Planner
     </a>
-      <a class="navbar-item">City: {{tripsIndex.newTrip.location}}</a>
+      <a class="navbar-item">City: {{tripsIndex.address}}</a>
       <a class="navbar-item">{{tripsIndex.newTrip.startDate | date:"EEE dd-MMM yyyy "}}
       </a>
     <div class="navbar-burger ng-class:clicked ? 'is-active' : 'is-not-active'" data-target="#mobile-menu" ng-click="clicked = !clicked" >
@@ -51,6 +51,7 @@
         <span></span>
     </div>
   </div>
+
   <div id="mobile-menu" class="navbar-menu ng-class:clicked ? 'is-active' : 'is-not-active'">
     <div class="navbar-end">
       <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="">Daily Plan</a>
