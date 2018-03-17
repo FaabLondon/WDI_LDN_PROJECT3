@@ -1,9 +1,10 @@
-TripsIndexCtrl.$inject = ['$auth','Trip', '$state', '$http'];
+TripsIndexCtrl.$inject = ['$auth','Trip', '$state'];
 
-function TripsIndexCtrl($auth, Trip, $state, $http) {
+function TripsIndexCtrl($auth, Trip, $state) {
 
   const vm = this; //ViewModel allows us to use this in function
   vm.isActive = true;
+  vm.searchResult = [];
   vm.newTrip = {};
   vm.userName = '';
   vm.newTrip.days = [];
@@ -35,18 +36,15 @@ function TripsIndexCtrl($auth, Trip, $state, $http) {
     Trip.create(vm.newTrip)
       .then(() => $state.go('tripsIndex'));
 
-    //this is the google search nearby search results  
+    //this is the google search nearby search results
+    vm.searchResult = Trip.searchResult;
     console.log(Trip.searchResult);
-
   }
 
-  vm.all = {};
-  $http.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&type=restaurant&key=AIzaSyAPEmf9_jhooXaFG-9VI-W1catLwZ5vGfg')
-    .then(res => Object.assign(vm.all, res))
-    .then(res => vm.all = res.data);
-
-  console.log(vm.all);
-
+  // add place to day
+  // function addPlace() {
+  //   Trip.add
+  // }
 
   //logs the user out
   function logout(){

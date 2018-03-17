@@ -38,8 +38,6 @@
   </div>
 </div>
 
-
-
 <!-- INDEX PAGE - TOP NAVBARS -->
 
 <nav class="navbar">
@@ -90,40 +88,64 @@
 <section class="main-content columns is-fullheight">
 
   <aside class="column is-one-quarter is-sidebar-menu is-fullheight section is-hidden-mobile">
-    <!-- <p class="menu-label is-hidden-touch">Navigation</p> -->
-    <!-- <ul class="menu-list"> -->
-    <ul>
-      <li>
-        <div class="">
-        <a href="#" class="">
-          <img src="http://www.lonelyplanet.com/news/wp-content/uploads/2017/08/London.jpg" alt="">
-        </a>
-          <h1>Big Ben</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-      </div>
-      </li>
-      <li>
-        <div class="">
-        <a href="#" class="">
-          <img src="https://www.virginexperiencedays.co.uk/content/img/product/large/sights-of-london-14163305.jpg" alt="">
-        </a>
-          <h1>London Eye</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-      </div>
-      </li>
-      <li>
-        <div class="">
-        <a href="#" class="">
-          <img src="https://www.virginexperiencedays.co.uk/content/img/product/large/sights-of-london-14163305.jpg" alt="">
-        </a>
-          <h1>London Eye</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-      </div>
-      </li>
 
-
+    <!-- <ul class="places-card">
+      <li ng-repeat="place in tripsIndex.searchResult">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image">
+              <img ng-src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={{ place.photos[0].photo_reference }}&key=AIzaSyAeGflF1al5jTmLnzNRHP6mzQ0KqAM5J7A" />
+              </figure>
+            </div>
+            <div class="card-content">
+              <h4>{{ place.name }}</h4>
+              <p>{{ place.rating }} ⭐️</p>
+              <p>{{ place.price  | currency: '£' }}</p>
+            </div>
+          </div>
+      </li>
+    </ul> -->
+    <ul class="places-card">
+      <li ng-repeat="place in tripsIndex.searchResult">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image">
+              <img ng-src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={{ place.photos[0].photo_reference }}&key=AIzaSyAeGflF1al5jTmLnzNRHP6mzQ0KqAM5J7A" />
+              </figure>
+            </div>
+            <div class="card-content">
+              <h4>{{ place.name }}</h4>
+              <p>{{ place.rating }} ⭐️</p>
+              <button ng-click="tripsIndex.addPlace()" name="button">Add to trip</button>
+            </div>
+          </div>
+      </li>
     </ul>
+
+<!--
+    <ul class="places-card">
+      <li ng-repeat="place in tripsIndex.searchResult">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image">
+                <a ui-sref="placesShow({ id: place._id })">
+                  <img ng-click="trips.Index.showPlace" ng-src="https://imgix.ttcdn.co/i/product/original/0/7751-6f2dd9206d64426eb80c532aa0603cca.jpeg?q=100&auto=format%2Ccompress&w=2000" />
+
+                </a>
+              </figure>
+            </div>
+            <div class="card-content">
+              <h4>BIG OLD TEST CARD</h4>
+
+            </div>
+          </div>
+      </li>
+    </ul> -->
+
+
   </aside>
+
+
   <!-- GOOGLE MAPS -->
 
   <div class="column is-three-quarters"><google-map zoom="14" center="tripsIndex.coordinates"></google-map></div>

@@ -10,8 +10,13 @@ function Trip($http) {
   function create(trip) {
     return $http.post('/api/trips', trip);
   }
+  function add(place) {
+    return $http.post('/api/trips/:id/places', place);
+  }
+
 
   this.create = create;
+  this.add = add;
 
 }
 
