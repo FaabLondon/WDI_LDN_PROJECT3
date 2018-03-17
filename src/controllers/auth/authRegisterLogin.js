@@ -30,7 +30,7 @@ function AuthRegisterLoginCtrl($auth, Trip, $state){
     $auth.login(this.credentials)
     //flash message removed
       .then(res => {
-        console.log(res.data.message);
+        //console.log(res.data.message);
         Trip.userName = res.data.message;
         $state.go('tripsIndex');
       })

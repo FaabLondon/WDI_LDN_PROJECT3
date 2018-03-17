@@ -1,6 +1,6 @@
-TripsIndexCtrl.$inject = ['$auth','Trip', '$state'];
+TripsIndexCtrl.$inject = ['$auth','Trip', '$state', '$http'];
 
-function TripsIndexCtrl($auth, Trip, $state) {
+function TripsIndexCtrl($auth, Trip, $state, $http) {
 
   const vm = this; //ViewModel allows us to use this in function
   vm.isActive = true;
@@ -19,7 +19,6 @@ function TripsIndexCtrl($auth, Trip, $state) {
 
   //create trip function
   function handleSubmit() {
-    console.log(vm);
     const start = vm.newTrip.startDate;
 
     if(vm.form.$invalid) return false;
@@ -36,6 +35,9 @@ function TripsIndexCtrl($auth, Trip, $state) {
     Trip.create(vm.newTrip)
       .then(() => $state.go('tripsIndex'));
 
+    //this is the google search nearby search results  
+    console.log(Trip.searchResult);
+
   }
 
   //logs the user out
@@ -43,6 +45,7 @@ function TripsIndexCtrl($auth, Trip, $state) {
     $auth.logout(); //removes token from local storage
     $state.go('homepage');
   }
+
 
   this.handleSubmit = handleSubmit;
   vm.logout = logout;

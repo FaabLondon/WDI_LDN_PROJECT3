@@ -5,6 +5,7 @@ Trip.$inject = ['$http'];
 function Trip($http) {
 
   const userName = '';
+  const searchResult = [];
 
   function create(trip) {
     return $http.post('/api/trips', trip);
