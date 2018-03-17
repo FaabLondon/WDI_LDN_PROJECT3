@@ -11,6 +11,9 @@ function Trip($http) {
     return $http.post('/api/trips', trip);
   }
 
+  //add here the fucntion to add a place to the trips
+  
+
   this.create = create;
 
 }

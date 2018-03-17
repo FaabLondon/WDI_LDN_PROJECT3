@@ -5,6 +5,8 @@ function TripsIndexCtrl($auth, Trip, $state, $http) {
   const vm = this; //ViewModel allows us to use this in function
   vm.isActive = true;
   vm.newTrip = {};
+  vm.tripId;
+  vm.searchResult = [];
   vm.userName = '';
   vm.newTrip.days = [];
   vm.coordinates = {
@@ -32,21 +34,19 @@ function TripsIndexCtrl($auth, Trip, $state, $http) {
     };
 
     //user will be added to trip on server side
+    //fucntion returns trip and we store tripId
     Trip.create(vm.newTrip)
-      .then(() => $state.go('tripsIndex'));
+      .then(trip => {
+        vm.tripId = trip._id;
+        console.log(vm.tripId);
+        $state.go('tripsIndex');
+      });
 
-    //this is the google search nearby search results  
-    console.log(Trip.searchResult);
+    //this is the google search nearby search results
+    vm.searchResult = Trip.searchResult;
+    console.log(vm.searchResult);
 
   }
-
-  vm.all = {};
-  $http.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&type=restaurant&key=AIzaSyAPEmf9_jhooXaFG-9VI-W1catLwZ5vGfg')
-    .then(res => Object.assign(vm.all, res))
-    .then(res => vm.all = res.data);
-
-  console.log(vm.all);
-
 
   //logs the user out
   function logout(){
