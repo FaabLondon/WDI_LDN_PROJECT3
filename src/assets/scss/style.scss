@@ -1,3 +1,4 @@
+// Homepage
 .hero.homepage {
   background-image: url(https://www.freshdesignpedia.com/wp-content/uploads/holidays-in-sardinia-you-should-visit-these-cities-and-beaches/holiday-sardinia-beach-holiday-destinations.jpg);
   background-size: cover;
@@ -14,7 +15,30 @@
   background-color: white;
 }
 
+// Modal
+
+// .container .form {
+//
+//     width: 500px;
+//     height: 400px;
+//     background-color: blue;
+//     z-index: 1;
+// }
+
+// Index Page
 .google-map {
   width: 300px;
   height: 300px;
+}
+
+.is-sidebar-menu {
+    // width: 30vw;
+    min-height: calc(100vh - .75rem );
+    max-height: calc(100vh - .75rem );
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+  }
+    .column {
+      overflow-y: auto;
 }
