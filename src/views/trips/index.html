@@ -11,7 +11,7 @@
         <form name="tripsIndex.form" ng-submit="tripsIndex.handleSubmit()" novalidate>
           <div class="field">
             <label for="location">Where?</label>
-            <input location="tripsIndex.newPlace.location" ng-model="tripsIndex.locationName" class="input googleAutocomplete" placeholder="where do you want to go?" name="location" required />
+            <input coordinates="tripsIndex.coordinates" ng-model="tripsIndex.newPlace.location" class="input googleAutocomplete" placeholder="where do you want to go?" name="location" required />
             <div ng-messages="tripsIndex.form.location.$error" ng-if="tripsIndex.form.location.$dirty || tripsIndex.form.$submitted">
               <div class="has-text-danger" ng-message="required">This field is required
               </div>
@@ -128,4 +128,4 @@
 <div>
 
 </div>
-<div><google-map zoom="14" center="tripsIndex.newPlace.location"></google-map></div>
+<div><google-map zoom="14" center="tripsIndex.coordinates"></google-map></div>
