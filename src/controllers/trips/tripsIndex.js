@@ -6,6 +6,7 @@ function TripsIndexCtrl($auth, Trip, $state) {
   vm.isActive = true;
   vm.searchResult = [];
   vm.newTrip = {};
+  vm.searchResult = [];
   vm.userName = '';
   vm.newTrip.days = [];
   vm.coordinates = {
@@ -33,18 +34,18 @@ function TripsIndexCtrl($auth, Trip, $state) {
     };
 
     //user will be added to trip on server side
+    //fucntion returns trip and we store tripId
     Trip.create(vm.newTrip)
-      .then(() => $state.go('tripsIndex'));
+      .then(trip => {
+        Trip.tripId = trip._id;
+        $state.go('tripsIndex');
+      });
 
     //this is the google search nearby search results
     vm.searchResult = Trip.searchResult;
-    console.log(Trip.searchResult);
-  }
+    // console.log(vm.searchResult);
 
-  // add place to day
-  // function addPlace() {
-  //   Trip.add
-  // }
+  }
 
   //logs the user out
   function logout(){

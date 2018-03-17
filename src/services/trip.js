@@ -6,17 +6,21 @@ function Trip($http) {
 
   const userName = '';
   const searchResult = [];
+  const tripId;
 
+  //function to create a new trip - the user id is added on the server side
   function create(trip) {
     return $http.post('/api/trips', trip);
   }
-  function add(place) {
-    return $http.post('/api/trips/:id/places', place);
+
+  //function to add a place to a trip
+  function createPlaceTrip(place){
+    return $http.post(`/trips/${tripId}/places`, place);
   }
 
 
   this.create = create;
-  this.add = add;
+  this.createPLaceTrip = createPLaceTrip;
 
 }
 
