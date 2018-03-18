@@ -58,6 +58,11 @@ function TripsIndexCtrl($auth, Trip, $state) {
     vm.searchCat=category;
   }
 
+  // Hide nearby Places - not working
+  function hideNearbyPlaces() {
+    vm.showMe = !vm.showMe;
+  }
+
 
   //logs the user out
   function logout(){
@@ -70,6 +75,7 @@ function TripsIndexCtrl($auth, Trip, $state) {
   vm.logout = logout;
   //not working
   vm.changeCat = changeCat;
+  vm.hideNearbyPlaces = hideNearbyPlaces;
 
 }
 
