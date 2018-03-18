@@ -91,7 +91,7 @@ function googleMap(Trip) {
                 console.error(status);
                 return;
               }
-              const html = `<b>${result.name}</b> <br/>${result.vicinity}<br/>Rating:${'🤩'.repeat(Math.floor(result.rating))}`;
+              const html = `<b>${result.name}</b> <br/>${result.vicinity}<br/>Rating:${'🤩'.repeat(Math.floor(result.rating))}<br/>Click on the picture to add this place to your trip`;
               infoWindow.setContent(html);
               infoWindow.open(map, marker);
             });
@@ -110,6 +110,7 @@ function googleMap(Trip) {
             newPlace.image = place.photos ? place.photos[0].getUrl({'maxWidth': 300, 'maxHeight': 150}): '';
             newPlace.description = '';
             newPlace.rating = place.rating;
+            newPlace.googleId = place.place_id;
 
             //add it to the trip
             Trip.createPlaceTrip(newPlace)
@@ -159,11 +160,8 @@ function googleMap(Trip) {
         let nbPlaces = Trip.currentTrip.days[0].places.length;
         let origin = {location: {lat: 0,lng: 0}};
         let destination = {location: {lat: 0,lng: 0}};
-        origin.location.lat = Trip.currentTrip.days[0].places[0].location.lat;
-        origin.location.lng = Trip.currentTrip.days[0].places[0].location.lng;
-        destination.location.lat = Trip.currentTrip.days[0].places[nbPlaces - 1].location.lat;
-        destination.location.lng = Trip.currentTrip.days[0].places[nbPlaces - 1].location.lng;
-
+        origin.location = Trip.currentTrip.days[0].places[0].location;
+        destination.location = Trip.currentTrip.days[0].places[nbPlaces - 1].location;
 
         Trip.currentTrip.days[0].places.forEach(place => {
           waypts.push({
