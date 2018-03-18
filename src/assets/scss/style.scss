@@ -17,13 +17,6 @@
 
 // Modal
 
-// .container .form {
-//
-//     width: 500px;
-//     height: 400px;
-//     background-color: blue;
-//     z-index: 1;
-// }
 
 // Index Page
 .google-map {
@@ -41,4 +34,13 @@
   }
     .column {
       overflow-y: auto;
+}
+
+.places-card {
+  height: 200px;
+}
+
+.figure-image {
+  height: 100px;
+  background-color: blue;
 }

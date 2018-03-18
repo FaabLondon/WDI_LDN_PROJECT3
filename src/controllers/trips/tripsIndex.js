@@ -1,9 +1,10 @@
-TripsIndexCtrl.$inject = ['$auth','Trip', '$state', '$http'];
+TripsIndexCtrl.$inject = ['$auth','Trip', '$state'];
 
-function TripsIndexCtrl($auth, Trip, $state, $http) {
+function TripsIndexCtrl($auth, Trip, $state) {
 
   const vm = this; //ViewModel allows us to use this in function
   vm.isActive = true;
+  vm.searchResult = [];
   vm.newTrip = {};
   vm.searchResult = [];
   vm.userName = '';
@@ -13,6 +14,8 @@ function TripsIndexCtrl($auth, Trip, $state, $http) {
     lng: 0
   };
   vm.address;
+  //not working
+  vm.searchCat='point_of_interest';
 
   //need to store wether user is authenticated or not in order to test it in view and hide/show buttons accordingly.
   vm.isAuthenticated = $auth.isAuthenticated;
@@ -42,9 +45,16 @@ function TripsIndexCtrl($auth, Trip, $state, $http) {
       });
 
     //this is the google search nearby search results
+    console.log(Trip.searchResult);
     vm.searchResult = Trip.searchResult;
 
   }
+
+  //not working
+  function changeCat(category){
+    vm.searchCat=category;
+  }
+
 
   //logs the user out
   function logout(){
@@ -55,6 +65,8 @@ function TripsIndexCtrl($auth, Trip, $state, $http) {
 
   this.createTrip = createTrip;
   vm.logout = logout;
+  //not working
+  vm.changeCat = changeCat;
 
 }
 

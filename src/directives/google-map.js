@@ -8,7 +8,8 @@ function googleMap(Trip) {
     replace: true,
     scope: {
       center: '=',
-      zoom: '='
+      zoom: '=',
+      searchCat: '='
     },
     link($scope, $element) {
       let service;
@@ -25,10 +26,10 @@ function googleMap(Trip) {
         mapTypeId: google.maps.MapTypeId.ROADMAP //mapTypeId not working
       });
 
+
       //to link the directions rendering to the map
       directionsDisplay.setMap(map);
 
-      //set center of Map
       $scope.$watch('center', () => {
         map.setCenter($scope.center);
         //need to set zoom and mapType here
@@ -40,6 +41,7 @@ function googleMap(Trip) {
         const request = {
           location: $scope.center,
           radius: '500',
+          // type: [$scope.searchCat]
           type: ['museum']
         };
 
@@ -53,6 +55,11 @@ function googleMap(Trip) {
           }
         });
       }
+
+      //not working
+      $scope.$watch('searchCat', () => {
+        showPlaces;
+      }, true);
 
       //callback function called for each place after getDetails()
       function callbackDetails(place, status) {
