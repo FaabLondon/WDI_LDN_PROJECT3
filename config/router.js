@@ -7,20 +7,20 @@ const secureRoute = require('../lib/secureRoute');
 
 router.route('/trips')
   .post(secureRoute, trips.createTrip)
-  .get(secureRoute, trips.indexTrip);
+  .get(trips.indexTrip); //put secureRoute back in
 
 router.route('/trips/:id')
-  .get(secureRoute, trips.showTrip)
-  .put(secureRoute, trips.updateTrip)
-  .delete(secureRoute, trips.deleteTrip);
+  .get(trips.showTrip) //put secureRoute back in
+  .put(trips.updateTrip) //put secureRoute back in
+  .delete(trips.deleteTrip); //put secureRoute back in
 
 //add a new place to trip
 router.route('/trips/:id/places')
-  .post(secureRoute, places.createPlaceDay); //changed to post as creating new place
+  .post(places.createPlaceDay); //put secureRoute back in
 
 //delete a place from trip
 router.route('/trips/:id/places/:placeId')
-  .delete(secureRoute,  places.deletePlaceDay); //changed to post as creating new place
+  .delete(places.deletePlaceDay); //put secureRoute back in
 
 //registration
 router.post('/register', auth.register);
