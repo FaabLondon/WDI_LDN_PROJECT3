@@ -64,12 +64,10 @@ function TripsIndexCtrl($auth, Trip, $state) {
         lng: 0
       }
     };
-    //update and format newPlace that will be added to trip
-
-
+    //check that we are not adding a duplicate place in the trip
     if(!vm.currentTrip.days[0].places.find(element => {
       return element.googleId === place.place_id;
-    })){
+    })){//update and format newPlace that will be added to trip
       newPlace.name = place.name;
       newPlace.address = place.vicinity; //check if formatted address exists
       newPlace.location.lat = place.geometry.location.lat();
@@ -78,7 +76,7 @@ function TripsIndexCtrl($auth, Trip, $state) {
       newPlace.description = '';
       newPlace.rating = place.rating;
       newPlace.googleId = place.place_id;
-      // add it to the trip
+      // add the place to the trip
       Trip.createPlaceTrip(newPlace)
         .then(res => {
           Trip.currentTrip = res.data;

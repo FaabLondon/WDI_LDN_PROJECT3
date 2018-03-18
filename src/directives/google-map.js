@@ -16,8 +16,9 @@ function googleMap(Trip) {
       let infoWindow;
 
       //variables used to display routes between different places and waypoints
-      let directionsService = new google.maps.DirectionsService;
-      let directionsDisplay = new google.maps.DirectionsRenderer;
+      const directionsService = new google.maps.DirectionsService;
+      const directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
+
 
       //create new map
       const map = new google.maps.Map($element[0], {
@@ -26,6 +27,15 @@ function googleMap(Trip) {
         mapTypeId: google.maps.MapTypeId.ROADMAP //mapTypeId not working
       });
 
+      //in order to style the markers/images. The image can then be styled in css
+      //important to set optimized: false in marker
+      //other google alternative : https://developers.google.com/maps/documentation/javascript/examples/marker-symbol-custom
+      var myoverlay = new google.maps.OverlayView();
+      myoverlay.draw = function () {
+        //this assigns an id to the markerlayer Pane, so it can be referenced by CSS
+        this.getPanes().markerLayer.id='markerLayer';
+      };
+      myoverlay.setMap(map);
 
       //to link the directions rendering to the map
       directionsDisplay.setMap(map);
@@ -75,33 +85,27 @@ function googleMap(Trip) {
             anchor: new google.maps.Point(45, 45)
           };
 
+          //setup marker for that specific place
           const marker = new google.maps.Marker({
             map: map,
             icon: image,
             title: place.name,
-            position: place.geometry.location
+            position: place.geometry.location,
+            optimized: false
           });
 
           //add mouseover event to each marker to display box with name
           google.maps.event.addListener(marker, 'mouseover', function() {
-            var request = {placeId: place.place_id};
-
-            service.getDetails(request, function(result, status) {
-              if (status !== google.maps.places.PlacesServiceStatus.OK) {
-                console.error(status);
-                return;
-              }
-              const html = `<b>${result.name}</b> <br/>${result.vicinity}<br/>Rating:${'🤩'.repeat(Math.floor(result.rating))}<br/>Click on the picture to add this place to your trip`;
-              infoWindow.setContent(html);
-              infoWindow.open(map, marker);
-            });
+            const html = `<b>${place.name}</b> <br/>${place.vicinity}<br/>Rating:${'🤩'.repeat(Math.floor(place.rating))}<br/><b>Click on the picture to add this place to your trip</b>`;
+            infoWindow.setContent(html);
+            infoWindow.open(map, marker);
           });
 
           //add click event to each marker to add it to trip
           google.maps.event.addListener(marker, 'click', function() {
             //
             let newPlace = {location: {lat: 0,lng: 0}};
-
+            //test to avoid adding duplicate place on the same day
             if(!Trip.currentTrip.days[0].places.find(element => {
               return element.googleId === place.place_id;
             })
@@ -123,7 +127,7 @@ function googleMap(Trip) {
                 })
                 .then(() => {
                   //only display direction if more than 1 place in the trip
-                  let nbPlaces = Trip.currentTrip.days[0].places.length;
+                  const nbPlaces = Trip.currentTrip.days[0].places.length;
                   if(nbPlaces > 1) {
                     //calls function to update and render display route on map
                     calculateAndDisplayRoute(directionsService, directionsDisplay);
