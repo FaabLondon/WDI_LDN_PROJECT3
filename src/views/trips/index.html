@@ -101,14 +101,26 @@
             </div>
           </div>
         </div>
-
       </li>
     </ul>
 
 <!-- SIDEBAR - DAILY PLAN VIEW -->
 
     <ul class="" ng-show="showMe">
-      <li>DAILY PLAN GOES HERE</li>
+      <li ng-repeat="place in tripsIndex.currentTrip.days[0].places">DAILY PLAN GOES HERE
+        <div class="card">
+          <div class="card-image">
+            <a class="">
+              hello
+              <img ng-src="{{ place.image }}" alt="">
+            </a>
+            <div class="card-content">
+              <h1 class="has-text-weight-bold">{{ place.name }}</h1>
+              <p>{{ place.address}}</p>
+            </div>
+          </div>
+        </div>
+      </li>
       <button ng-click="showMe=false" class="button is-primary" name="button">Back</button>
     </ul>
 
