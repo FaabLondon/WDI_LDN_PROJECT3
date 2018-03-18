@@ -102,30 +102,34 @@ function googleMap(Trip) {
             //
             let newPlace = {location: {lat: 0,lng: 0}};
 
-            //update and format newPlace that will be added to trip
-            newPlace.name = place.name;
-            newPlace.address = place.vicinity; //check if formatted address exists
-            newPlace.location.lat = place.geometry.location.lat();
-            newPlace.location.lng = place.geometry.location.lng();
-            newPlace.image = place.photos ? place.photos[0].getUrl({'maxWidth': 300, 'maxHeight': 150}): '';
-            newPlace.description = '';
-            newPlace.rating = place.rating;
-            newPlace.googleId = place.place_id;
+            if(!Trip.currentTrip.days[0].places.find(element => {
+              return element.googleId === place.place_id;
+            })
+            ){
+              //update and format newPlace that will be added to trip
+              newPlace.name = place.name;
+              newPlace.address = place.vicinity; //check if formatted address exists
+              newPlace.location.lat = place.geometry.location.lat();
+              newPlace.location.lng = place.geometry.location.lng();
+              newPlace.image = place.photos ? place.photos[0].getUrl({'maxWidth': 300, 'maxHeight': 150}): '';
+              newPlace.description = '';
+              newPlace.rating = place.rating;
+              newPlace.googleId = place.place_id;
 
-            //add it to the trip
-            Trip.createPlaceTrip(newPlace)
-              .then(res => {
-                Trip.currentTrip = res.data;
-              })
-              .then(() => {
-                //only display direction if more than 1 place in the trip
-                let nbPlaces = Trip.currentTrip.days[0].places.length;
-                if(nbPlaces > 1) {
-                  //calls function to update and render display route on map
-                  calculateAndDisplayRoute(directionsService, directionsDisplay);
-                }
-              });
-
+              //add it to the trip
+              Trip.createPlaceTrip(newPlace)
+                .then(res => {
+                  Trip.currentTrip = res.data;
+                })
+                .then(() => {
+                  //only display direction if more than 1 place in the trip
+                  let nbPlaces = Trip.currentTrip.days[0].places.length;
+                  if(nbPlaces > 1) {
+                    //calls function to update and render display route on map
+                    calculateAndDisplayRoute(directionsService, directionsDisplay);
+                  }
+                });
+            }
           });
 
           //add detailed picture to each place object to be accessed in view
@@ -163,6 +167,8 @@ function googleMap(Trip) {
         origin.location = Trip.currentTrip.days[0].places[0].location;
         destination.location = Trip.currentTrip.days[0].places[nbPlaces - 1].location;
 
+        //should not be doing it for each place as would include origin and destination...
+        //should only loop from index 1 to array length - 2
         Trip.currentTrip.days[0].places.forEach(place => {
           waypts.push({
             location: place.location,
@@ -176,7 +182,7 @@ function googleMap(Trip) {
           destination: destination,
           waypoints: waypts,
           optimizeWaypoints: true,
-          travelMode: 'DRIVING'
+          travelMode: 'WALKING'
         };
 
         function callBackDirections(response, status) {
