@@ -6,7 +6,6 @@ function TripsIndexCtrl($auth, Trip, $state) {
   vm.isActive = true;
   vm.searchResult = [];
   vm.newTrip = {};
-  vm.searchResult = [];
   vm.userName = '';
   vm.newTrip.days = [];
   vm.currentTrip = {};
@@ -42,8 +41,7 @@ function TripsIndexCtrl($auth, Trip, $state) {
       .then(res => {
         Trip.tripId = res.data._id;
         vm.currentTrip = res.data;
-        Trip.currentTrip = vm.currentTrip;
-        console.log(Trip.tripId);
+        Trip.currentTrip = res.data;
         $state.go('tripsIndex');
       });
 
