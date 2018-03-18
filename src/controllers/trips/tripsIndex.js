@@ -55,6 +55,36 @@ function TripsIndexCtrl($auth, Trip, $state) {
     vm.searchCat=category;
   }
 
+  function addTrip(place){
+    const newPlace = {
+      location: {
+        lat: 0,
+        lng: 0
+      }
+    };
+    // console.log(place);
+    //update and format newPlace that will be added to trip
+    newPlace.name = place.name;
+    newPlace.address = place.vicinity; //check if formatted address exists
+    newPlace.location.lat = place.geometry.location.lat();
+    newPlace.location.lng = place.geometry.location.lng();
+    newPlace.image = place.pictures;
+    newPlace.description = '';
+    newPlace.rating = place.rating;
+
+    //add it to the trip
+    // Trip.createPlaceTrip(newPlace)
+    //   .then(res => {
+    //     Trip.currentTrip = res.data;
+    //   });
+  }
+
+  function removeTrip(place){
+
+  }
+
+
+
 
   //logs the user out
   function logout(){
