@@ -9,6 +9,7 @@ function TripsIndexCtrl($auth, Trip, $state) {
   vm.searchResult = [];
   vm.userName = '';
   vm.newTrip.days = [];
+  vm.currentTrip = {};
   vm.coordinates = {
     lat: 0,
     lng: 0
@@ -36,10 +37,12 @@ function TripsIndexCtrl($auth, Trip, $state) {
     };
 
     //user will be added to trip on server side
-    //function returns trip and we store tripId
+    //function returns trip and we store tripId to be able to send Ajax requests
     Trip.create(vm.newTrip)
       .then(res => {
         Trip.tripId = res.data._id;
+        vm.currentTrip = res.data;
+        Trip.currentTrip = vm.currentTrip;
         console.log(Trip.tripId);
         $state.go('tripsIndex');
       });
@@ -54,6 +57,7 @@ function TripsIndexCtrl($auth, Trip, $state) {
   function changeCat(category){
     vm.searchCat=category;
   }
+
 
   function addPlaceTrip(place){
     const newPlace = {
@@ -91,7 +95,10 @@ function TripsIndexCtrl($auth, Trip, $state) {
   }
 
 
-
+  // Hide nearby Places - not working
+  function hideNearbyPlaces() {
+    vm.showMe = !vm.showMe;
+  }
 
   //logs the user out
   function logout(){
@@ -106,6 +113,8 @@ function TripsIndexCtrl($auth, Trip, $state) {
   vm.changeCat = changeCat;
   vm.addPlaceTrip = addPlaceTrip;
   vm.removeTrip = removeTrip;
+  vm.hideNearbyPlaces = hideNearbyPlaces;
+
 
 }
 

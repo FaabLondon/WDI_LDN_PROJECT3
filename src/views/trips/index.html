@@ -81,17 +81,17 @@
   </div>
 </nav>
 
-<!-- SIDEBAR -->
+<!-- SIDEBAR - NEARBY / FILTERED PLACES VIEW -->
 
 <section class="main-content columns is-fullheight">
   <aside class="column is-one-quarter is-sidebar-menu is-fullheight section is-hidden-mobile">
 
-    <ul class="nearby-places-list" ng-hide="showMe" ng-show="showShow">
+    <ul class="nearby-places-list" ng-hide="showMe">
       <li ng-repeat="place in tripsIndex.searchResult">
         <div class="card">
           <div class="card-image">
             <a class="">
-              <img ng-src="{{ place.pictures }}" alt="" >
+              <img ng-src="{{ place.pictures }}" alt="" ng-click="tripsIndex.hideNearbyPlaces()" >
             </a>
             <button class="addButton" ng-click="tripsIndex.addPlaceTrip(place)">+</button>
             <button class="addButton" ng-click="tripsIndex.removeTrip(place)">-</button>
@@ -101,19 +101,30 @@
             </div>
           </div>
         </div>
-
       </li>
     </ul>
 
+<!-- SIDEBAR - DAILY PLAN VIEW -->
 
     <ul class="" ng-show="showMe">
-      <li>DAILY PLAN GOES HERE</li>
+      <li ng-repeat="place in tripsIndex.currentTrip.days[0].places">DAILY PLAN GOES HERE
+        <div class="card">
+          <div class="card-image">
+            <a class="">
+              hello
+              <img ng-src="{{ place.image }}" alt="">
+            </a>
+            <div class="card-content">
+              <h1 class="has-text-weight-bold">{{ place.name }}</h1>
+              <p>{{ place.address}}</p>
+            </div>
+          </div>
+        </div>
+      </li>
       <button ng-click="showMe=false" class="button is-primary" name="button">Back</button>
     </ul>
 
-
   </aside>
-
 
   <!-- GOOGLE MAPS -->
 

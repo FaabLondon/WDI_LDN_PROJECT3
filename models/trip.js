@@ -1,15 +1,16 @@
 const mongoose = require('mongoose');
 
 const placeSchema = new mongoose.Schema({
-  name: { type: String },
-  address: { type: String },
+  name: { type: String, required: true },
+  address: { type: String, required: true },
   location: {
-    lat: { type: Number },
-    lng: { type: Number }
+    lat: { type: Number, required: true },
+    lng: { type: Number, required: true }
   },
-  image: { type: String },
-  description: { type: String },
-  rating: { type: Number, min: 1, max: 5 }
+  image: { type: String},
+  description: { type: String},
+  rating: { type: Number, min: 1, max: 5 },
+  googleId: { type: String, required: true }
 });
 
 
