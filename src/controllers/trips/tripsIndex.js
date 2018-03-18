@@ -67,11 +67,10 @@ function TripsIndexCtrl($auth, Trip, $state) {
       }
     };
     //update and format newPlace that will be added to trip
-    console.log('kjjhkj');
-    console.log(vm.currentTrip);
+
 
     if(!vm.currentTrip.days[0].places.find(element => {
-      element.googleId === place.place_id;
+      return element.googleId === place.place_id;
     })){
       newPlace.name = place.name;
       newPlace.address = place.vicinity; //check if formatted address exists
