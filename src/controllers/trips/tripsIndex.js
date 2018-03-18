@@ -43,7 +43,7 @@ function TripsIndexCtrl($auth, Trip, $state) {
 
     //this is the google search nearby search results
     vm.searchResult = Trip.searchResult;
-    // console.log(vm.searchResult);
+    console.log(vm.searchResult);
 
   }
 
