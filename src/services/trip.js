@@ -27,6 +27,7 @@ function Trip($http) {
 
   this.create = create;
   this.createPlaceTrip = createPlaceTrip;
+  this.showTrip = showTrip;
 
 }
 
