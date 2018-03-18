@@ -7,16 +7,21 @@ function Trip($http) {
   vm.userName = '';
   vm.searchResult = [];
   vm.tripId = '';
+  vm.currentTrip = {};
 
   //function to create a new trip - the user id is added on the server side
   function create(trip) {
     return $http.post('/api/trips', trip);
   }
 
-  //function to add a place to a trip
+  //function to add a place to a trip - returns the updated trip
   function createPlaceTrip(place){
-    console.log(`tripId: ${vm.tripId}`);
     return $http.post(`/api/trips/${vm.tripId}/places`, place);
+  }
+
+  //function to show all places in a trip
+  function showTrip(){
+    return $http.get(`/api/trips/${vm.tripId}`);
   }
 
 
