@@ -37,6 +37,7 @@ function TripsIndexCtrl($auth, Trip, $state, $http) {
     Trip.create(vm.newTrip)
       .then(res => {
         Trip.tripId = res.data._id;
+        console.log(Trip.tripId);
         $state.go('tripsIndex');
       });
 

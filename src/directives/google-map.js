@@ -67,8 +67,8 @@ function googleMap(Trip) {
             position: place.geometry.location
           });
 
-          //add click event to each marker to display box with name
-          google.maps.event.addListener(marker, 'click', function() {
+          //add mouseover event to each marker to display box with name
+          google.maps.event.addListener(marker, 'mouseover', function() {
             var request = {placeId: place.place_id};
 
             service.getDetails(request, function(result, status) {
@@ -80,6 +80,23 @@ function googleMap(Trip) {
               infoWindow.setContent(html);
               infoWindow.open(map, marker);
             });
+          });
+
+          //add click event to each marker to add it to trip
+          google.maps.event.addListener(marker, 'click', function() {
+            let newPlace = {};
+            newPlace.location ={};
+            //update and format newPlace that will be added to trip
+            newPlace.name = place.name;
+            newPlace.address = place.vicinity; //check if formatted address exists
+            Object.assign(newPlace.location, place.geometry.location);
+            newPlace.image = place.photos ? place.photos[0].getUrl({'maxWidth': 300, 'maxHeight': 150}): '';
+            newPlace.description = '';
+            newPlace.rating = place.rating;
+
+            //add it to the trip
+            Trip.createPlaceTrip(newPlace);
+
           });
 
           //add detailed picture to each place object to be accessed in view
