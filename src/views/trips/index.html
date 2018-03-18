@@ -10,7 +10,7 @@
 
       <div class="container">
 
-        <form name="tripsIndex.form" ng-submit="tripsIndex.handleSubmit()" novalidate>
+        <form name="tripsIndex.form" ng-submit="tripsIndex.createTrip()" novalidate>
           <div class="field">
             <label for="location">Where are you going?</label>
             <input coordinates="tripsIndex.coordinates" address="tripsIndex.address" class="input googleAutocomplete" placeholder="e.g. London, New York, Paris" name="location" required />
@@ -30,9 +30,6 @@
           <button class="button is-primary">Create Trip</button>
         </form>
       </div>
-
-
-
 
     </section>
   </div>
@@ -61,7 +58,8 @@
     <div class="navbar-end">
       <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="">Daily Plan</a>
       <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="">My Trip</a>
-      <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="">See all my Trips</a>
+      <!-- <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="">See all my Trips</a> -->
+      <a class="navbar-item" ng-click="tripsIndex.seeTrips()" ui-sref="">See all my Trips</a>
       <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link" href=""> <span class="icon is-small"><i class="fas fa-user"></i></span>&nbsp {{tripsIndex.userName}}</a>
           <div class="navbar-dropdown is-boxed is-right" ng-if="tripsIndex.isAuthenticated()">
@@ -75,10 +73,10 @@
 <nav class="navbar">
   <div class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item" ui-sref="">Places</a>
-      <a class="navbar-item" ui-sref="">Events</a>
-      <a class="navbar-item" ui-sref="">Restaurants</a>
-      <a class="navbar-item" ui-sref="">Hotels</a>
+      <a class="navbar-item" ng-click="tripsIndex.changeCat('point_of_interest')">Places</a>
+      <a class="navbar-item" ng-click="tripsIndex.changeCat('establishment')">Events</a>
+      <a class="navbar-item" ng-click="tripsIndex.changeCat('restaurant')">Restaurants</a>
+      <a class="navbar-item" ng-click="tripsIndex.changeCat('lodging')">Hotels</a>
     </div>
   </div>
 </nav>
@@ -86,67 +84,32 @@
 <!-- SIDEBAR -->
 
 <section class="main-content columns is-fullheight">
-
   <aside class="column is-one-quarter is-sidebar-menu is-fullheight section is-hidden-mobile">
-
-    <!-- <ul class="places-card">
+    <!-- <p class="menu-label is-hidden-touch">Navigation</p> -->
+    <!-- <ul class="menu-list"> -->
+    <ul>
       <li ng-repeat="place in tripsIndex.searchResult">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image">
-              <img ng-src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={{ place.photos[0].photo_reference }}&key=AIzaSyAeGflF1al5jTmLnzNRHP6mzQ0KqAM5J7A" />
-              </figure>
-            </div>
+        <div class="card">
+          <div class="card-image">
+            <a href="#" class="">
+              <img ng-src="{{ place.pictures }}" alt="">
+            </a>
+            <button class="addButton">+</button>
+            <button class="addButton">-</button>
             <div class="card-content">
-              <h4>{{ place.name }}</h4>
-              <p>{{ place.rating }} ⭐️</p>
-              <p>{{ place.price  | currency: '£' }}</p>
+              <h1 class="has-text-weight-bold">{{ place.name }}</h1>
+              <p>{{ place.formatted_address}}</p>
             </div>
           </div>
+        </div>
+
       </li>
-    </ul> -->
-    <ul class="places-card">
-      <li ng-repeat="place in tripsIndex.searchResult">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image">
-              <img ng-src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={{ place.photos[0].photo_reference }}&key=AIzaSyAeGflF1al5jTmLnzNRHP6mzQ0KqAM5J7A" />
-              </figure>
-            </div>
-            <div class="card-content">
-              <h4>{{ place.name }}</h4>
-              <p>{{ place.rating }} ⭐️</p>
-              <button ng-click="tripsIndex.addPlace()" name="button">Add to trip</button>
-            </div>
-          </div>
-      </li>
-    </ul>
-
-<!--
-    <ul class="places-card">
-      <li ng-repeat="place in tripsIndex.searchResult">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image">
-                <a ui-sref="placesShow({ id: place._id })">
-                  <img ng-click="trips.Index.showPlace" ng-src="https://imgix.ttcdn.co/i/product/original/0/7751-6f2dd9206d64426eb80c532aa0603cca.jpeg?q=100&auto=format%2Ccompress&w=2000" />
-
-                </a>
-              </figure>
-            </div>
-            <div class="card-content">
-              <h4>BIG OLD TEST CARD</h4>
-
-            </div>
-          </div>
-      </li>
-    </ul> -->
-
 
   </aside>
 
 
   <!-- GOOGLE MAPS -->
 
-  <div class="column is-three-quarters"><google-map zoom="14" center="tripsIndex.coordinates"></google-map></div>
+{{ tripsIndex.searchCat}}
+  <div class="column is-three-quarters googleMap"><google-map zoom="20" center="tripsIndex.coordinates" searchCat="tripsIndex.searchCat"></google-map></div>
 </section>

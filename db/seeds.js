@@ -60,3 +60,5 @@ mongoose.connect(dbURI, (err, db) => {
 //   description: 'The London Eye is a giant Ferris wheel on the South Bank of the River Thames in London. The structure is 443 feet tall and the wheel has a diameter of 394 feet. When it opened to the public in 2000 it was the world\'s tallest Ferris wheel.',
 //   rating: 4.5
 // }
+// {"name":"Birtish Museum","address":"Great Russell St, Bloomsbury, London WC1B 3DG","location":{"lat":51.5194133,"lng":-0.1269566},"image":"https://upload.wikimedia.org/wikipedia/commons/5/5a/British_Museum_Great_Court%2C_London%2C_UK_-_Diliff.jpg","description":"amazing museum","rating":5
+//  }

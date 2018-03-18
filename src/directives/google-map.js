@@ -8,64 +8,107 @@ function googleMap(Trip) {
     replace: true,
     scope: {
       center: '=',
-      zoom: '='
+      zoom: '=',
+      searchCat: '='
     },
     link($scope, $element) {
       let service;
+      let infoWindow;
 
       const map = new google.maps.Map($element[0], {
-        zoom: $scope.zoom,
-        center: $scope.center
+        center: $scope.center,
+        zoom: $scope.zoom, //zoom not working
+        mapTypeId: google.maps.MapTypeId.ROADMAP //mapTypeId not working
       });
 
-      //set center of Map
+      // set center of Map
       $scope.$watch('center', () => {
         map.setCenter($scope.center);
+        //need to set zoom and mapType here
         showPlaces();
       }, true);
 
       ////Google Places search
-      function showPlaces(){
+      function showPlaces() {
         const request = {
           location: $scope.center,
           radius: '500',
+          // type: [$scope.searchCat]
           type: ['museum']
         };
 
         //service to run a nearby search on google places
+        infoWindow = new google.maps.InfoWindow();
         service = new google.maps.places.PlacesService(map);
-        service.nearbySearch(request, callback);
-
-        function callback(results, status) {
+        service.nearbySearch(request, (results, status) => {
           if (status === google.maps.places.PlacesServiceStatus.OK) {
             Trip.searchResult = [];
             createDetailedSearchResults(results);
           }
-        }
-
+        });
       }
 
+      //not working
+      $scope.$watch('searchCat', () => {
+        showPlaces;
+      }, true);
 
       function callbackDetails(place, status) {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
+          let url = '';
 
-          // var image = {
-          //   url: place.icon,
-          //   size: new google.maps.Size(71, 71),
-          //   origin: new google.maps.Point(0, 0),
-          //   anchor: new google.maps.Point(17, 34),
-          //   scaledSize: new google.maps.Size(25, 25)
-          // };
+          //get error message Uncaught TypeError: a.url.substr is not a function
+          place.photos ? url = place.photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100}): url = '';
 
-          var marker = new google.maps.Marker({
+          const image = {
+            url: url,
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(45, 45)
+          };
+
+          const marker = new google.maps.Marker({
             map: map,
-            icon: place.photos[0].getUrl({'maxWidth': 35, 'maxHeight': 35}),
+            icon: image,
             title: place.name,
             position: place.geometry.location
           });
+
+          //add mouseover event to each marker to display box with name
+          google.maps.event.addListener(marker, 'mouseover', function() {
+            var request = {placeId: place.place_id};
+
+            service.getDetails(request, function(result, status) {
+              if (status !== google.maps.places.PlacesServiceStatus.OK) {
+                console.error(status);
+                return;
+              }
+              const html = `<b>${result.name}</b> <br/>${result.vicinity}<br/>Rating:${'🤩'.repeat(Math.floor(result.rating))}`;
+              infoWindow.setContent(html);
+              infoWindow.open(map, marker);
+            });
+          });
+
+          //add click event to each marker to add it to trip
+          google.maps.event.addListener(marker, 'click', function() {
+            let newPlace = {};
+            newPlace.location ={};
+            //update and format newPlace that will be added to trip
+            newPlace.name = place.name;
+            newPlace.address = place.vicinity; //check if formatted address exists
+            Object.assign(newPlace.location, place.geometry.location);
+            newPlace.image = place.photos ? place.photos[0].getUrl({'maxWidth': 300, 'maxHeight': 150}): '';
+            newPlace.description = '';
+            newPlace.rating = place.rating;
+
+            //add it to the trip
+            Trip.createPlaceTrip(newPlace);
+
+          });
+
           //add detailed picture to each place object to be accessed in view
           //might want to change to just place.photos to get access to array of pics
-          place.pictures = place.photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100});
+          //Uncaught TypeError: a.url.substr is not a function
+          place.photos ? place.pictures = place.photos[0].getUrl({'maxWidth': 300, 'maxHeight': 150}): place.pictures = '';
 
           //save the search result in Trip.searchResult
           Trip.searchResult.push(place);
@@ -73,11 +116,11 @@ function googleMap(Trip) {
       }
 
       function createDetailedSearchResults(places) {
-        var bounds = new google.maps.LatLngBounds();
+        const bounds = new google.maps.LatLngBounds();
         service = new google.maps.places.PlacesService(map);
         places.forEach(place => {
 
-          var requestDetails = {
+          const requestDetails = {
             placeId: place.place_id
           };
 
@@ -86,7 +129,6 @@ function googleMap(Trip) {
         });
         map.fitBounds(bounds);
       }
-
     }
   };
 }

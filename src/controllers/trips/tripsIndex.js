@@ -14,13 +14,15 @@ function TripsIndexCtrl($auth, Trip, $state) {
     lng: 0
   };
   vm.address;
+  //not working
+  vm.searchCat='point_of_interest';
 
   //need to store wether user is authenticated or not in order to test it in view and hide/show buttons accordingly.
   vm.isAuthenticated = $auth.isAuthenticated;
   vm.userName = Trip.userName;
 
   //create trip function
-  function handleSubmit() {
+  function createTrip() {
     const start = vm.newTrip.startDate;
 
     if(vm.form.$invalid) return false;
@@ -34,18 +36,25 @@ function TripsIndexCtrl($auth, Trip, $state) {
     };
 
     //user will be added to trip on server side
-    //fucntion returns trip and we store tripId
+    //function returns trip and we store tripId
     Trip.create(vm.newTrip)
-      .then(trip => {
-        Trip.tripId = trip._id;
+      .then(res => {
+        Trip.tripId = res.data._id;
+        console.log(Trip.tripId);
         $state.go('tripsIndex');
       });
 
     //this is the google search nearby search results
+    console.log(Trip.searchResult);
     vm.searchResult = Trip.searchResult;
-    console.log(vm.searchResult);
 
   }
+
+  //not working
+  function changeCat(category){
+    vm.searchCat=category;
+  }
+
 
   //logs the user out
   function logout(){
@@ -54,8 +63,10 @@ function TripsIndexCtrl($auth, Trip, $state) {
   }
 
 
-  this.handleSubmit = handleSubmit;
+  this.createTrip = createTrip;
   vm.logout = logout;
+  //not working
+  vm.changeCat = changeCat;
 
 }
 
