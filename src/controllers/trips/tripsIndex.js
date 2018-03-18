@@ -55,28 +55,35 @@ function TripsIndexCtrl($auth, Trip, $state) {
     vm.searchCat=category;
   }
 
-  function addTrip(place){
+  function addPlaceTrip(place){
     const newPlace = {
       location: {
         lat: 0,
         lng: 0
       }
     };
-    // console.log(place);
     //update and format newPlace that will be added to trip
-    newPlace.name = place.name;
-    newPlace.address = place.vicinity; //check if formatted address exists
-    newPlace.location.lat = place.geometry.location.lat();
-    newPlace.location.lng = place.geometry.location.lng();
-    newPlace.image = place.pictures;
-    newPlace.description = '';
-    newPlace.rating = place.rating;
+    console.log('kjjhkj');
+    console.log(vm.currentTrip);
 
-    //add it to the trip
-    // Trip.createPlaceTrip(newPlace)
-    //   .then(res => {
-    //     Trip.currentTrip = res.data;
-    //   });
+    if(!vm.currentTrip.days[0].places.find(element => {
+      element.googleId === place.place_id;
+    })){
+      newPlace.name = place.name;
+      newPlace.address = place.vicinity; //check if formatted address exists
+      newPlace.location.lat = place.geometry.location.lat();
+      newPlace.location.lng = place.geometry.location.lng();
+      newPlace.image = place.pictures;
+      newPlace.description = '';
+      newPlace.rating = place.rating;
+      newPlace.googleId = place.place_id;
+      // add it to the trip
+      Trip.createPlaceTrip(newPlace)
+        .then(res => {
+          Trip.currentTrip = res.data;
+          vm.currentTrip = res.data;
+        });
+    }
   }
 
   function removeTrip(place){
@@ -97,6 +104,8 @@ function TripsIndexCtrl($auth, Trip, $state) {
   vm.logout = logout;
   //not working
   vm.changeCat = changeCat;
+  vm.addPlaceTrip = addPlaceTrip;
+  vm.removeTrip = removeTrip;
 
 }
 
