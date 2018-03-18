@@ -5,6 +5,7 @@ function createPlaceDayRoute(req, res, next) {
   Trip.findById(req.params.id)
     .then(trip => {
       trip.days[0].places.push(req.body);
+      console.log(trip);
       return trip.save();
     })
     .then(trip => res.json(trip))

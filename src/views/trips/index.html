@@ -10,7 +10,7 @@
 
       <div class="container">
 
-        <form name="tripsIndex.form" ng-submit="tripsIndex.handleSubmit()" novalidate>
+        <form name="tripsIndex.form" ng-submit="tripsIndex.createTrip()" novalidate>
           <div class="field">
             <label for="location">Where are you going?</label>
             <input coordinates="tripsIndex.coordinates" address="tripsIndex.address" class="input googleAutocomplete" placeholder="e.g. London, New York, Paris" name="location" required />
@@ -60,7 +60,8 @@
     <div class="navbar-end">
       <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="">Daily Plan</a>
       <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="">My Trip</a>
-      <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="">See all my Trips</a>
+      <!-- <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="">See all my Trips</a> -->
+      <a class="navbar-item" ng-click="tripsIndex.seeTrips()" ui-sref="">See all my Trips</a>
       <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link" href=""> <span class="icon is-small"><i class="fas fa-user"></i></span>&nbsp {{tripsIndex.userName}}</a>
           <div class="navbar-dropdown is-boxed is-right" ng-if="tripsIndex.isAuthenticated()">
@@ -85,39 +86,21 @@
 <!-- SIDEBAR -->
 
 <section class="main-content columns is-fullheight">
-
   <aside class="column is-one-quarter is-sidebar-menu is-fullheight section is-hidden-mobile">
     <!-- <p class="menu-label is-hidden-touch">Navigation</p> -->
     <!-- <ul class="menu-list"> -->
     <ul>
-      <li>
+      <li ng-repeat="place in tripsIndex.searchResult">
         <div class="">
         <a href="#" class="">
-          <img src="http://www.lonelyplanet.com/news/wp-content/uploads/2017/08/London.jpg" alt="">
+          <img ng-src="{{ place.pictures }}" alt="">
         </a>
-          <h1>Big Ben</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <button class="w3-btn w3-grey">+</button>
+          <button class="w3-btn w3-grey">-</button>
+          <h1 class="has-text-weight-bold">{{ place.name }}</h1>
+          <p>{{ place.formatted_address}}</p>
       </div>
       </li>
-      <li>
-        <div class="">
-        <a href="#" class="">
-          <img src="https://www.virginexperiencedays.co.uk/content/img/product/large/sights-of-london-14163305.jpg" alt="">
-        </a>
-          <h1>London Eye</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-      </div>
-      </li>
-      <li>
-        <div class="">
-        <a href="#" class="">
-          <img src="https://www.virginexperiencedays.co.uk/content/img/product/large/sights-of-london-14163305.jpg" alt="">
-        </a>
-          <h1>London Eye</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-      </div>
-      </li>
-
 
     </ul>
   </aside>
