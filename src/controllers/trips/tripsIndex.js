@@ -12,6 +12,7 @@ function TripsIndexCtrl($auth, Trip, $state, $http) {
     lng: 0
   };
   vm.address;
+  vm.searchCat='point_of_interest';
 
   //need to store wether user is authenticated or not in order to test it in view and hide/show buttons accordingly.
   vm.isAuthenticated = $auth.isAuthenticated;
@@ -35,18 +36,16 @@ function TripsIndexCtrl($auth, Trip, $state, $http) {
     Trip.create(vm.newTrip)
       .then(() => $state.go('tripsIndex'));
 
-    //this is the google search nearby search results  
+    //this is the google search nearby search results
     console.log(Trip.searchResult);
+
+    console.log('Trip: '+vm.searchCat);
 
   }
 
-  vm.all = {};
-  $http.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&type=restaurant&key=AIzaSyAPEmf9_jhooXaFG-9VI-W1catLwZ5vGfg')
-    .then(res => Object.assign(vm.all, res))
-    .then(res => vm.all = res.data);
-
-  console.log(vm.all);
-
+  function changeCat(category){
+    vm.searchCat=category;
+  }
 
   //logs the user out
   function logout(){
@@ -57,6 +56,7 @@ function TripsIndexCtrl($auth, Trip, $state, $http) {
 
   this.handleSubmit = handleSubmit;
   vm.logout = logout;
+  vm.changeCat = changeCat;
 
 }
 

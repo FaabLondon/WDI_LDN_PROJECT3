@@ -31,9 +31,6 @@
         </form>
       </div>
 
-
-
-
     </section>
   </div>
 </div>
@@ -77,10 +74,10 @@
 <nav class="navbar">
   <div class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item" ui-sref="">Places</a>
-      <a class="navbar-item" ui-sref="">Events</a>
-      <a class="navbar-item" ui-sref="">Restaurants</a>
-      <a class="navbar-item" ui-sref="">Hotels</a>
+      <a class="navbar-item" ng-click="tripsIndex.changeCat('point_of_interest')">Places</a>
+      <a class="navbar-item" ng-click="tripsIndex.changeCat('establishment')">Events</a>
+      <a class="navbar-item" ng-click="tripsIndex.changeCat('restaurant')">Restaurants</a>
+      <a class="navbar-item" ng-click="tripsIndex.changeCat('lodging')">Hotels</a>
     </div>
   </div>
 </nav>
@@ -125,6 +122,8 @@
     </ul>
   </aside>
   <!-- GOOGLE MAPS -->
-
-  <div class="column is-three-quarters"><google-map zoom="14" center="tripsIndex.coordinates"></google-map></div>
+  <p></p>
+  <p></p>
+{{ tripsIndex.searchCat}}
+  <div class="column is-three-quarters googleMap"><google-map zoom="14" center="tripsIndex.coordinates" searchCat="tripsIndex.searchCat"></google-map></div>
 </section>

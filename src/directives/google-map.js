@@ -8,7 +8,8 @@ function googleMap(Trip) {
     replace: true,
     scope: {
       center: '=',
-      zoom: '='
+      zoom: '=',
+      searchCat: '='
     },
     link($scope, $element) {
       let service;
@@ -18,7 +19,7 @@ function googleMap(Trip) {
         center: $scope.center
       });
 
-      //set center of Map
+      // set center of Map
       $scope.$watch('center', () => {
         map.setCenter($scope.center);
         showPlaces();
@@ -26,10 +27,12 @@ function googleMap(Trip) {
 
       ////Google Places search
       function showPlaces(){
+        console.log('herer');
+        console.log($scope);
         const request = {
           location: $scope.center,
           radius: '500',
-          type: ['restaurant']
+          type: [$scope.searchCat]
         };
 
         service = new google.maps.places.PlacesService(map);
@@ -47,6 +50,9 @@ function googleMap(Trip) {
         }
       }
 
+      $scope.$watch('searchCat', () => {
+        showPlaces;
+      }, true);
 
 
     }
