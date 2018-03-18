@@ -91,22 +91,26 @@
     <!-- <ul class="menu-list"> -->
     <ul>
       <li ng-repeat="place in tripsIndex.searchResult">
-        <div class="">
-        <a href="#" class="">
-          <img ng-src="{{ place.pictures }}" alt="">
-        </a>
-          <button class="w3-btn w3-grey">+</button>
-          <button class="w3-btn w3-grey">-</button>
-          <h1 class="has-text-weight-bold">{{ place.name }}</h1>
-          <p>{{ place.formatted_address}}</p>
-      </div>
+        <div class="card">
+          <div class="card-image">
+            <a href="#" class="">
+              <img ng-src="{{ place.pictures }}" alt="">
+            </a>
+            <button class="addButton">+</button>
+            <button class="addButton">-</button>
+            <div class="card-content">
+              <h1 class="has-text-weight-bold">{{ place.name }}</h1>
+              <p>{{ place.formatted_address}}</p>
+            </div>
+          </div>
+        </div>
+
       </li>
 
     </ul>
   </aside>
   <!-- GOOGLE MAPS -->
-  <p></p>
-  <p></p>
+
 {{ tripsIndex.searchCat}}
-  <div class="column is-three-quarters googleMap"><google-map zoom="14" center="tripsIndex.coordinates" searchCat="tripsIndex.searchCat"></google-map></div>
+  <div class="column is-three-quarters googleMap"><google-map zoom="20" center="tripsIndex.coordinates" searchCat="tripsIndex.searchCat"></google-map></div>
 </section>
