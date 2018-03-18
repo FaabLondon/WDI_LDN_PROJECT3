@@ -100,12 +100,8 @@ function googleMap(Trip) {
           //add click event to each marker to add it to trip
           google.maps.event.addListener(marker, 'click', function() {
             //
-            let newPlace = {
-              location: {
-                lat: 0,
-                lng: 0
-              }
-            };
+            let newPlace = {location: {lat: 0,lng: 0}};
+
             //update and format newPlace that will be added to trip
             newPlace.name = place.name;
             newPlace.address = place.vicinity; //check if formatted address exists
@@ -123,11 +119,10 @@ function googleMap(Trip) {
               .then(() => {
                 //only display direction if more than 1 place in the trip
                 let nbPlaces = Trip.currentTrip.days[0].places.length;
-                if(nbPlaces > 1)
-                //calls function to update and render display route on map
-                let origin = Trip.currentTrip.days[0].places[0].geometry.location;
-                let destination = Trip.currentTrip.days[0].places[nbPlaces - 1].geometry.location
+                if(nbPlaces > 1) {
+                  //calls function to update and render display route on map
                   calculateAndDisplayRoute(directionsService, directionsDisplay);
+                }
               });
 
           });
@@ -161,11 +156,18 @@ function googleMap(Trip) {
       function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         console.log(Trip.currentTrip);
         let waypts = [];
-        //get trip Object by making a showTrip request through the service Trip
+        let nbPlaces = Trip.currentTrip.days[0].places.length;
+        let origin = {location: {lat: 0,lng: 0}};
+        let destination = {location: {lat: 0,lng: 0}};
+        origin.location.lat = Trip.currentTrip.days[0].places[0].location.lat;
+        origin.location.lng = Trip.currentTrip.days[0].places[0].location.lng;
+        destination.location.lat = Trip.currentTrip.days[0].places[nbPlaces - 1].location.lat;
+        destination.location.lng = Trip.currentTrip.days[0].places[nbPlaces - 1].location.lng;
+
 
         Trip.currentTrip.days[0].places.forEach(place => {
           waypts.push({
-            location: place.geometry.location,
+            location: place.location,
             stopover: true
           });
         });
