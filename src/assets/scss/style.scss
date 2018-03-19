@@ -40,7 +40,21 @@
   height: 200px;
 }
 
-.figure-image {
-  height: 100px;
-  background-color: blue;
+
+.place-image {
+  position: relative;
+}
+.card {
+  position: relative;
+}
+
+.addButton {
+    position:absolute;
+    top:0px;
+    right:20px;
+}
+.removeButton {
+    position:absolute;
+    top:0px;
+    right:0px;
 }
