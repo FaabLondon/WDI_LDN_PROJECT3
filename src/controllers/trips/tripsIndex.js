@@ -1,13 +1,13 @@
-TripsIndexCtrl.$inject = ['$auth','Trip', '$state'];
+TripsIndexCtrl.$inject = ['$auth','Trip', '$state', '$scope'];
 
-function TripsIndexCtrl($auth, Trip, $state) {
-
-  const vm = this; //ViewModel allows us to use this in function
+function TripsIndexCtrl($auth, Trip, $state, $scope) {
+  const vm = this; //ViewModel - allows us to use this in function
   vm.isActive = true;
   vm.searchResult = [];
   vm.newTrip = {};
   vm.userName = '';
   vm.newTrip.days = [];
+  //$scope.currentTrip = {};
   vm.currentTrip = {};
   vm.coordinates = {
     lat: 0,
@@ -40,12 +40,13 @@ function TripsIndexCtrl($auth, Trip, $state) {
     Trip.create(vm.newTrip)
       .then(res => {
         Trip.tripId = res.data._id;
+        //$scope.currentTrip = res.data;
         vm.currentTrip = res.data;
         Trip.currentTrip = res.data;
         $state.go('tripsIndex');
       });
 
-    //this is the google search nearby search results
+    //this is the google search nearby search results which updates Trip.searchResult
     console.log(Trip.searchResult);
     vm.searchResult = Trip.searchResult;
 
@@ -56,36 +57,23 @@ function TripsIndexCtrl($auth, Trip, $state) {
     vm.searchCat=category;
   }
 
-
+  //function to add a place to the trip -
+  //try to move to service as same code as in google-map directive, however I could not get vm.currentTrip to be updated in the controller from the service...
+  //adding a scope.watch on Trip.currentTrip did not work.
   function addPlaceTrip(place){
-    const newPlace = {
-      location: {
-        lat: 0,
-        lng: 0
-      }
-    };
+
     //check that we are not adding a duplicate place in the trip
     if(!vm.currentTrip.days[0].places.find(element => {
       return element.googleId === place.place_id;
-    })){//update and format newPlace that will be added to trip
-      newPlace.name = place.name;
-      newPlace.address = place.vicinity; //check if formatted address exists
-      newPlace.location.lat = place.geometry.location.lat();
-      newPlace.location.lng = place.geometry.location.lng();
-      newPlace.image = place.pictures;
-      newPlace.description = '';
-      newPlace.rating = place.rating;
-      newPlace.googleId = place.place_id;
-      // add the place to the trip
-      Trip.createPlaceTrip(newPlace)
-        .then(res => {
-          Trip.currentTrip = res.data;
-          vm.currentTrip = res.data;
-        });
+    })){
+      Trip.createPlace(place);
+      //$scope.currentTrip = Trip.currentTrip;
+      vm.currentTrip = Trip.currentTrip;
     }
   }
 
-  function removeTrip(place){
+  //function to remive a place from the trip
+  function removePlaceTrip(place){
 
   }
 
@@ -101,13 +89,18 @@ function TripsIndexCtrl($auth, Trip, $state) {
     $state.go('homepage');
   }
 
+  $scope.$on('trip updated', (e, data) => {
+    console.log('received data:', data);
+    vm.currentTrip = data;
+  });
 
-  this.createTrip = createTrip;
+
+  vm.createTrip = createTrip;
   vm.logout = logout;
   //not working
   vm.changeCat = changeCat;
   vm.addPlaceTrip = addPlaceTrip;
-  vm.removeTrip = removeTrip;
+  vm.removePlaceTrip = removePlaceTrip;
   vm.hideNearbyPlaces = hideNearbyPlaces;
 
 
