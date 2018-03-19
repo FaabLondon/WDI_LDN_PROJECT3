@@ -85,7 +85,7 @@
 
 <section class="main-content columns is-fullheight">
   <aside class="column is-one-quarter is-sidebar-menu is-fullheight section is-hidden-mobile">
-
+ {{ tripsIndex.searchCat }}
     <ul class="nearby-places-list" ng-hide="showMe">
       <li ng-repeat="place in tripsIndex.searchResult">
         <div class="card">
@@ -94,7 +94,7 @@
               <img ng-src="{{ place.pictures }}" alt="" ng-click="tripsIndex.hideNearbyPlaces()" >
             </a>
             <button class="addButton" ng-click="tripsIndex.addPlaceTrip(place)">+</button>
-            <button class="addButton" ng-click="tripsIndex.removeTrip(place)">-</button>
+            <button class="addButton" ng-click="tripsIndex.removePlaceTrip(place)">-</button>
             <div class="card-content">
               <h1 class="has-text-weight-bold">{{ place.name }}</h1>
               <p>{{ place.formatted_address}}</p>
@@ -128,5 +128,5 @@
 
   <!-- GOOGLE MAPS -->
 
-  <div class="column is-three-quarters googleMap"><google-map zoom="20" center="tripsIndex.coordinates" searchCat="tripsIndex.searchCat"></google-map></div>
+  <div class="column is-three-quarters googleMap"><google-map zoom="20" center="tripsIndex.coordinates" search-cat="tripsIndex.searchCat"></google-map></div>
 </section>

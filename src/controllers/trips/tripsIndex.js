@@ -87,9 +87,20 @@ function TripsIndexCtrl($auth, Trip, $state) {
     }
   }
 
-  function removeTrip(place){
+  function removePlaceTrip(googlePlace){
+    // if(vm.currentTrip.days[0].places.find(element => {
+    //   return element. === place.place_id;
+    // })){
 
+
+
+    Trip.deletePlaceTrip(googlePlace)
+      .then(res => {
+        Trip.currentTrip = res.data;
+        vm.currentTrip = res.data;
+      });
   }
+
 
 
   // Hide nearby Places - not working
@@ -109,7 +120,7 @@ function TripsIndexCtrl($auth, Trip, $state) {
   //not working
   vm.changeCat = changeCat;
   vm.addPlaceTrip = addPlaceTrip;
-  vm.removeTrip = removeTrip;
+  vm.removePlaceTrip = removePlaceTrip;
   vm.hideNearbyPlaces = hideNearbyPlaces;
 
 
