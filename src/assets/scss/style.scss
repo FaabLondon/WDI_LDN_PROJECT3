@@ -24,6 +24,16 @@
   height: 85vh;
 }
 
+//to style images in map
+
+#markerLayer img {
+        border: 3px solid #444444 !important;
+        width: 60px !important;
+        height: 60px !important;
+        border-radius: 50px;
+      }
+
+
 .is-sidebar-menu {
     min-height: calc(100vh - .75rem );
     max-height: calc(100vh - .75rem );
