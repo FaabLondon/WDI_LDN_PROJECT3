@@ -25,7 +25,9 @@ function deletePlaceDayRoute(req, res, next){
       place.remove();
       return trip.save();
     })
-    .then(trip => res.status(204).json(trip)) //check if we should return anything...
+    .then((trip) => {
+      res.json(trip);
+    }) //check if we should return anything...
     .catch(next);
 }
 

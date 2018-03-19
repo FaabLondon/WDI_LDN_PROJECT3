@@ -85,7 +85,6 @@
 
 <section class="main-content columns is-fullheight">
   <aside class="column is-one-quarter is-sidebar-menu is-fullheight section is-hidden-mobile">
- {{ tripsIndex.searchCat }}
     <ul class="nearby-places-list" ng-hide="showMe">
       <li ng-repeat="place in tripsIndex.searchResult">
         <div class="card">
@@ -130,3 +129,5 @@
 
   <div class="column is-three-quarters googleMap"><google-map zoom="20" center="tripsIndex.coordinates" search-cat="tripsIndex.searchCat"></google-map></div>
 </section>
+
+<!-- currentTrip="tripsIndex.currentTrip" -->
