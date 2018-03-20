@@ -89,7 +89,10 @@
         <div class="card">
           <div class="card-image">
             <a class="">
-              <img class="place-image" ng-src="{{ place.pictures }}" alt="" ng-click="tripsIndex.hideNearbyPlaces()" >
+              <figure class="image">
+                <div class="places-images" style="background: url({{place.pictures}})"></div>
+              </figure>
+              <!-- <img class="place-image" ng-src="{{ place.pictures }}" alt="" ng-click="tripsIndex.hideNearbyPlaces()" > -->
               <button class="addButton" ng-click="tripsIndex.addPlaceTrip(place)">+</button>
               <button class="removeButton" ng-click="tripsIndex.removePlaceTrip(place)">-</button>
             </a>
@@ -125,7 +128,7 @@
 
   <!-- GOOGLE MAPS -->
 
-  <div class="column is-three-quarters googleMap"><google-map zoom="20" center="tripsIndex.coordinates" search-cat="tripsIndex.searchCat"></google-map></div>
+  <div class="column is-three-quarters googleMap"><google-map zoom="20" center="tripsIndex.coordinates" searchCat="tripsIndex.searchCat"></google-map></div>
 </section>
 
 <!-- currentTrip="tripsIndex.currentTrip" -->
