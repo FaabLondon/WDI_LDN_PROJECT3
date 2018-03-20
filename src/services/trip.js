@@ -31,6 +31,7 @@ function Trip($http, $rootScope) {
   }
 
 
+  //delete Google Place from the trip
   function deletePlaceTrip(place){
 
     let delPlace = {};
@@ -47,7 +48,7 @@ function Trip($http, $rootScope) {
             .then(() => {
               //only display direction if more than 1 place in the trip
               const nbPlaces = vm.currentTrip.days[0].places.length;
-              if(nbPlaces > 1) {
+              if(nbPlaces > 0) { //in case there is only 1 place left
                 //calls function to update and render display route on map
                 vm.calculateAndDisplayRoute(vm.directionsService, vm.directionsDisplay);
               }
@@ -57,9 +58,6 @@ function Trip($http, $rootScope) {
       .catch(err => console.log(err));
   }
 
-  // function getPlaceTrip(place){
-  //
-  // }
 
   //function to show all places in a trip
   function showTrip(){
@@ -84,7 +82,7 @@ function Trip($http, $rootScope) {
     vm.createPlaceTrip(newPlace)
       .then(res => {
         vm.currentTrip = res.data;
-        console.log('sendingfrom service:', res.data);
+        //console.log('sendingfrom service:', res.data);
         $rootScope.$broadcast('trip updated', res.data);
       })
       .then(() => {
@@ -130,22 +128,15 @@ function Trip($http, $rootScope) {
       if (status === 'OK') {
         // code to display route in a panel - need to define a DOM element to display it in
         directionsDisplay.setDirections(response);
-        // var route = response.routes[0];
-        // var summaryPanel = document.getElementById('directions-panel');
-        // summaryPanel.innerHTML = '';
-        // // For each route, display summary information.
-        // for (var i = 0; i < route.legs.length; i++) {
-        //   var routeSegment = i + 1;
-        //   summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
-        //       '</b><br>';
-        //   summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
-        //   summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
-        //   summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
-        //}
+        //send boradcats message to google-directions directive
+        console.log('sendingfrom service:', response);
+        $rootScope.$broadcast('Directions updated', response);
+
       } else {
         window.alert('Directions request failed due to ' + status);
       }
     }
+
     //calls function to set route and directions
     directionsService.route(request, callBackDirections);
   }

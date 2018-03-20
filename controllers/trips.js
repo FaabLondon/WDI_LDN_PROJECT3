@@ -25,15 +25,9 @@ function indexTripRoute(req, res, next){
   console.log(req.params.userId);
 
   Trip.find()
-    .populate('user')
-    .populate('trips.user')
+    .populate('user') //had to populate user data in order to get access to trip.user._id
     .then(trips => {
-      trips.forEach(elt => {
-        console.log('user in array', elt.user._id);
-        console.log('re param',req.params.userId);
-      });
-
-      const arrTrips = trips.filter(elt => elt.user === req.params.userId);
+      trips = trips.filter(trip => trip.user._id.equals(req.currentUser._id));
       res.status(200).json(trips);
     })
     .catch(next);

@@ -55,7 +55,7 @@ function TripsIndexCtrl($auth, Trip, $state, $scope) {
 
   }
 
-  //not working
+  //changes the search category on google places
   function changeCat(category){
     vm.searchCat=category;
   }
@@ -109,7 +109,7 @@ function TripsIndexCtrl($auth, Trip, $state, $scope) {
   }
 
   $scope.$on('trip updated', (e, data) => {
-    console.log('received data:', data);
+    //console.log('received data:', data);
     vm.currentTrip = data;
   });
 
