@@ -13,6 +13,11 @@ function Router($stateProvider, $urlRouterProvider, $locationProvider) {
       url: '/trips',
       templateUrl: 'views/trips/index.html',
       controller: 'TripsIndexCtrl as tripsIndex'
+    })
+    .state('allTrips', {
+      url: '/trips/all',
+      templateUrl: 'views/trips/allTrips.html',
+      controller: 'allTripsCtrl as allTrips'
     });
 
 

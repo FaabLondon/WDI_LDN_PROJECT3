@@ -8,7 +8,7 @@ function Trip($http, $rootScope) {
   vm.userName = '';
   vm.searchResult = [];
   vm.tripId = '';
-
+  //vm.allUsersTrips;
   vm.currentTrip = {};
   //variables used to display routes between different places and waypoints
   vm.directionsService = new google.maps.DirectionsService;
@@ -58,6 +58,10 @@ function Trip($http, $rootScope) {
     return $http.get(`/api/trips/${vm.tripId}`);
   }
 
+  function seeAllTrips(req, res, next){
+    return $http.get('/api/trips');
+  }
+
   //function to add place - calls createPlaceTrip
   function createPlace(place){
     const newPlace = {location: {lat: 0,lng: 0}};
@@ -100,14 +104,15 @@ function Trip($http, $rootScope) {
     origin.location = vm.currentTrip.days[0].places[0].location;
     destination.location = vm.currentTrip.days[0].places[nbPlaces - 1].location;
 
-    //Add each place to waypoints. Should not be doing it for each place as would have origin and destination in doublon...however it works that way as google is smart...
-    //should only loop from index 1 to array length - 2
-    vm.currentTrip.days[0].places.forEach(place => {
-      waypts.push({
-        location: place.location,
-        stopover: true
-      });
-    });
+    //Add each place to waypoints except for origin (1st element in array) and destination (last element of array) - directions are optimised by google on origin, destination and all waypoints
+    if(nbPlaces > 2){
+      for (let i = 1; i < nbPlaces - 1; i++){
+        waypts.push({
+          location: vm.currentTrip.days[0].places[i].location,
+          stopover: true
+        });
+      }
+    } //else waypts stays [];
 
     //define request to get directions
     const request = {
@@ -142,6 +147,7 @@ function Trip($http, $rootScope) {
   vm.showTrip = showTrip;
   vm.createPlace = createPlace;
   vm.deletePlaceTrip = deletePlaceTrip;
+  vm.seeAllTrips = seeAllTrips;
 
 
 

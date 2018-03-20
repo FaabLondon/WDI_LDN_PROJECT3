@@ -58,7 +58,7 @@
     <div class="navbar-end">
       <a class="navbar-item" ng-click="showMe=true" ui-sref="">Daily Plan</a>
       <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="">Current Trip</a>
-      <a class="navbar-item" ng-click="tripsIndex.seeTrips()" ui-sref="">See all my Trips</a>
+      <a class="navbar-item" ng-click="tripsIndex.seeAllTrips()" ui-sref="allTrips">See all my Trips</a>
       <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link" href=""> <span class="icon is-small"><i class="fas fa-user"></i></span>&nbsp {{tripsIndex.userName}}</a>
           <div class="navbar-dropdown is-boxed is-right" ng-if="tripsIndex.isAuthenticated()">
@@ -103,7 +103,7 @@
     </ul>
 
 <!-- SIDEBAR - DAILY PLAN VIEW -->
-
+    {{tripsIndex.instructionsDay}}
     <ul class="daily-plan-view" ng-show="showMe">
       <li ng-repeat="place in tripsIndex.currentTrip.days[0].places">
         <div class="card">
@@ -128,10 +128,6 @@
   <div class="column is-three-quarters googleMap">
     <google-map zoom="20" center="tripsIndex.coordinates" search-cat="tripsIndex.searchCat">
     </google-map>
-
-    <div class="directions-panel">
-
-    </div>
   </div>
 
 

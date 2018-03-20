@@ -29,11 +29,11 @@ mongoose.connect(dbURI, (err, db) => {
         return trip;
       });
 
-      Trip.create(tripData)
-        .then(trips => console.log(`${trips.length} trip(s) created`))
-        .catch(err => console.log(err))
-        .finally(() => mongoose.connection.close());
-    });
+      return Trip.create(tripData);
+    })
+    .then(trips => console.log(`${trips.length} trip(s) created`))
+    .catch(err => console.log(err))
+    .finally(() => mongoose.connection.close());
 });
 
 

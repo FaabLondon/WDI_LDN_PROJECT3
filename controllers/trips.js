@@ -25,6 +25,7 @@ function indexTripRoute(req, res, next){
   Trip.find()
     .populate('user') //had to populate user data in order to get access to trip.user._id
     .then(trips => {
+      console.log(trips);
       trips = trips.filter(trip => trip.user._id.equals(req.currentUser._id));
       res.status(200).json(trips);
     })
@@ -46,6 +47,8 @@ function updateTripRoute(req, res, next){
     .then(trip => res.json(trip))
     .catch(next);
 }
+
+
 
 module.exports = {
   createTrip: createTripRoute,

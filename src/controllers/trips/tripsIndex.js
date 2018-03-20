@@ -1,6 +1,6 @@
-TripsIndexCtrl.$inject = ['$auth','Trip', '$state', '$scope'];
+TripsIndexCtrl.$inject = ['$auth','Trip', '$state', '$scope', '$rootScope'];
 
-function TripsIndexCtrl($auth, Trip, $state, $scope) {
+function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope) {
   const vm = this; //ViewModel - allows us to use this in function
   vm.isActive = true;
   vm.searchResult = [];
@@ -9,11 +9,13 @@ function TripsIndexCtrl($auth, Trip, $state, $scope) {
   vm.newTrip.days = [];
   //$scope.currentTrip = {};
   vm.currentTrip = {};
+  vm.allUsersTrips = [];
   vm.coordinates = {
     lat: 0,
     lng: 0
   };
   vm.address;
+  vm.instructionsDay = '';
   //not working
   vm.searchCat='point_of_interest';
 
@@ -58,8 +60,6 @@ function TripsIndexCtrl($auth, Trip, $state, $scope) {
   }
 
   //function to add a place to the trip -
-  //try to move to service as same code as in google-map directive, however I could not get vm.currentTrip to be updated in the controller from the service...
-  //adding a scope.watch on Trip.currentTrip did not work.
   function addPlaceTrip(place){
 
     //check that we are not adding a duplicate place in the trip
@@ -67,23 +67,48 @@ function TripsIndexCtrl($auth, Trip, $state, $scope) {
       return element.googleId === place.place_id;
     })){
       Trip.createPlace(place);
-      //$scope.currentTrip = Trip.currentTrip;
-      vm.currentTrip = Trip.currentTrip;
+      vm.currentTrip = Trip.currentTrip; //currentTrip is also updated through a broadcast...
     }
   }
 
   //function to remive a place from the trip
   function removePlaceTrip(googlePlace){
-
     Trip.deletePlaceTrip(googlePlace);
-
-    // Trip.currentTrip = res.data;
-    // vm.currentTrip = res.data;
+    vm.currentTrip = Trip.currentTrip; //currentTrip is also updated through a broadcast...
     console.log(`after delete log ${vm.currentTrip}`);
-
   }
 
+  //function to display the directions in the dailyPLan
+  $scope.$on('Directions updated', (e, directions) => {
+    console.log('received directions:', directions);
+    vm.displayDirections(directions);
+  });
 
+  function displayDirections(directions){
+    console.log(directions);
+    const route = directions.routes[0];
+    vm.instructionsDay = '';
+    //For each route, display summary information.
+    for (let i = 0; i < route.legs.length; i++) {
+      let routeSegment = i + 1;
+      vm.instructionsDay += '<b>Route Segment: ' + routeSegment +
+          '</b><br>';
+      vm.instructionsDay += route.legs[i].start_address + ' to ';
+      vm.instructionsDay += route.legs[i].end_address + '<br>';
+      vm.instructionsDay += route.legs[i].distance.text + '<br><br>';
+    }
+  }
+
+  function seeAllTrips() {
+    Trip.seeAllTrips()
+      .then(res => {
+        vm.allUsersTrips = res.data;
+      //  Trip.allUsersTrips = res.data;
+        console.log('Returned trips', vm.allUsersTrips);
+        $rootScope.$broadcast('All trips sent', res.data);
+        console.log('send data', res.data);
+      });
+  }
 
   // Hide nearby Places - not working
   function hideNearbyPlaces() {
@@ -102,6 +127,8 @@ function TripsIndexCtrl($auth, Trip, $state, $scope) {
   });
 
 
+
+
   vm.createTrip = createTrip;
   vm.logout = logout;
   //not working
@@ -109,6 +136,8 @@ function TripsIndexCtrl($auth, Trip, $state, $scope) {
   vm.addPlaceTrip = addPlaceTrip;
   vm.removePlaceTrip = removePlaceTrip;
   vm.hideNearbyPlaces = hideNearbyPlaces;
+  vm.displayDirections = displayDirections;
+  vm.seeAllTrips = seeAllTrips;
 
 
 }

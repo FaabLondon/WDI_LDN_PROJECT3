@@ -12,6 +12,7 @@ import Auth from './config/auth';
 //controllers
 import AuthRegisterLoginCtrl from './controllers/auth/authRegisterLogin';
 import TripsIndexCtrl from './controllers/trips/tripsIndex';
+import allTripsCtrl from './controllers/trips/allTrips';
 
 //service
 import Trip from './services/trip';
@@ -19,7 +20,7 @@ import Trip from './services/trip';
 //directives
 import googleMap from './directives/google-map';
 import googleAutocomplete from './directives/google-autocomplete';
-import googleDirections from './directives/google-directions';
+// import googleDirections from './directives/google-directions';
 
 //sass styling and bulma
 import './assets/scss/style.scss';
@@ -33,6 +34,7 @@ angular
   .service('Trip', Trip)
   .controller('AuthRegisterLoginCtrl', AuthRegisterLoginCtrl)
   .controller('TripsIndexCtrl', TripsIndexCtrl)
+  .controller('allTripsCtrl', allTripsCtrl)
   .directive('googleMap',googleMap)
-  .directive('googleAutocomplete',googleAutocomplete)
-  .directive('googleDirections', googleDirections);
+  .directive('googleAutocomplete',googleAutocomplete);
+  // .directive('googleDirections', googleDirections);
