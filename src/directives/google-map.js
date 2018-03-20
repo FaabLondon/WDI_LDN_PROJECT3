@@ -1,7 +1,7 @@
 /* global google */
-googleMap.$inject = ['Trip'];
+googleMap.$inject = ['Trip', '$rootScope'];
 
-function googleMap(Trip) {
+function googleMap(Trip, $rootScope) {
   return {
     restrict: 'E',
     template: '<div class="google-map"></div>',
@@ -52,6 +52,8 @@ function googleMap(Trip) {
 
       ////Google Places search
       function showPlaces() {
+
+        //create a new Search request
         const request = {
           location: $scope.center,
           radius: '500',
@@ -122,6 +124,7 @@ function googleMap(Trip) {
 
           //save the search result in Trip.searchResult in order to use in controller and view
           Trip.searchResult.push(place);
+
         }
       }
 
@@ -130,15 +133,18 @@ function googleMap(Trip) {
         service = new google.maps.places.PlacesService(Trip.map);
 
         places.forEach(place => {
-
           const requestDetails = {
             placeId: place.place_id
           };
-
           service.getDetails(requestDetails, callbackDetails);
           bounds.extend(place.geometry.location);
         });
+
+        //broadcast new search result - tell the controller that the searchResult is updated
+        $rootScope.$broadcast('All search results updated', places);
+        console.log('broadcasted new search result', places)
         Trip.map.fitBounds(bounds);
+
       }
 
       //setup function to render and display route

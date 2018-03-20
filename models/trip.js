@@ -23,6 +23,7 @@ const tripSchema = new mongoose.Schema({
   user: {type: mongoose.Schema.ObjectId, ref: 'User'},
   location: { type: String },
   startDate: { type: Date },
+  image: {type: String},
   days: [daySchema]
 });
 

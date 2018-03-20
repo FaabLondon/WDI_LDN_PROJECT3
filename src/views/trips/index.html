@@ -13,18 +13,29 @@
         <form name="tripsIndex.form" ng-submit="tripsIndex.createTrip()" novalidate>
           <div class="field">
             <label for="location">Where are you going?</label>
-            <input coordinates="tripsIndex.coordinates" address="tripsIndex.address" class="input googleAutocomplete" placeholder="e.g. London, New York, Paris" name="location" required />
-            <div ng-messages="tripsIndex.form.location.$error" ng-if="tripsIndex.form.location.$dirty || tripsIndex.form.$submitted">
-              <div class="has-text-danger" ng-message="required">This field is required
-              </div>
+            <p class="control has-icons-left">
+              <input coordinates="tripsIndex.coordinates" address="tripsIndex.newTrip.location" image="tripsIndex.newTrip.image" class="input googleAutocomplete" id="modal-input-1" placeholder="e.g. London, New York, Paris" name="location" required />
+              <span class="icon is-left">
+                <i class="fas fa-map-marker-alt"></i>
+              </span>
+            </p>
+          </div>
+          <div ng-messages="tripsIndex.form.location.$error" ng-if="tripsIndex.form.location.$dirty || tripsIndex.form.$submitted">
+            <div class="has-text-danger" ng-message="required">This field is required
             </div>
           </div>
+
           <div class="field">
             <label for="startDate">When?</label>
-            <input class="input" type="date" placeholder="" name="startDate" ng-model="tripsIndex.newTrip.startDate" required />
-            <div ng-messages="tripsIndex.form.startDate.$error" ng-if="tripsIndex.form.startDate.$dirty || tripsIndex.form.$submitted">
-              <div class="has-text-danger" ng-message="required">This field is required</div>
-            </div>
+            <p class="control has-icons-left">
+              <input class="input" type="date" id="modal-input-2" placeholder="" name="startDate" ng-model="tripsIndex.newTrip.startDate" required />
+              <span class="icon is-left">
+                <i class="far fa-calendar-alt"></i>
+              </span>
+            </p>
+          </div>
+          <div ng-messages="tripsIndex.form.startDate.$error" ng-if="tripsIndex.form.startDate.$dirty || tripsIndex.form.$submitted">
+            <div class="has-text-danger" ng-message="required">This field is required</div>
           </div>
 
           <button class="button is-primary">Create Trip</button>
@@ -58,7 +69,7 @@
     <div class="navbar-end">
       <a class="navbar-item" ng-click="showMe=true" ui-sref="">Daily Plan</a>
       <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="">Current Trip</a>
-      <a class="navbar-item" ng-click="tripsIndex.seeTrips()" ui-sref="">See all my Trips</a>
+      <a class="navbar-item" ng-click="tripsIndex.seeAllTrips()" ui-sref="allTrips">See all my Trips</a>
       <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link" href=""> <span class="icon is-small"><i class="fas fa-user"></i></span>&nbsp {{tripsIndex.userName}}</a>
           <div class="navbar-dropdown is-boxed is-right" ng-if="tripsIndex.isAuthenticated()">
@@ -72,7 +83,7 @@
 <nav class="navbar">
   <div class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item" ng-click="tripsIndex.changeCat('point_of_interest')">Places</a>
+      <a class="navbar-item" ng-click="tripsIndex.changeCat('museum')">Places</a>
       <a class="navbar-item" ng-click="tripsIndex.changeCat('establishment')">Events</a>
       <a class="navbar-item" ng-click="tripsIndex.changeCat('restaurant')">Restaurants</a>
       <a class="navbar-item" ng-click="tripsIndex.changeCat('lodging')">Hotels</a>
@@ -89,12 +100,13 @@
         <div class="card">
           <div class="card-image">
             <a class="">
-              <figure class="image">
-                <div class="places-images" style="background: url({{place.pictures}})"></div>
-              </figure>
-              <!-- <img class="place-image" ng-src="{{ place.pictures }}" alt="" ng-click="tripsIndex.hideNearbyPlaces()" > -->
-              <button class="addButton" ng-click="tripsIndex.addPlaceTrip(place)">+</button>
-              <button class="removeButton" ng-click="tripsIndex.removePlaceTrip(place)">-</button>
+              <img class="place-image" ng-src="{{ place.pictures }}" alt="" ng-click="tripsIndex.hideNearbyPlaces()" >
+              <button class="addButton" ng-click="tripsIndex.addPlaceTrip(place)">
+                <span class="word"> {{ place.addButton1 || '+' }}</span>
+              </button>
+              <button class="removeButton" ng-click="tripsIndex.removePlaceTrip(place)">
+                <span class="word"> - </span>
+              </button>
             </a>
             <div class="card-content">
               <h1 class="has-text-weight-bold">{{ place.name }}</h1>
@@ -106,8 +118,17 @@
     </ul>
 
 <!-- SIDEBAR - DAILY PLAN VIEW -->
-
-    <ul class="daily-plan-view" ng-show="showMe">
+    <div ng-show="showMe">
+      <button ng-click="showMe=false" class="button is-primary" name="button">Back to trip planning</button>
+      <br>
+      <br>
+      <h2 class="subtitle is-bold"> Directions for today's trip </h2>
+      <div ng-bind-html="tripsIndex.instructionsDay"></div>
+      <h2 class="subtitle is-bold"> Places you are visiting today </h2>
+      <br>
+      <br>
+    </div>
+    <ul class="daily-plan-view" >
       <li ng-repeat="place in tripsIndex.currentTrip.days[0].places">
         <div class="card">
           <div class="card-image">
@@ -121,7 +142,6 @@
           </div>
         </div>
       </li>
-      <button ng-click="showMe=false" class="button is-primary" name="button">Back</button>
     </ul>
 
   </aside>
@@ -131,10 +151,6 @@
   <div class="column is-three-quarters googleMap">
     <google-map zoom="20" center="tripsIndex.coordinates" search-cat="tripsIndex.searchCat">
     </google-map>
-
-    <div class="directions-panel">
-
-    </div>
   </div>
 
 

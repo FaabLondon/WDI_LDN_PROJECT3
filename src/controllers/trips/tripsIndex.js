@@ -1,6 +1,6 @@
-TripsIndexCtrl.$inject = ['$auth','Trip', '$state', '$scope'];
+TripsIndexCtrl.$inject = ['$auth','Trip', '$state', '$scope', '$rootScope', '$sce'];
 
-function TripsIndexCtrl($auth, Trip, $state, $scope) {
+function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce) {
   const vm = this; //ViewModel - allows us to use this in function
   vm.isActive = true;
   vm.searchResult = [];
@@ -9,13 +9,18 @@ function TripsIndexCtrl($auth, Trip, $state, $scope) {
   vm.newTrip.days = [];
   //$scope.currentTrip = {};
   vm.currentTrip = {};
+  vm.allUsersTrips = [];
   vm.coordinates = {
     lat: 0,
     lng: 0
   };
   vm.address;
+  vm.instructionsDay = '';
   //not working
-  vm.searchCat='point_of_interest';
+  vm.searchCat='museum';
+  vm.addButton1 = '+';
+  vm.addButton2;
+
 
   //need to store wether user is authenticated or not in order to test it in view and hide/show buttons accordingly.
   vm.isAuthenticated = $auth.isAuthenticated;
@@ -28,7 +33,7 @@ function TripsIndexCtrl($auth, Trip, $state, $scope) {
     if(vm.form.$invalid) return false;
     vm.isActive = !vm.isActive;
 
-    vm.newTrip.location = vm.address;
+    //vm.newTrip.location = vm.address;
     //add array of day with 1st day = startDate of trip
     vm.newTrip.days[0] = {
       date: start,
@@ -46,20 +51,17 @@ function TripsIndexCtrl($auth, Trip, $state, $scope) {
         $state.go('tripsIndex');
       });
 
-    //this is the google search nearby search results which updates Trip.searchResult
-    console.log(Trip.searchResult);
+    //this is the google search nearby search results that updates Trip.searchResult in the directive and then updates vm.searchResult
     vm.searchResult = Trip.searchResult;
 
   }
 
   //changes the search category on google places
   function changeCat(category){
-    vm.searchCat=category;
+    vm.searchCat = category;
   }
 
   //function to add a place to the trip -
-  //try to move to service as same code as in google-map directive, however I could not get vm.currentTrip to be updated in the controller from the service...
-  //adding a scope.watch on Trip.currentTrip did not work.
   function addPlaceTrip(place){
 
     //check that we are not adding a duplicate place in the trip
@@ -67,23 +69,58 @@ function TripsIndexCtrl($auth, Trip, $state, $scope) {
       return element.googleId === place.place_id;
     })){
       Trip.createPlace(place);
-      //$scope.currentTrip = Trip.currentTrip;
-      vm.currentTrip = Trip.currentTrip;
+      vm.currentTrip = Trip.currentTrip; //currentTrip is also updated through a broadcast...
+    }
+    if(place.addButton1 === '✓'){
+      place.addButton1 = '+';
+    } else {
+      place.addButton1 = '✓';
     }
   }
 
-  //function to remive a place from the trip
+  //function to remove a place from the trip
   function removePlaceTrip(googlePlace){
-
     Trip.deletePlaceTrip(googlePlace);
-
-    // Trip.currentTrip = res.data;
-    // vm.currentTrip = res.data;
-    console.log(`after delete log ${vm.currentTrip}`);
-
+    vm.currentTrip = Trip.currentTrip; //currentTrip is also updated through a broadcast...
+    if(googlePlace.addButton1 === '✓'){
+      googlePlace.addButton1 = '+';
+    } else {
+      googlePlace.addButton1 = '✓';
+    }
   }
 
+  //function to display the directions in the dailyPLan
+  $scope.$on('Directions updated', (e, directions) => {
+    vm.displayDirections(directions);
+  });
 
+  function displayDirections(directions){
+    const route = directions.routes[0];
+    vm.instructionsDay = '';
+    //loop through the geocode_waypoints to Object.assign detailed information for display in myTrip view
+    directions.geocoded_waypoints.forEach(wayPt => {
+    });
+
+    //For each route, display summary information.
+    for (let i = 0; i < route.legs.length; i++) {
+      let routeSegment = i + 1;
+      vm.instructionsDay += '<b> Step: ' + routeSegment + ' of your trip</b><br>';
+      vm.instructionsDay += route.legs[i].start_address + ' to ';
+      vm.instructionsDay += route.legs[i].end_address + '<br>';
+      vm.instructionsDay += '<b> Distance: </b>' + route.legs[i].distance.text + '<br>';
+      vm.instructionsDay += '<b> Duration: </b>' + route.legs[i].duration.text + '<br><br>';
+      vm.instructionsDay = $sce.trustAsHtml(vm.instructionsDay);
+    }
+  }
+
+  function seeAllTrips() {
+    Trip.seeAllTrips()
+      .then(res => {
+        vm.allUsersTrips = res.data;
+      //  Trip.allUsersTrips = res.data;
+        $rootScope.$broadcast('All trips sent', res.data);
+      });
+  }
 
   // Hide nearby Places - not working
   function hideNearbyPlaces() {
@@ -96,9 +133,14 @@ function TripsIndexCtrl($auth, Trip, $state, $scope) {
     $state.go('homepage');
   }
 
+  //listening for events
   $scope.$on('trip updated', (e, data) => {
-    //console.log('received data:', data);
     vm.currentTrip = data;
+  });
+
+  $scope.$on('All search results updated', (e, data) => {
+    console.log('received data for updated search:', data);
+    vm.searchResult = data;
   });
 
 
@@ -109,6 +151,8 @@ function TripsIndexCtrl($auth, Trip, $state, $scope) {
   vm.addPlaceTrip = addPlaceTrip;
   vm.removePlaceTrip = removePlaceTrip;
   vm.hideNearbyPlaces = hideNearbyPlaces;
+  vm.displayDirections = displayDirections;
+  vm.seeAllTrips = seeAllTrips;
 
 
 }

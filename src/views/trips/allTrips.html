@@ -1,0 +1,15 @@
+<ul class="daily-plan-view">
+  <li ng-repeat="trip in AllTrips.allUsersTrips">
+    <div class="card">
+      <div class="card-image">
+        <a class="">
+          <img ng-src="{{ trip.image }}" alt="">
+        </a>
+        <div class="card-content">
+          <h1 class="has-text-weight-bold">{{ trip.location }}</h1>
+          <p>{{ trip.startDate}}</p>
+        </div>
+      </div>
+    </div>
+  </li>
+</ul>

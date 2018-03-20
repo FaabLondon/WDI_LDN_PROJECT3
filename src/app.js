@@ -1,7 +1,7 @@
 import angular from 'angular';
 import 'satellizer'; //for authetification on client side
 import 'angular-messages'; //for messages in form validation management
-
+import 'jsonwebtoken';
 //Router
 import '@uirouter/angularjs';
 import Router from './config/router';
@@ -12,6 +12,7 @@ import Auth from './config/auth';
 //controllers
 import AuthRegisterLoginCtrl from './controllers/auth/authRegisterLogin';
 import TripsIndexCtrl from './controllers/trips/tripsIndex';
+import AllTripsCtrl from './controllers/trips/allTrips';
 
 //service
 import Trip from './services/trip';
@@ -19,7 +20,7 @@ import Trip from './services/trip';
 //directives
 import googleMap from './directives/google-map';
 import googleAutocomplete from './directives/google-autocomplete';
-import googleDirections from './directives/google-directions';
+// import googleDirections from './directives/google-directions';
 
 //sass styling and bulma
 import './assets/scss/style.scss';
@@ -32,7 +33,9 @@ angular
   .config(Auth)
   .service('Trip', Trip)
   .controller('AuthRegisterLoginCtrl', AuthRegisterLoginCtrl)
+  .controller('AllTripsCtrl', AllTripsCtrl)
   .controller('TripsIndexCtrl', TripsIndexCtrl)
+  .controller('AllTripsCtrl', AllTripsCtrl)
   .directive('googleMap',googleMap)
-  .directive('googleAutocomplete',googleAutocomplete)
-  .directive('googleDirections', googleDirections);
+  .directive('googleAutocomplete',googleAutocomplete);
+  // .directive('googleDirections', googleDirections);

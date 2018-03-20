@@ -8,7 +8,6 @@ function createTripRoute(req, res, next) {
   Trip.create(req.body)
   //add that on trip creation, the first date in days array is equalto startDay of trip
     .then(trip => {
-      console.log(trip);
       res.status(201).json(trip);
     })
     .catch(next);
@@ -46,6 +45,8 @@ function updateTripRoute(req, res, next){
     .then(trip => res.json(trip))
     .catch(next);
 }
+
+
 
 module.exports = {
   createTrip: createTripRoute,
