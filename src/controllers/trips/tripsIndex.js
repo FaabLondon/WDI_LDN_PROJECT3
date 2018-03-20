@@ -97,7 +97,7 @@ function TripsIndexCtrl($auth, Trip, $state, $scope) {
   }
 
   $scope.$on('trip updated', (e, data) => {
-    console.log('received data:', data);
+    //console.log('received data:', data);
     vm.currentTrip = data;
   });
 

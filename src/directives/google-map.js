@@ -85,6 +85,7 @@ function googleMap(Trip) {
           let url = '';
 
           //get error message Uncaught TypeError: a.url.substr is not a function
+          //picture for the marker
           place.photos ? url = place.photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100}): url = '';
 
           const image = {
@@ -118,7 +119,7 @@ function googleMap(Trip) {
             })
             ){
               //update and format newPlace with google pictures before adding to the trip
-              place.pictures = place.photos ? place.photos[0].getUrl({'maxWidth': 400, 'maxHeight': 200}): '';
+              place.pictures = place.photos ? place.photos[0].getUrl({'maxWidth': 800, 'maxHeight': 800}): '';
               Trip.createPlace(place);
 
             }
@@ -127,7 +128,7 @@ function googleMap(Trip) {
           //add detailed picture to each place object to be accessed in view
           //might want to change to just place.photos to get access to array of pics
           //Uncaught TypeError: a.url.substr is not a function
-          place.photos ? place.pictures = place.photos[0].getUrl({'maxWidth': 300, 'maxHeight': 150}): place.pictures = '';
+          place.photos ? place.pictures = place.photos[0].getUrl({'maxWidth': 800, 'maxHeight': 800}): place.pictures = '';
 
           //save the search result in Trip.searchResult in order to use in controller and view
           Trip.searchResult.push(place);

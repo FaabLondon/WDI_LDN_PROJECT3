@@ -78,7 +78,7 @@ function Trip($http, $rootScope) {
     vm.createPlaceTrip(newPlace)
       .then(res => {
         vm.currentTrip = res.data;
-        console.log('sendingfrom service:', res.data);
+        //console.log('sendingfrom service:', res.data);
         $rootScope.$broadcast('trip updated', res.data);
       })
       .then(() => {
@@ -124,18 +124,10 @@ function Trip($http, $rootScope) {
       if (status === 'OK') {
         // code to display route in a panel - need to define a DOM element to display it in
         directionsDisplay.setDirections(response);
-        // var route = response.routes[0];
-        // var summaryPanel = document.getElementById('directions-panel');
-        // summaryPanel.innerHTML = '';
-        // // For each route, display summary information.
-        // for (var i = 0; i < route.legs.length; i++) {
-        //   var routeSegment = i + 1;
-        //   summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
-        //       '</b><br>';
-        //   summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
-        //   summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
-        //   summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
-        //}
+        //send boradcats message to google-directions directive
+        console.log('sendingfrom service:', response);
+        $rootScope.$broadcast('Directions updated', response);
+
       } else {
         window.alert('Directions request failed due to ' + status);
       }
