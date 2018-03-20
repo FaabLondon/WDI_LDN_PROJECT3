@@ -6,6 +6,7 @@ const User = require('../models/user');
 let tripData = [{
   location: 'Barcelona',
   startDate: 'Thu Apr 15 2018 00:00:00 GMT+0100 (CET)',
+  image: 'https://static.barcelona.com/var/plain/storage/images/promociones/blocks/commercial/all_skip_the_line_priority_tickets/9496261-2-eng-GB/all_skip_the_line_priority_tickets_block-selection.jpg',
   days: [{
     date: 'Thu Apr 15 2018 00:00:00 GMT+0100 (CET)',
     places: []

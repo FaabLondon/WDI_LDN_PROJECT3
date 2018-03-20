@@ -17,7 +17,7 @@ function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce) {
   vm.address;
   vm.instructionsDay = '';
   //not working
-  vm.searchCat='point_of_interest';
+  vm.searchCat='museum';
   vm.addButton1 = '+';
   vm.addButton2;
 
@@ -33,7 +33,7 @@ function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce) {
     if(vm.form.$invalid) return false;
     vm.isActive = !vm.isActive;
 
-    vm.newTrip.location = vm.address;
+    //vm.newTrip.location = vm.address;
     //add array of day with 1st day = startDate of trip
     vm.newTrip.days[0] = {
       date: start,
@@ -51,15 +51,14 @@ function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce) {
         $state.go('tripsIndex');
       });
 
-    //this is the google search nearby search results which updates Trip.searchResult
-    console.log(Trip.searchResult);
+    //this is the google search nearby search results that updates Trip.searchResult in the directive and then updates vm.searchResult
     vm.searchResult = Trip.searchResult;
 
   }
 
   //changes the search category on google places
   function changeCat(category){
-    vm.searchCat=category;
+    vm.searchCat = category;
   }
 
   //function to add a place to the trip -
@@ -83,7 +82,6 @@ function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce) {
   function removePlaceTrip(googlePlace){
     Trip.deletePlaceTrip(googlePlace);
     vm.currentTrip = Trip.currentTrip; //currentTrip is also updated through a broadcast...
-    console.log(`after delete log ${vm.currentTrip}`);
     if(googlePlace.addButton1 === '✓'){
       googlePlace.addButton1 = '+';
     } else {
@@ -97,13 +95,10 @@ function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce) {
   });
 
   function displayDirections(directions){
-    console.log('directions', directions);
     const route = directions.routes[0];
     vm.instructionsDay = '';
     //loop through the geocode_waypoints to Object.assign detailed information for display in myTrip view
-    console.log('my current trip', vm.currentTrip.days[0].places);
     directions.geocoded_waypoints.forEach(wayPt => {
-      console.log('waypt id', wayPt.place_id);
     });
 
     //For each route, display summary information.
@@ -138,12 +133,15 @@ function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce) {
     $state.go('homepage');
   }
 
+  //listening for events
   $scope.$on('trip updated', (e, data) => {
-    //console.log('received data:', data);
     vm.currentTrip = data;
   });
 
-
+  $scope.$on('All search results updated', (e, data) => {
+    console.log('received data for updated search:', data);
+    vm.searchResult = data;
+  });
 
 
   vm.createTrip = createTrip;

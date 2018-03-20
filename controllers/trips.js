@@ -8,7 +8,6 @@ function createTripRoute(req, res, next) {
   Trip.create(req.body)
   //add that on trip creation, the first date in days array is equalto startDay of trip
     .then(trip => {
-      console.log(trip);
       res.status(201).json(trip);
     })
     .catch(next);
@@ -22,12 +21,9 @@ function deleteTripRoute(req, res, next){
 }
 
 function indexTripRoute(req, res, next){
-  console.log(req.params.userId);
-
   Trip.find()
     .populate('user') //had to populate user data in order to get access to trip.user._id
     .then(trips => {
-      console.log(trips);
       trips = trips.filter(trip => trip.user._id.equals(req.currentUser._id));
       res.status(200).json(trips);
     })

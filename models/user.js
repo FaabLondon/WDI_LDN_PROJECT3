@@ -7,6 +7,14 @@ const userSchema = new mongoose.Schema({
   password: {type: String, required: true}
 });
 
+//to protect our users passwords 
+userSchema.set('toJSON', {
+  transform(doc, json){
+    delete json.password;
+    return json;
+  }
+});
+
 //.this refer to the User object
 userSchema.virtual('passwordConfirmation')
   .set(function setpasswordConfirmation(passwordConfirmation){

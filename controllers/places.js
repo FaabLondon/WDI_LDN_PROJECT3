@@ -5,7 +5,6 @@ function createPlaceDayRoute(req, res, next) {
   Trip.findById(req.params.id)
     .then(trip => {
       trip.days[0].places.push(req.body);
-      console.log(trip);
       return trip.save();
     })
     .then(trip => res.json(trip))
@@ -14,14 +13,11 @@ function createPlaceDayRoute(req, res, next) {
 
 //delete place
 function deletePlaceDayRoute(req, res, next){
-  console.log('place in server controller');
-  console.log('params', req.params);
   Trip.findById(req.params.id)
     .then(trip => {
       // const place = trip.days[0].places.id(req.params.placeId);
       const place = trip.days[0].places.id(req.params.placeId);
 
-      console.log(place);
       place.remove();
       return trip.save();
     })

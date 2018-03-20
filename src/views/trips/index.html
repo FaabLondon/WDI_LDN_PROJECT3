@@ -13,19 +13,31 @@
         <form name="tripsIndex.form" ng-submit="tripsIndex.createTrip()" novalidate>
           <div class="field">
             <label for="location">Where are you going?</label>
-            <input coordinates="tripsIndex.coordinates" address="tripsIndex.address" class="input googleAutocomplete" placeholder="e.g. London, New York, Paris" name="location" required />
-            <div ng-messages="tripsIndex.form.location.$error" ng-if="tripsIndex.form.location.$dirty || tripsIndex.form.$submitted">
-              <div class="has-text-danger" ng-message="required">This field is required
-              </div>
+            <p class="control has-icons-left">
+              <input coordinates="tripsIndex.coordinates" address="tripsIndex.newTrip.location" image="tripsIndex.newTrip.image" class="input googleAutocomplete" placeholder="e.g. London, New York, Paris" name="location" required />
+              <span class="icon is-left">
+                <i class="fas fa-map-marker-alt"></i>
+              </span>
+            </p>
+          </div>
+          <div ng-messages="tripsIndex.form.location.$error" ng-if="tripsIndex.form.location.$dirty || tripsIndex.form.$submitted">
+            <div class="has-text-danger" ng-message="required">This field is required
             </div>
           </div>
+
           <div class="field">
             <label for="startDate">When?</label>
-            <input class="input" type="date" placeholder="" name="startDate" ng-model="tripsIndex.newTrip.startDate" required />
-            <div ng-messages="tripsIndex.form.startDate.$error" ng-if="tripsIndex.form.startDate.$dirty || tripsIndex.form.$submitted">
-              <div class="has-text-danger" ng-message="required">This field is required</div>
-            </div>
+            <p class="control has-icons-left">
+              <input class="input" type="date" placeholder="" name="startDate" ng-model="tripsIndex.newTrip.startDate" required />
+              <span class="icon is-left">
+                <i class="far fa-calendar-alt"></i>
+              </span>
+            </p>
           </div>
+          <div ng-messages="tripsIndex.form.startDate.$error" ng-if="tripsIndex.form.startDate.$dirty || tripsIndex.form.$submitted">
+            <div class="has-text-danger" ng-message="required">This field is required</div>
+          </div>
+
 
           <button class="button is-primary">Create Trip</button>
         </form>
@@ -72,7 +84,7 @@
 <nav class="navbar">
   <div class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item" ng-click="tripsIndex.changeCat('point_of_interest')">Places</a>
+      <a class="navbar-item" ng-click="tripsIndex.changeCat('museum')">Places</a>
       <a class="navbar-item" ng-click="tripsIndex.changeCat('establishment')">Events</a>
       <a class="navbar-item" ng-click="tripsIndex.changeCat('restaurant')">Restaurants</a>
       <a class="navbar-item" ng-click="tripsIndex.changeCat('lodging')">Hotels</a>
@@ -107,13 +119,17 @@
     </ul>
 
 <!-- SIDEBAR - DAILY PLAN VIEW -->
-    <button ng-click="showMe=false" class="button is-primary" name="button">Back to trip planning</button>
-    <br>
-    <br>
-    <h2 class="subtitle is-bold"> Directions for today's trip </h2>
-    <div ng-bind-html="tripsIndex.instructionsDay"></div>
-    <h2 class="subtitle is-bold"> Places you are visiting today </h2>
-    <ul class="daily-plan-view" ng-show="showMe">
+    <div ng-show="showMe">
+      <button ng-click="showMe=false" class="button is-primary" name="button">Back to trip planning</button>
+      <br>
+      <br>
+      <h2 class="subtitle is-bold"> Directions for today's trip </h2>
+      <div ng-bind-html="tripsIndex.instructionsDay"></div>
+      <h2 class="subtitle is-bold"> Places you are visiting today </h2>
+      <br>
+      <br>
+    </div>
+    <ul class="daily-plan-view" >
       <li ng-repeat="place in tripsIndex.currentTrip.days[0].places">
         <div class="card">
           <div class="card-image">

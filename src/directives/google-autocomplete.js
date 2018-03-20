@@ -5,7 +5,8 @@ function googleAutocomplete() {
     restrict: 'C',
     scope: {
       coordinates: '=',
-      address: '='
+      address: '=',
+      image: '='
     },
     link($scope, $element) {
 
@@ -14,7 +15,7 @@ function googleAutocomplete() {
       const autocomplete = new google.maps.places.Autocomplete(input);
 
       autocomplete.addListener('place_changed', () => {
-        console.log(autocomplete.getPlace());
+        console.log('autocomplete log', autocomplete.getPlace());
         const address = autocomplete.getPlace().formatted_address;
         const coordinates = autocomplete.getPlace().geometry.location;
         const lat = coordinates.lat();
@@ -23,6 +24,7 @@ function googleAutocomplete() {
         $scope.coordinates.lat = lat;
         $scope.coordinates.lng = lng;
         $scope.address = address;
+        $scope.image = autocomplete.getPlace().photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100});
 
       });
     }
