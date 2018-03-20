@@ -1,7 +1,7 @@
 import angular from 'angular';
 import 'satellizer'; //for authetification on client side
 import 'angular-messages'; //for messages in form validation management
-
+import 'jsonwebtoken';
 //Router
 import '@uirouter/angularjs';
 import Router from './config/router';

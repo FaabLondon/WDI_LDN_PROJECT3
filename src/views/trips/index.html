@@ -14,7 +14,7 @@
           <div class="field">
             <label for="location">Where are you going?</label>
             <p class="control has-icons-left">
-              <input coordinates="tripsIndex.coordinates" address="tripsIndex.newTrip.location" image="tripsIndex.newTrip.image" class="input googleAutocomplete" placeholder="e.g. London, New York, Paris" name="location" required />
+              <input coordinates="tripsIndex.coordinates" address="tripsIndex.newTrip.location" image="tripsIndex.newTrip.image" class="input googleAutocomplete" id="modal-input-1" placeholder="e.g. London, New York, Paris" name="location" required />
               <span class="icon is-left">
                 <i class="fas fa-map-marker-alt"></i>
               </span>
@@ -28,7 +28,7 @@
           <div class="field">
             <label for="startDate">When?</label>
             <p class="control has-icons-left">
-              <input class="input" type="date" placeholder="" name="startDate" ng-model="tripsIndex.newTrip.startDate" required />
+              <input class="input" type="date" id="modal-input-2" placeholder="" name="startDate" ng-model="tripsIndex.newTrip.startDate" required />
               <span class="icon is-left">
                 <i class="far fa-calendar-alt"></i>
               </span>
@@ -37,7 +37,6 @@
           <div ng-messages="tripsIndex.form.startDate.$error" ng-if="tripsIndex.form.startDate.$dirty || tripsIndex.form.$submitted">
             <div class="has-text-danger" ng-message="required">This field is required</div>
           </div>
-
 
           <button class="button is-primary">Create Trip</button>
         </form>
