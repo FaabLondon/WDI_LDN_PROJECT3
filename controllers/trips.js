@@ -22,6 +22,8 @@ function deleteTripRoute(req, res, next){
 }
 
 function indexTripRoute(req, res, next){
+  console.log(req.params.userId);
+
   Trip.find()
     .populate('user') //had to populate user data in order to get access to trip.user._id
     .then(trips => {

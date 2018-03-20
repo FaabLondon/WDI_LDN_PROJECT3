@@ -90,8 +90,12 @@
           <div class="card-image">
             <a class="">
               <img class="place-image" ng-src="{{ place.pictures }}" alt="" ng-click="tripsIndex.hideNearbyPlaces()" >
-              <button class="addButton" ng-click="tripsIndex.addPlaceTrip(place)">+</button>
-              <button class="removeButton" ng-click="tripsIndex.removePlaceTrip(place)">-</button>
+              <button class="addButton" ng-click="tripsIndex.addPlaceTrip(place)">
+                <span class="word"> {{ place.addButton1 || '+' }}</span>
+              </button>
+              <button class="removeButton" ng-click="tripsIndex.removePlaceTrip(place)">
+                <span class="word"> - </span>
+              </button>
             </a>
             <div class="card-content">
               <h1 class="has-text-weight-bold">{{ place.name }}</h1>
@@ -129,7 +133,6 @@
     <google-map zoom="20" center="tripsIndex.coordinates" search-cat="tripsIndex.searchCat">
     </google-map>
   </div>
-
 
 
 </section>

@@ -17,7 +17,7 @@ function Router($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('allTrips', {
       url: '/trips/all',
       templateUrl: 'views/trips/allTrips.html',
-      controller: 'allTripsCtrl as allTrips'
+      controller: 'AllTripsCtrl as AllTrips'
     });
 
 

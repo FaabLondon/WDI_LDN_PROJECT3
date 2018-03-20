@@ -1,6 +1,6 @@
-allTripsCtrl.$inject = ['Trip', '$scope'];
+AllTripsCtrl.$inject = ['Trip', '$scope'];
 
-function allTripsCtrl(Trip, $scope) {
+function AllTripsCtrl(Trip, $scope) {
   const vm = this; //ViewModel - allows us to use this in function
   vm.allUsersTrips = [];
 
@@ -11,4 +11,4 @@ function allTripsCtrl(Trip, $scope) {
 
 }
 
-export default allTripsCtrl;
+export default AllTripsCtrl;

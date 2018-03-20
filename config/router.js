@@ -20,7 +20,7 @@ router.route('/trips/:id/places')
 
 //delete a place from trip
 router.route('/trips/:id/places/:placeId')
-  .delete(secureRoute, places.deletePlaceDay); 
+  .delete(secureRoute, places.deletePlaceDay);
 
 //registration
 router.post('/register', auth.register);

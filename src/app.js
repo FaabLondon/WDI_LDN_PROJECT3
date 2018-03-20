@@ -12,7 +12,7 @@ import Auth from './config/auth';
 //controllers
 import AuthRegisterLoginCtrl from './controllers/auth/authRegisterLogin';
 import TripsIndexCtrl from './controllers/trips/tripsIndex';
-import allTripsCtrl from './controllers/trips/allTrips';
+import AllTripsCtrl from './controllers/trips/allTrips';
 
 //service
 import Trip from './services/trip';
@@ -33,8 +33,9 @@ angular
   .config(Auth)
   .service('Trip', Trip)
   .controller('AuthRegisterLoginCtrl', AuthRegisterLoginCtrl)
+  .controller('AllTripsCtrl', AllTripsCtrl)
   .controller('TripsIndexCtrl', TripsIndexCtrl)
-  .controller('allTripsCtrl', allTripsCtrl)
+  .controller('AllTripsCtrl', AllTripsCtrl)
   .directive('googleMap',googleMap)
   .directive('googleAutocomplete',googleAutocomplete);
   // .directive('googleDirections', googleDirections);

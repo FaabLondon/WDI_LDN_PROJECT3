@@ -18,6 +18,9 @@ function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope) {
   vm.instructionsDay = '';
   //not working
   vm.searchCat='point_of_interest';
+  vm.addButton1 = '+';
+  vm.addButton2;
+
 
   //need to store wether user is authenticated or not in order to test it in view and hide/show buttons accordingly.
   vm.isAuthenticated = $auth.isAuthenticated;
@@ -69,13 +72,23 @@ function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope) {
       Trip.createPlace(place);
       vm.currentTrip = Trip.currentTrip; //currentTrip is also updated through a broadcast...
     }
+    if(place.addButton1 === '✓'){
+      place.addButton1 = '+';
+    } else {
+      place.addButton1 = '✓';
+    }
   }
 
-  //function to remive a place from the trip
+  //function to remove a place from the trip
   function removePlaceTrip(googlePlace){
     Trip.deletePlaceTrip(googlePlace);
     vm.currentTrip = Trip.currentTrip; //currentTrip is also updated through a broadcast...
     console.log(`after delete log ${vm.currentTrip}`);
+    if(googlePlace.addButton1 === '✓'){
+      googlePlace.addButton1 = '+';
+    } else {
+      googlePlace.addButton1 = '✓';
+    }
   }
 
   //function to display the directions in the dailyPLan
