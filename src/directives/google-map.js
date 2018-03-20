@@ -73,12 +73,6 @@ function googleMap(Trip) {
         });
       }
 
-      //not working
-      // $scope.$watch('searchCat', () => {
-      //   console.log('running');
-      //   showPlaces();
-      // });
-
       //callback function called for each place after getDetails()
       function callbackDetails(place, status) {
         if (status === google.maps.places.PlacesServiceStatus.OK) {

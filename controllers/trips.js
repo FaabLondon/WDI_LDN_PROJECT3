@@ -22,8 +22,20 @@ function deleteTripRoute(req, res, next){
 }
 
 function indexTripRoute(req, res, next){
+  console.log(req.params.userId);
+
   Trip.find()
-    .then(trips => res.status(200).json(trips))
+    .populate('user')
+    .populate('trips.user')
+    .then(trips => {
+      trips.forEach(elt => {
+        console.log('user in array', elt.user._id);
+        console.log('re param',req.params.userId);
+      });
+
+      const arrTrips = trips.filter(elt => elt.user === req.params.userId);
+      res.status(200).json(trips);
+    })
     .catch(next);
 }
 

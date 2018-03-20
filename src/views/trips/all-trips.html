@@ -1,0 +1,16 @@
+HELLO
+{{ 1+1 }}
+<ul class="daily-plan-view">
+  <li ng-repeat="place in tripsIndex.currentTrip.days[0].places">
+    <div class="card">
+      <div class="card-image">
+        <a class="">
+          <img ng-src="{{ place.image }}" alt="">
+        </a>
+        <div class="card-content">
+          <h1 class="has-text-weight-bold">{{ place.name }}</h1>
+          <p>{{ place.address}}</p>
+        </div>
+      </div>
+    </div>
+  </li>

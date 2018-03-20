@@ -59,10 +59,62 @@
 .addButton {
     position:absolute;
     top:0px;
-    right:20px;
+    right:0px;
 }
 .removeButton {
     position:absolute;
-    top:0px;
+    top:40px;
     right:0px;
+}
+
+.addButton {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  border: 1px solid grey;
+  color: #f4511e;
+  text-align: center;
+  font-size: 28px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  padding:0 0 0 0;
+}
+.addButton:focus {
+  outline:0;
+}
+.removeButton {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  border: 1px solid grey;
+  color: #f4511e;
+  text-align: center;
+  font-size: 28px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  padding:2px;
+}
+.removeButton:focus {
+  outline:0;
+}
+
+
+/*  */
+
+button .word {
+  max-width: 40px;
+  -webkit-transition: max-width 5s;
+  transition: max-width 5s;
+  display: inline-block;
+  vertical-align: top;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 0 0 0 0;
+  // margin-left: 10px;
+}
+button:hover .word {
+  max-width: 80px;
+  margin-left: 40px;
 }

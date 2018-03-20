@@ -6,7 +6,9 @@ const auth = require('../controllers/auth');
 const secureRoute = require('../lib/secureRoute');
 
 router.route('/trips')
-  .post(secureRoute, trips.createTrip)
+  .post(secureRoute, trips.createTrip);
+
+router.route('/user/:userId/trips')
   .get(trips.indexTrip); //put secureRoute back in
 
 router.route('/trips/:id')

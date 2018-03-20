@@ -1,3 +1,5 @@
+/* global google */
+
 Trip.$inject = ['$http', '$rootScope'];
 
 //directive will be injected in different controllers. Only 1 instance of it (Singleton)
@@ -22,6 +24,10 @@ function Trip($http, $rootScope) {
   //function to add a place to a trip - returns the updated trip
   function createPlaceTrip(place){
     return $http.post(`/api/trips/${vm.tripId}/places`, place);
+  }
+
+  function indexTrip(){
+    return $http.get(`/api/user/${userId}/trips`);
   }
 
 

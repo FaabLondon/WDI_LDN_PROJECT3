@@ -16,6 +16,9 @@ function TripsIndexCtrl($auth, Trip, $state, $scope) {
   vm.address;
   //not working
   vm.searchCat='point_of_interest';
+  vm.addButton1 = '+';
+  vm.addButton2;
+
 
   //need to store wether user is authenticated or not in order to test it in view and hide/show buttons accordingly.
   vm.isAuthenticated = $auth.isAuthenticated;
@@ -70,9 +73,14 @@ function TripsIndexCtrl($auth, Trip, $state, $scope) {
       //$scope.currentTrip = Trip.currentTrip;
       vm.currentTrip = Trip.currentTrip;
     }
+    if(place.addButton1 === '✓'){
+      place.addButton1 = '+';
+    } else {
+      place.addButton1 = '✓';
+    }
   }
 
-  //function to remive a place from the trip
+  //function to remove a place from the trip
   function removePlaceTrip(googlePlace){
 
     Trip.deletePlaceTrip(googlePlace);
@@ -80,7 +88,11 @@ function TripsIndexCtrl($auth, Trip, $state, $scope) {
     // Trip.currentTrip = res.data;
     // vm.currentTrip = res.data;
     console.log(`after delete log ${vm.currentTrip}`);
-
+    if(googlePlace.addButton1 === '✓'){
+      googlePlace.addButton1 = '+';
+    } else {
+      googlePlace.addButton1 = '✓';
+    }
   }
 
 
@@ -100,6 +112,8 @@ function TripsIndexCtrl($auth, Trip, $state, $scope) {
     console.log('received data:', data);
     vm.currentTrip = data;
   });
+
+
 
 
   vm.createTrip = createTrip;
