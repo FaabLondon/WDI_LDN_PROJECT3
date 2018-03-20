@@ -1,6 +1,6 @@
-TripsIndexCtrl.$inject = ['$auth','Trip', '$state', '$scope', '$rootScope'];
+TripsIndexCtrl.$inject = ['$auth','Trip', '$state', '$scope', '$rootScope', '$sce'];
 
-function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope) {
+function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce) {
   const vm = this; //ViewModel - allows us to use this in function
   vm.isActive = true;
   vm.searchResult = [];
@@ -93,22 +93,28 @@ function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope) {
 
   //function to display the directions in the dailyPLan
   $scope.$on('Directions updated', (e, directions) => {
-    console.log('received directions:', directions);
     vm.displayDirections(directions);
   });
 
   function displayDirections(directions){
-    console.log(directions);
+    console.log('directions', directions);
     const route = directions.routes[0];
     vm.instructionsDay = '';
+    //loop through the geocode_waypoints to Object.assign detailed information for display in myTrip view
+    console.log('my current trip', vm.currentTrip.days[0].places);
+    directions.geocoded_waypoints.forEach(wayPt => {
+      console.log('waypt id', wayPt.place_id);
+    });
+
     //For each route, display summary information.
     for (let i = 0; i < route.legs.length; i++) {
       let routeSegment = i + 1;
-      vm.instructionsDay += '<b>Route Segment: ' + routeSegment +
-          '</b><br>';
+      vm.instructionsDay += '<b> Step: ' + routeSegment + ' of your trip</b><br>';
       vm.instructionsDay += route.legs[i].start_address + ' to ';
       vm.instructionsDay += route.legs[i].end_address + '<br>';
-      vm.instructionsDay += route.legs[i].distance.text + '<br><br>';
+      vm.instructionsDay += '<b> Distance: </b>' + route.legs[i].distance.text + '<br>';
+      vm.instructionsDay += '<b> Duration: </b>' + route.legs[i].duration.text + '<br><br>';
+      vm.instructionsDay = $sce.trustAsHtml(vm.instructionsDay);
     }
   }
 

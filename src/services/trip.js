@@ -134,7 +134,6 @@ function Trip($http, $rootScope) {
         // code to display route in a panel - need to define a DOM element to display it in
         directionsDisplay.setDirections(response);
         //send boradcats message to google-directions directive
-        console.log('sendingfrom service:', response);
         $rootScope.$broadcast('Directions updated', response);
 
       } else {
