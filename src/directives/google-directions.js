@@ -1,16 +1,16 @@
 /* global google */
-googleDirections.$inject = ['Trip', 'scope'];
+googleDirections.$inject = ['Trip', '$scope'];
 
-function googleDirections(Trip, scope) {
+function googleDirections(Trip, $scope) {
   return {
     restrict: 'C',
-    template: '<div class="directions-panel"></div>',
+    template: '<div class="google-directions"></div>', //change to directions-panel?
     replace: true,
 
     link($element) {
       let response;
       //receives updated directions from our Trip service
-      scope.$on('Directions updated', (e, directions) => {
+      $scope.$on('Directions updated', (e, directions) => {
         console.log('received directions:', directions);
         response = directions;
       });

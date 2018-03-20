@@ -25,6 +25,7 @@ function Trip($http, $rootScope) {
   }
 
 
+  //delete Google Place from the trip
   function deletePlaceTrip(place){
 
     let delPlace = {};
@@ -41,7 +42,7 @@ function Trip($http, $rootScope) {
             .then(() => {
               //only display direction if more than 1 place in the trip
               const nbPlaces = vm.currentTrip.days[0].places.length;
-              if(nbPlaces > 1) {
+              if(nbPlaces > 0) { //in case there is only 1 place left
                 //calls function to update and render display route on map
                 vm.calculateAndDisplayRoute(vm.directionsService, vm.directionsDisplay);
               }
@@ -51,9 +52,6 @@ function Trip($http, $rootScope) {
       .catch(err => console.log(err));
   }
 
-  // function getPlaceTrip(place){
-  //
-  // }
 
   //function to show all places in a trip
   function showTrip(){
@@ -132,6 +130,7 @@ function Trip($http, $rootScope) {
         window.alert('Directions request failed due to ' + status);
       }
     }
+
     //calls function to set route and directions
     directionsService.route(request, callBackDirections);
   }

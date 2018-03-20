@@ -26,7 +26,6 @@ function indexTripRoute(req, res, next){
     .populate('user') //had to populate user data in order to get access to trip.user._id
     .then(trips => {
       trips = trips.filter(trip => trip.user._id.equals(req.currentUser._id));
-      console.log('filter arr', trips);
       res.status(200).json(trips);
     })
     .catch(next);

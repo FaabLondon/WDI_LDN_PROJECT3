@@ -9,7 +9,6 @@ function googleMap(Trip) {
     scope: {
       center: '=',
       zoom: '=',
-      //currentTrip: '=',
       searchCat: '='
     },
     link($scope, $element) {
@@ -21,7 +20,13 @@ function googleMap(Trip) {
 
 
       $scope.$watch('searchCat', () => {
-        console.log('running', $scope.searchCat);
+        showPlaces();
+      }, true);
+
+      //set a watch on center change
+      $scope.$watch('center', () => {
+        Trip.map.setCenter($scope.center);
+        //need to set zoom and mapType here
         showPlaces();
       }, true);
 
@@ -44,22 +49,13 @@ function googleMap(Trip) {
       };
       myoverlay.setMap(Trip.map);
 
-      //set a wathc on center change
-      $scope.$watch('center', () => {
-        Trip.map.setCenter($scope.center);
-        //need to set zoom and mapType here
-        showPlaces();
-      }, true);
-
 
       ////Google Places search
       function showPlaces() {
-        console.log('s cat:', $scope.searchCat);
         const request = {
           location: $scope.center,
           radius: '500',
           type: [$scope.searchCat]
-          // type: ['museum']
         };
 
         //service to run a nearby search on google places
@@ -72,12 +68,6 @@ function googleMap(Trip) {
           }
         });
       }
-
-      //not working
-      // $scope.$watch('searchCat', () => {
-      //   console.log('running');
-      //   showPlaces();
-      // });
 
       //callback function called for each place after getDetails()
       function callbackDetails(place, status) {
@@ -138,6 +128,7 @@ function googleMap(Trip) {
       function createDetailedSearchResults(places) {
         const bounds = new google.maps.LatLngBounds();
         service = new google.maps.places.PlacesService(Trip.map);
+
         places.forEach(place => {
 
           const requestDetails = {
