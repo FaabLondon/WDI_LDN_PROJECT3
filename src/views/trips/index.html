@@ -13,7 +13,8 @@
         <form name="tripsIndex.form" ng-submit="tripsIndex.createTrip()" novalidate>
           <div class="field">
             <label for="location">Where are you going?</label>
-            <input coordinates="tripsIndex.coordinates" address="tripsIndex.address" class="input googleAutocomplete" placeholder="e.g. London, New York, Paris" name="location" required />
+            <br>
+            <input coordinates="tripsIndex.coordinates" address="tripsIndex.address" class="input googleAutocomplete" id="modal-input-1" placeholder="e.g. London, New York, Paris" name="location" required />
             <div ng-messages="tripsIndex.form.location.$error" ng-if="tripsIndex.form.location.$dirty || tripsIndex.form.$submitted">
               <div class="has-text-danger" ng-message="required">This field is required
               </div>
@@ -21,7 +22,8 @@
           </div>
           <div class="field">
             <label for="startDate">When?</label>
-            <input class="input" type="date" placeholder="" name="startDate" ng-model="tripsIndex.newTrip.startDate" required />
+            <br>
+            <input class="input" type="date" id="modal-input-2" placeholder="" name="startDate" ng-model="tripsIndex.newTrip.startDate" required />
             <div ng-messages="tripsIndex.form.startDate.$error" ng-if="tripsIndex.form.startDate.$dirty || tripsIndex.form.$submitted">
               <div class="has-text-danger" ng-message="required">This field is required</div>
             </div>
