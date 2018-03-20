@@ -104,9 +104,7 @@ function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope) {
       .then(res => {
         vm.allUsersTrips = res.data;
       //  Trip.allUsersTrips = res.data;
-        console.log('Returned trips', vm.allUsersTrips);
         $rootScope.$broadcast('All trips sent', res.data);
-        console.log('send data', res.data);
       });
   }
 
