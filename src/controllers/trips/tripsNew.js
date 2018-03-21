@@ -19,7 +19,7 @@ function TripsNewCtrl($auth, Trip, $state) {
     //user will be added to trip on server side
     //function returns trip and we store tripId to be able to send Ajax requests
     Trip.create(vm.newTrip)
-      .then(res => $state.go('tripShow', { id: res.data._id }));
+      .then(res => $state.go('tripsShow', { id: res.data._id }));
 
   }
 

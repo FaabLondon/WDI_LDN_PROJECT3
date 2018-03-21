@@ -14,11 +14,13 @@ import AuthRegisterLoginCtrl from './controllers/auth/authRegisterLogin';
 import TripsIndexCtrl from './controllers/trips/tripsIndex';
 import TripsNewCtrl from './controllers/trips/tripsNew';
 import TripsShowCtrl from './controllers/trips/tripsShow';
+import MainCtrl from './controllers/main';
 
 //service
 import Trip from './services/trip';
 import mapService from './services/map';
 import searchService from './services/search';
+import directionsService from './services/directions';
 
 //directives
 import googleMap from './directives/google-map';
@@ -37,8 +39,10 @@ angular
   .service('Trip', Trip)
   .service('mapService', mapService)
   .service('searchService', searchService)
+  .service('directionsService', directionsService)
   .controller('AuthRegisterLoginCtrl', AuthRegisterLoginCtrl)
   .controller('TripsIndexCtrl', TripsIndexCtrl)
+  .controller('MainCtrl', MainCtrl)
   .controller('TripsShowCtrl', TripsShowCtrl)
   .controller('TripsNewCtrl', TripsNewCtrl)
   .directive('googleMap',googleMap)

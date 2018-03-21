@@ -32,6 +32,7 @@ function indexTripRoute(req, res, next){
 
 function showTripRoute(req, res, next){
   Trip.findById(req.params.id)
+    .populate('user')
     .then(trip => res.status(200).json(trip))
     .catch(next);
 }

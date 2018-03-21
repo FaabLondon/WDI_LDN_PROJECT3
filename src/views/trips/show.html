@@ -13,7 +13,7 @@
 
 <section class="main-content columns is-fullheight">
   <aside class="column is-one-quarter is-sidebar-menu is-fullheight section is-hidden-mobile">
-    <ul class="nearby-places-list" ng-hide="showMe">
+    <ul class="nearby-places-list">
       <!-- {{tripsShow.searchResult}} -->
       <li ng-repeat="place in tripsShow.searchResults">
         <div class="card">
@@ -37,8 +37,8 @@
     </ul>
 
 <!-- SIDEBAR - DAILY PLAN VIEW -->
-    <div ng-show="showMe">
-      <button ng-click="showMe=false" class="button is-primary" name="button">Back to trip planning</button>
+    <div ng-if="tripsShow.showDailyPlan">
+      <a ui-sref="tripsShow({ showDailyPlan: false })" class="button is-primary" name="button">Back to trip planning</a>
       <br>
       <br>
       <h2 class="subtitle is-bold"> Directions for today's trip </h2>
@@ -67,7 +67,7 @@
   <!-- GOOGLE MAPS -->
 
   <div class="column is-three-quarters googleMap">
-    <google-map zoom="20" center="tripsShow.currentTrip.coordinates" search-cat="tripsShow.searchCat" results="tripsShow.searchResults">
+    <google-map zoom="15" center="tripsShow.currentTrip.coordinates" search-cat="tripsShow.searchCat" results="tripsShow.searchResults">
     </google-map>
   </div>
 

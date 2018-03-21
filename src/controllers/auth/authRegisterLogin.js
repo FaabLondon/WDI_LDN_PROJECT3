@@ -36,7 +36,7 @@ function AuthRegisterLoginCtrl($auth, Trip, $state, $rootScope,$timeout){
       .then(res => {
         //console.log(res.data.message);
         Trip.userName = res.data.message;
-        $state.go('tripNew');
+        $state.go('tripsNew');
       })
       .catch(res => {
         if(res.data.message === 'Unauthorized'){
@@ -44,7 +44,6 @@ function AuthRegisterLoginCtrl($auth, Trip, $state, $rootScope,$timeout){
         }
       });
   }
-
 
   vm.handleRegister = handleRegister;
   vm.handleLogin = handleLogin;

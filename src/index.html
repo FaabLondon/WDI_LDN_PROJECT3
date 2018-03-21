@@ -8,7 +8,7 @@
   <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
 
 </head>
-<body>
+<body ng-controller="MainCtrl as main">
 
   <nav class="navbar">
     <div class="navbar-brand">
@@ -17,8 +17,8 @@
         &nbsp;
         Holiday Planner
       </a>
-        <a class="navbar-item">City: {{tripsIndex.newTrip.address}}</a>
-        <a class="navbar-item">{{tripsIndex.newTrip.startDate | date:"EEE dd-MMM yyyy "}}
+        <a class="navbar-item">City: {{main.currentTrip.address}}</a>
+        <a class="navbar-item">{{main.currentTrip.startDate | date:"EEE dd-MMM yyyy "}}
         </a>
       <div class="navbar-burger ng-class:clicked ? 'is-active' : 'is-not-active'" data-target="#mobile-menu" ng-click="clicked = !clicked" >
           <span></span>
@@ -29,14 +29,14 @@
 
     <div id="mobile-menu" class="navbar-menu ng-class:clicked ? 'is-active' : 'is-not-active'">
       <div class="navbar-end">
-        <a class="navbar-item" ng-click="tripsIndex.isActive = !tripsIndex.isActive; showMe=false; " ui-sref="tripsIndex">Add new trip</a>
-        <a class="navbar-item" ng-click="showMe=true" ui-sref="">Daily Plan</a>
+        <a class="navbar-item" ui-sref="tripsNew">Add new trip</a>
+        <a class="navbar-item" ui-sref="tripsShow({ showDailyPlan: true })">Daily Plan</a>
         <!-- <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="">Current Trip</a> -->
-        <a class="navbar-item" ng-click="tripsIndex.seeAllTrips()" ui-sref="allTrips">See all my Trips</a>
+        <a class="navbar-item" ui-sref="tripsIndex">See all my Trips</a>
         <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link" href=""> <span class="icon is-small"><i class="fas fa-user"></i></span>&nbsp {{tripsIndex.userName}}</a>
-            <div class="navbar-dropdown is-boxed is-right" ng-if="tripsIndex.isAuthenticated()">
-              <a class="navbar-item" ng-click="tripsIndex.logout()">Logout</a>
+            <a class="navbar-link" href=""> <span class="icon is-small"><i class="fas fa-user"></i></span>&nbsp {{main.currentTrip.user.username}}</a>
+            <div class="navbar-dropdown is-boxed is-right" ng-if="main.isAuthenticated()">
+              <a class="navbar-item" ng-click="main.logout()">Logout</a>
             </div>
         </div>
       </div>

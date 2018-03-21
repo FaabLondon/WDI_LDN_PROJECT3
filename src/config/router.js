@@ -34,7 +34,7 @@ function Router($stateProvider, $urlRouterProvider, $locationProvider) {
       controller: 'TripsNewCtrl as tripsNew'
     })
     .state('tripsShow',{
-      url: '/trips/:id',
+      url: '/trips/:id?showDailyPlan',
       templateUrl: 'views/trips/show.html',
       controller: 'TripsShowCtrl as tripsShow'
     })
