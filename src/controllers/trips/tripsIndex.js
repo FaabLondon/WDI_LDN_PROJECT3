@@ -31,6 +31,7 @@ function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce, $timeout)
 
     if(vm.form.$invalid) return false;
     vm.isActive = !vm.isActive;
+
     vm.newTrip.location = vm.address;
     //add array of day with 1st day = startDate of trip
     vm.newTrip.days[0] = {
@@ -136,9 +137,9 @@ function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce, $timeout)
     vm.currentTrip = data;
   });
 
-  $scope.$on('All search results updated', (e, data) => {
+  $rootScope.$on('All search results updated', (e, data) => {
     console.log('Controller received data for updated search:', data);
-    $timeout(() => vm.searchResult = data, 200);//temporary fix to render search results on category change
+    $timeout(() => vm.searchResult = data, 400);//temporary fix to render search results on category change
     console.log('search results', vm.searchResult);
   });
 
