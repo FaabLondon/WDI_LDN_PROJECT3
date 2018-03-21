@@ -1,13 +1,12 @@
-TripsIndexCtrl.$inject = ['$auth','Trip', '$state', '$scope', '$rootScope', '$sce'];
+TripsIndexCtrl.$inject = ['$auth','Trip', '$state', '$scope', '$rootScope', '$sce', '$timeout'];
 
-function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce) {
+function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce, $timeout) {
   const vm = this; //ViewModel - allows us to use this in function
   vm.isActive = true;
   vm.searchResult = [];
   vm.newTrip = {};
   vm.userName = '';
-  vm.newTrip.days = [];
-  //$scope.currentTrip = {};
+  vm.newTrip.days = [];//has to be initialised otherwise cannot set property of undefined
   vm.currentTrip = {};
   vm.allUsersTrips = [];
   vm.coordinates = {
@@ -16,7 +15,6 @@ function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce) {
   };
   vm.address;
   vm.instructionsDay = '';
-  //not working
   vm.searchCat='museum';
   vm.addButton1 = '+';
   vm.addButton2;
@@ -29,15 +27,16 @@ function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce) {
 
   //create trip function
   function createTrip() {
-    const start = vm.newTrip.startDate;
+    vm.currentTrip = {};
+    Trip.currentTrip = {};
 
     if(vm.form.$invalid) return false;
     vm.isActive = !vm.isActive;
 
-    //vm.newTrip.location = vm.address;
+    vm.newTrip.location = vm.address;
     //add array of day with 1st day = startDate of trip
     vm.newTrip.days[0] = {
-      date: start,
+      date: vm.newTrip.startDate,
       places: []
     };
 
@@ -118,15 +117,11 @@ function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce) {
     Trip.seeAllTrips()
       .then(res => {
         vm.allUsersTrips = res.data;
-      //  Trip.allUsersTrips = res.data;
+        //Trip.allUsersTrips = res.data;
         $rootScope.$broadcast('All trips sent', res.data);
       });
   }
 
-  // Hide nearby Places - not working
-  function hideNearbyPlaces() {
-    vm.showMe = !vm.showMe;
-  }
 
   //logs the user out
   function logout(){
@@ -139,18 +134,42 @@ function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce) {
     vm.currentTrip = data;
   });
 
-  $scope.$on('All search results updated', (e, data) => {
-    console.log('received data for updated search:', data);
-    vm.searchResult = data;
+  $rootScope.$on('All search results updated', (e, data) => {
+    console.log('Controller received data for updated search:', data);
+    $timeout(() => vm.searchResult = data, 400);//temporary fix to render search results on category change
+    console.log('search results', vm.searchResult);
+  });
+
+  // listening for backToIndex click event
+  $scope.$on('Toggle modal off on page change', (e, data) => {
+    $timeout(() => console.log('received toggle change message'), 200);
+    // Temporary timeout fix!!
+    vm.isActive = !vm.isActive;
+    vm.currentTrip = Trip.currentTrip;
+    vm.searchResult = Trip.searchResult;
+  });
+
+  // listening for viewSpecificTrip click event
+  $scope.$on('Modal off, bring back specific trip', (e, tripId) => {
+    $timeout(() => console.log('received modal off and specific trip change message', tripId), 200);
+    // Temporary timeout fix!!
+    vm.isActive = !vm.isActive;
+
+    console.log(tripId);
+    Trip.showTrip(tripId) //returns a promise
+      .then(trip => {
+        vm.currentTrip = trip.data;
+        console.log(vm.currentTrip);
+      });
+
+
   });
 
   vm.createTrip = createTrip;
   vm.logout = logout;
-  //not working
   vm.changeCat = changeCat;
   vm.addPlaceTrip = addPlaceTrip;
   vm.removePlaceTrip = removePlaceTrip;
-  vm.hideNearbyPlaces = hideNearbyPlaces;
   vm.displayDirections = displayDirections;
   vm.seeAllTrips = seeAllTrips;
 

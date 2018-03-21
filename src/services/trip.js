@@ -20,7 +20,10 @@ function Trip($http, $rootScope) {
   function create(trip) {
     return $http.post('/api/trips', trip);
   }
-
+  // function show specific trip  
+  function showTrip(tripId) {
+    return $http.get(`/api/trips/${tripId}`);
+  }
   //function to add a place to a trip - returns the updated trip
   function createPlaceTrip(place){
     return $http.post(`/api/trips/${vm.tripId}/places`, place);
@@ -58,11 +61,6 @@ function Trip($http, $rootScope) {
       .catch(err => console.log(err));
   }
 
-
-  //function to show all places in a trip
-  function showTrip(){
-    return $http.get(`/api/trips/${vm.tripId}`);
-  }
 
   function seeAllTrips(req, res, next){
     return $http.get('/api/trips');

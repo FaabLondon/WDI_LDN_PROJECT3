@@ -1,15 +1,23 @@
-<ul class="daily-plan-view">
-  <li ng-repeat="trip in AllTrips.allUsersTrips">
-    <div class="card">
-      <div class="card-image">
-        <a class="">
-          <img ng-src="{{ trip.image }}" alt="">
-        </a>
-        <div class="card-content">
-          <h1 class="has-text-weight-bold">{{ trip.location }}</h1>
-          <p>{{ trip.startDate}}</p>
+<h1>My Trips</h1>
+
+  <div class="container">
+    <div class="columns is-multiline">
+        <div class="column is-one-quarter-desktop is-half-tablet" ng-repeat="trip in AllTrips.allUsersTrips">
+          <a ui-sref="tripsIndex" ng-click="AllTrips.viewSpecificTrip(trip)">
+            <!-- needs an ng-repeat to go to the index page and displays the corresponding daily plan on the left -->
+            <div class="card">
+              <div class="card-image">
+                <figure class="image">
+                  <img src="{{ trip.image }}" alt="">
+                </figure>
+              </div>
+              <div class="card-content">
+                <h3 class="title">{{ trip.location }}</h3>
+                <h4 class="subtitle">{{ trip.startDate}}</h4>
+              </div>
+            </div>
+          </a>
         </div>
-      </div>
     </div>
-  </li>
-</ul>
+  </div>
+<a ui-sref="tripsIndex" ng-click="AllTrips.backToIndex()">Back</a>

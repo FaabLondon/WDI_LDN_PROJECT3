@@ -1,6 +1,6 @@
-AuthRegisterLoginCtrl.$inject = ['$auth', 'Trip', '$state'];
+AuthRegisterLoginCtrl.$inject = ['$auth', 'Trip', '$state', '$rootScope','$timeout'];
 
-function AuthRegisterLoginCtrl($auth, Trip, $state){
+function AuthRegisterLoginCtrl($auth, Trip, $state, $rootScope,$timeout){
   const vm = this;
   vm.credentials = {};
   vm.user = {};
@@ -22,6 +22,10 @@ function AuthRegisterLoginCtrl($auth, Trip, $state){
       });
   }
 
+  $rootScope.$on('flashMessage', (e, data) => {
+    vm.flashMessage = data;  //content of the broascasted message with type and content
+    $timeout(() => vm.flashMessage = null, 2000);
+  });
 
   function handleLogin(){
     //send the credentials to server with satelliser and get the token back from server

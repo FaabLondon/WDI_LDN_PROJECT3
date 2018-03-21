@@ -21,6 +21,8 @@ function googleMap(Trip, $rootScope) {
 
       $scope.$watch('searchCat', () => {
         showPlaces();
+        console.log('change of category', $scope.searchCat);
+
       }, true);
 
       //set a watch on center change
@@ -52,7 +54,7 @@ function googleMap(Trip, $rootScope) {
 
       ////Google Places search
       function showPlaces() {
-
+        console.log('seach cat in show places', $scope.searchCat);
         //create a new Search request
         const request = {
           location: $scope.center,
@@ -66,7 +68,11 @@ function googleMap(Trip, $rootScope) {
         service.nearbySearch(request, (results, status) => {
           if (status === google.maps.places.PlacesServiceStatus.OK) {
             Trip.searchResult = [];
+
             createDetailedSearchResults(results);
+            //broadcast new search result - tell the controller that the searchResult is updated
+            $rootScope.$broadcast('All search results updated', Trip.searchResult);
+            console.log('broadcasted new search result', Trip.searchResult);
           }
         });
       }
@@ -112,6 +118,7 @@ function googleMap(Trip, $rootScope) {
             ){
               //update and format newPlace with google pictures before adding to the trip
               place.pictures = place.photos ? place.photos[0].getUrl({'maxWidth': 800, 'maxHeight': 800}): '';
+              //adds place to the trip
               Trip.createPlace(place);
 
             }
@@ -140,9 +147,6 @@ function googleMap(Trip, $rootScope) {
           bounds.extend(place.geometry.location);
         });
 
-        //broadcast new search result - tell the controller that the searchResult is updated
-        $rootScope.$broadcast('All search results updated', places);
-        console.log('broadcasted new search result', places)
         Trip.map.fitBounds(bounds);
 
       }

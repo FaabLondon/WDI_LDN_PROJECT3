@@ -1,5 +1,7 @@
 <section class="hero is-medium homepage">
   <div class="hero-body">
+    <div ng-if="AuthRegisterLogin.flashMessage" class="notification is-{{AuthRegisterLogin.flashMessage.type}}">{{ AuthRegisterLogin.flashMessage.content}}
+    </div>
     <div class="container">
       <h1 class="title is-size-1-desktop is-size-4-touch has-text-white has-text-centered">The new way to plan your next trip</h1>
       <h2 class="subtitle is-size-3-desktop is-size-4-touch has-text-white has-text-centered">Create a fully customized day itinerary for free</h2>

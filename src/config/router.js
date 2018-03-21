@@ -1,3 +1,20 @@
+secureState.$inject = ['$q', '$state', '$auth', '$rootScope']; //angular promise library is q
+//secure state to avoid user to go to unauthorised pages (like /places/new)
+//secureState is a promise. If resolves, we go to the place we want to go to
+function secureState($q, $state, $auth, $rootScope){
+  return new $q((resolve) => {
+    if($auth.isAuthenticated()) return resolve(); //if we have a token, you are allowed to go to the state you want to go to
+
+    console.log('broadcasting warning message not logged in');
+    $rootScope.$broadcast('flashMessage', {
+      type: 'danger',
+      content: 'You must be logged in.'
+    });
+
+    $state.go('homepage'); //if not, go to login page
+  });
+}
+
 Router.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
 
 function Router($stateProvider, $urlRouterProvider, $locationProvider) {
@@ -12,12 +29,14 @@ function Router($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('tripsIndex', {
       url: '/trips',
       templateUrl: 'views/trips/index.html',
-      controller: 'TripsIndexCtrl as tripsIndex'
+      controller: 'TripsIndexCtrl as tripsIndex',
+      resolve: {secureState}
     })
     .state('allTrips', {
       url: '/trips/all',
       templateUrl: 'views/trips/allTrips.html',
-      controller: 'AllTripsCtrl as AllTrips'
+      controller: 'AllTripsCtrl as AllTrips',
+      resolve: {secureState}
     });
 
 
