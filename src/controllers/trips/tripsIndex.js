@@ -21,6 +21,7 @@ function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce) {
   vm.addButton1 = '+';
   vm.addButton2;
 
+  vm.today = new Date().toISOString();
 
   //need to store wether user is authenticated or not in order to test it in view and hide/show buttons accordingly.
   vm.isAuthenticated = $auth.isAuthenticated;
@@ -143,7 +144,6 @@ function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce) {
     vm.searchResult = data;
   });
 
-
   vm.createTrip = createTrip;
   vm.logout = logout;
   //not working
@@ -153,7 +153,6 @@ function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce) {
   vm.hideNearbyPlaces = hideNearbyPlaces;
   vm.displayDirections = displayDirections;
   vm.seeAllTrips = seeAllTrips;
-
 
 }
 
