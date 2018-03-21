@@ -6,8 +6,7 @@ function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce, $timeout)
   vm.searchResult = [];
   vm.newTrip = {};
   vm.userName = '';
-  vm.newTrip.days = [];
-  //$scope.currentTrip = {};
+  vm.newTrip.days = [];//has to be initialised otherwise cannot set property of undefined
   vm.currentTrip = {};
   vm.allUsersTrips = [];
   vm.coordinates = {
@@ -16,7 +15,6 @@ function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce, $timeout)
   };
   vm.address;
   vm.instructionsDay = '';
-  //not working
   vm.searchCat='museum';
   vm.addButton1 = '+';
   vm.addButton2;
@@ -28,10 +26,12 @@ function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce, $timeout)
 
   //create trip function
   function createTrip() {
+    vm.currentTrip = {};
+    Trip.currentTrip = {};
 
     if(vm.form.$invalid) return false;
     vm.isActive = !vm.isActive;
-    //vm.newTrip.location = vm.address;
+    vm.newTrip.location = vm.address;
     //add array of day with 1st day = startDate of trip
     vm.newTrip.days[0] = {
       date: vm.newTrip.startDate,
