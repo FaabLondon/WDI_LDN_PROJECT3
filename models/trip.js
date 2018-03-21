@@ -24,6 +24,10 @@ const tripSchema = new mongoose.Schema({
   location: { type: String },
   startDate: { type: Date },
   image: {type: String},
+  coordinates: {
+    lat: { type: Number},
+    lng: { type: Number}
+  },
   days: [daySchema]
 });
 

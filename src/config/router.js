@@ -21,21 +21,27 @@ function Router($stateProvider, $urlRouterProvider, $locationProvider) {
   $locationProvider.html5Mode(true); //removes #!
 
   $stateProvider
+  //registration and login
     .state('homepage', {
       url: '/',
       templateUrl: 'views/trips/home.html',
       controller: 'AuthRegisterLoginCtrl as AuthRegisterLogin'
     })
+  //
+    .state('tripsNew',{
+      url: '/trips/new',
+      templateUrl: 'views/trips/new.html',
+      controller: 'TripsNewCtrl as tripsNew'
+    })
+    .state('tripsShow',{
+      url: '/trips/:id',
+      templateUrl: 'views/trips/show.html',
+      controller: 'TripsShowCtrl as tripsShow'
+    })
     .state('tripsIndex', {
       url: '/trips',
       templateUrl: 'views/trips/index.html',
       controller: 'TripsIndexCtrl as tripsIndex',
-      resolve: {secureState}
-    })
-    .state('allTrips', {
-      url: '/trips/all',
-      templateUrl: 'views/trips/allTrips.html',
-      controller: 'AllTripsCtrl as AllTrips',
       resolve: {secureState}
     });
 

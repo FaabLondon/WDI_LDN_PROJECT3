@@ -10,7 +10,40 @@
 </head>
 <body>
 
-    <ui-view></ui-view>
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <img src="https://images.vexels.com/media/users/3/145136/isolated/preview/94a70b169da2d2f32dc34ead9122ef2d-sun-sharp-rays-big-icon-by-vexels.png" alt="holidayPlanner">
+        &nbsp;
+        Holiday Planner
+      </a>
+        <a class="navbar-item">City: {{tripsIndex.newTrip.address}}</a>
+        <a class="navbar-item">{{tripsIndex.newTrip.startDate | date:"EEE dd-MMM yyyy "}}
+        </a>
+      <div class="navbar-burger ng-class:clicked ? 'is-active' : 'is-not-active'" data-target="#mobile-menu" ng-click="clicked = !clicked" >
+          <span></span>
+          <span></span>
+          <span></span>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="navbar-menu ng-class:clicked ? 'is-active' : 'is-not-active'">
+      <div class="navbar-end">
+        <a class="navbar-item" ng-click="tripsIndex.isActive = !tripsIndex.isActive; showMe=false; " ui-sref="tripsIndex">Add new trip</a>
+        <a class="navbar-item" ng-click="showMe=true" ui-sref="">Daily Plan</a>
+        <!-- <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="">Current Trip</a> -->
+        <a class="navbar-item" ng-click="tripsIndex.seeAllTrips()" ui-sref="allTrips">See all my Trips</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link" href=""> <span class="icon is-small"><i class="fas fa-user"></i></span>&nbsp {{tripsIndex.userName}}</a>
+            <div class="navbar-dropdown is-boxed is-right" ng-if="tripsIndex.isAuthenticated()">
+              <a class="navbar-item" ng-click="tripsIndex.logout()">Logout</a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <ui-view></ui-view>
 
 </body>
 </html>

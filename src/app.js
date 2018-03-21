@@ -12,10 +12,13 @@ import Auth from './config/auth';
 //controllers
 import AuthRegisterLoginCtrl from './controllers/auth/authRegisterLogin';
 import TripsIndexCtrl from './controllers/trips/tripsIndex';
-import AllTripsCtrl from './controllers/trips/allTrips';
+import TripsNewCtrl from './controllers/trips/tripsNew';
+import TripsShowCtrl from './controllers/trips/tripsShow';
 
 //service
 import Trip from './services/trip';
+import mapService from './services/map';
+import searchService from './services/search';
 
 //directives
 import googleMap from './directives/google-map';
@@ -32,10 +35,12 @@ angular
   .config(Router)
   .config(Auth)
   .service('Trip', Trip)
+  .service('mapService', mapService)
+  .service('searchService', searchService)
   .controller('AuthRegisterLoginCtrl', AuthRegisterLoginCtrl)
-  .controller('AllTripsCtrl', AllTripsCtrl)
   .controller('TripsIndexCtrl', TripsIndexCtrl)
-  .controller('AllTripsCtrl', AllTripsCtrl)
+  .controller('TripsShowCtrl', TripsShowCtrl)
+  .controller('TripsNewCtrl', TripsNewCtrl)
   .directive('googleMap',googleMap)
   .directive('googleAutocomplete',googleAutocomplete);
   // .directive('googleDirections', googleDirections);

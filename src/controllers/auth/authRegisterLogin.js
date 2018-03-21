@@ -36,7 +36,7 @@ function AuthRegisterLoginCtrl($auth, Trip, $state, $rootScope,$timeout){
       .then(res => {
         //console.log(res.data.message);
         Trip.userName = res.data.message;
-        $state.go('tripsIndex');
+        $state.go('tripNew');
       })
       .catch(res => {
         if(res.data.message === 'Unauthorized'){

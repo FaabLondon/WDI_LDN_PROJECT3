@@ -1,159 +1,23 @@
-<!-- MODAL -->
+<h1>My Trips</h1>
 
-<div class="modal is-active" ng-class="{'is-active': tripsIndex.isActive}">
-  <div class="modal-background"></div>
-  <div class="modal-card">
-    <header class="modal-card-head">
-      <p class="modal-card-title">Holiday Planner</p>
-    </header>
-    <section class="modal-card-body" id="modal-body">
-
-      <div id="modal-container" class="container">
-
-        <form name="tripsIndex.form" ng-submit="tripsIndex.createTrip()" novalidate>
-          <div class="modal-field">
-            <label for="location">Where are you going?</label>
-            <p class="control has-icons-left">
-              <input coordinates="tripsIndex.coordinates" address="tripsIndex.address" image="tripsIndex.newTrip.image" class="input googleAutocomplete" id="modal-input-1" placeholder="e.g. London, New York, Paris" name="location" required />
-              <span class="icon is-left">
-                <i class="fas fa-map-marker-alt"></i>
-              </span>
-            </p>
-          </div>
-          <div ng-messages="tripsIndex.form.location.$error" ng-if="tripsIndex.form.location.$dirty || tripsIndex.form.$submitted">
-            <div class="has-text-danger" ng-message="required">This field is required
+<div class="container">
+  <div class="columns is-multiline">
+      <div class="column is-one-quarter-desktop is-half-tablet" ng-repeat="trip in tripsIndex.trips">
+        <a ui-sref="tripsShow({ id: trip._id })">
+          <!-- needs an ng-repeat to go to the index page and displays the corresponding daily plan on the left -->
+          <div class="card">
+            <div class="card-image">
+              <figure class="image">
+                <img src="{{ trip.image }}" alt="">
+              </figure>
+            </div>
+            <div class="card-content">
+              <h3 class="title">{{ trip.location }}</h3>
+              <h4 class="subtitle">{{ trip.startDate}}</h4>
             </div>
           </div>
-
-          <div class="modal-field">
-            <label for="startDate">When?</label>
-            <p class="control has-icons-left">
-              <input class="input" type="date" id="modal-input-2" placeholder="" name="startDate" ng-model="tripsIndex.newTrip.startDate" required min="{{ tripsIndex.today }}" />
-              <span class="icon is-left">
-                <i class="far fa-calendar-alt"></i>
-              </span>
-            </p>
-          </div>
-          <div ng-messages="tripsIndex.form.startDate.$error" ng-if="tripsIndex.form.startDate.$dirty || tripsIndex.form.$submitted">
-            <div class="has-text-danger" ng-message="required">This field is required</div>
-          </div>
-          <!-- <button class="button is-primary">Create Trip</button> -->
-          <!-- <button class="button is-primary" ng-disabled="(!(tripsIndex.newTrip.startDate.toISOString() >= tripsIndex.today) || !(tripsIndex.form.location.$dirty))">Create Trip</button> -->
-          <button class="button is-primary" ng-disabled="(!(tripsIndex.newTrip.startDate.toISOString() >= tripsIndex.today))">Create Trip</button>
-        </form>
+        </a>
       </div>
-
-    </section>
   </div>
 </div>
-
-<!-- INDEX PAGE - TOP NAVBARS -->
-
-<nav class="navbar">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="/">
-      <img src="https://images.vexels.com/media/users/3/145136/isolated/preview/94a70b169da2d2f32dc34ead9122ef2d-sun-sharp-rays-big-icon-by-vexels.png" alt="holidayPlanner">
-      &nbsp;
-      Holiday Planner
-    </a>
-      <a class="navbar-item">City: {{tripsIndex.newTrip.address}}</a>
-      <a class="navbar-item">{{tripsIndex.newTrip.startDate | date:"EEE dd-MMM yyyy "}}
-      </a>
-    <div class="navbar-burger ng-class:clicked ? 'is-active' : 'is-not-active'" data-target="#mobile-menu" ng-click="clicked = !clicked" >
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-  </div>
-
-  <div id="mobile-menu" class="navbar-menu ng-class:clicked ? 'is-active' : 'is-not-active'">
-    <div class="navbar-end">
-      <a class="navbar-item" ng-click="tripsIndex.isActive = !tripsIndex.isActive; showMe=false; " ui-sref="tripsIndex">Add new trip</a>
-      <a class="navbar-item" ng-click="showMe=true" ui-sref="">Daily Plan</a>
-      <!-- <a class="navbar-item" ng-click="clicked = !clicked" ui-sref="">Current Trip</a> -->
-      <a class="navbar-item" ng-click="tripsIndex.seeAllTrips()" ui-sref="allTrips">See all my Trips</a>
-      <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href=""> <span class="icon is-small"><i class="fas fa-user"></i></span>&nbsp {{tripsIndex.userName}}</a>
-          <div class="navbar-dropdown is-boxed is-right" ng-if="tripsIndex.isAuthenticated()">
-            <a class="navbar-item" ng-click="tripsIndex.logout()">Logout</a>
-          </div>
-      </div>
-    </div>
-  </div>
-</nav>
-
-<nav class="navbar">
-  <div class="navbar-menu">
-    <div class="navbar-start">
-      <a class="navbar-item" ng-click="tripsIndex.changeCat('museum')">Museums</a>
-      <a class="navbar-item" ng-click="tripsIndex.changeCat('art_gallery')">Art galleries</a>
-      <a class="navbar-item" ng-click="tripsIndex.changeCat('restaurant')">Restaurants</a>
-      <a class="navbar-item" ng-click="tripsIndex.changeCat('lodging')">Hotels</a>
-    </div>
-  </div>
-</nav>
-
-<!-- SIDEBAR - NEARBY / FILTERED PLACES VIEW -->
-
-<section class="main-content columns is-fullheight">
-  <aside class="column is-one-quarter is-sidebar-menu is-fullheight section is-hidden-mobile">
-    <ul class="nearby-places-list" ng-hide="showMe">
-      <!-- {{tripsIndex.searchResult}} -->
-      <li ng-repeat="place in tripsIndex.searchResult">
-        <div class="card">
-          <div class="card-image">
-            <a class="">
-              <img class="place-image" ng-src="{{ place.pictures }}" alt="" ng-click="tripsIndex.hideNearbyPlaces()" >
-              <button class="addButton" ng-click="tripsIndex.addPlaceTrip(place)">
-                <span class="word"> {{ place.addButton1 || '+' }}</span>
-              </button>
-              <button class="removeButton" ng-click="tripsIndex.removePlaceTrip(place)">
-                <span class="word"> - </span>
-              </button>
-            </a>
-            <div class="card-content">
-              <h1 class="has-text-weight-bold">{{ place.name }}</h1>
-              <p>{{ place.formatted_address}}</p>
-            </div>
-          </div>
-        </div>
-      </li>
-    </ul>
-
-<!-- SIDEBAR - DAILY PLAN VIEW -->
-    <div ng-show="showMe">
-      <button ng-click="showMe=false" class="button is-primary" name="button">Back to trip planning</button>
-      <br>
-      <br>
-      <h2 class="subtitle is-bold"> Directions for today's trip </h2>
-      <div ng-bind-html="tripsIndex.instructionsDay"></div>
-      <h2 class="subtitle is-bold"> Places you are visiting today </h2>
-      <br>
-    </div>
-    <ul class="daily-plan-view" >
-      <li ng-repeat="place in tripsIndex.currentTrip.days[0].places">
-        <div class="card">
-          <div class="card-image">
-            <a class="">
-              <img ng-src="{{ place.image }}" alt="">
-            </a>
-            <div class="card-content">
-              <h1 class="has-text-weight-bold">{{ place.name }}</h1>
-              <p>{{ place.address}}</p>
-            </div>
-          </div>
-        </div>
-      </li>
-    </ul>
-
-  </aside>
-
-  <!-- GOOGLE MAPS -->
-
-  <div class="column is-three-quarters googleMap">
-    <google-map zoom="20" center="tripsIndex.coordinates" search-cat="tripsIndex.searchCat">
-    </google-map>
-  </div>
-
-
-</section>
+<a ui-sref="tripsIndex">Back TODO</a>
