@@ -83,8 +83,8 @@
 <nav class="navbar">
   <div class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item" ng-click="tripsIndex.changeCat('museum')">Places</a>
-      <a class="navbar-item" ng-click="tripsIndex.changeCat('establishment')">Events</a>
+      <a class="navbar-item" ng-click="tripsIndex.changeCat('museum')">Museums</a>
+      <a class="navbar-item" ng-click="tripsIndex.changeCat('art_gallery')">Art galleries</a>
       <a class="navbar-item" ng-click="tripsIndex.changeCat('restaurant')">Restaurants</a>
       <a class="navbar-item" ng-click="tripsIndex.changeCat('lodging')">Hotels</a>
     </div>
@@ -96,6 +96,7 @@
 <section class="main-content columns is-fullheight">
   <aside class="column is-one-quarter is-sidebar-menu is-fullheight section is-hidden-mobile">
     <ul class="nearby-places-list" ng-hide="showMe">
+      <!-- {{tripsIndex.searchResult}} -->
       <li ng-repeat="place in tripsIndex.searchResult">
         <div class="card">
           <div class="card-image">
@@ -125,7 +126,6 @@
       <h2 class="subtitle is-bold"> Directions for today's trip </h2>
       <div ng-bind-html="tripsIndex.instructionsDay"></div>
       <h2 class="subtitle is-bold"> Places you are visiting today </h2>
-      <br>
       <br>
     </div>
     <ul class="daily-plan-view" >

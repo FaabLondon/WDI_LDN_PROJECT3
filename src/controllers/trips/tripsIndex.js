@@ -1,6 +1,6 @@
-TripsIndexCtrl.$inject = ['$auth','Trip', '$state', '$scope', '$rootScope', '$sce'];
+TripsIndexCtrl.$inject = ['$auth','Trip', '$state', '$scope', '$rootScope', '$sce', '$timeout'];
 
-function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce) {
+function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce, $timeout) {
   const vm = this; //ViewModel - allows us to use this in function
   vm.isActive = true;
   vm.searchResult = [];
@@ -28,15 +28,13 @@ function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce) {
 
   //create trip function
   function createTrip() {
-    const start = vm.newTrip.startDate;
 
     if(vm.form.$invalid) return false;
     vm.isActive = !vm.isActive;
-
     //vm.newTrip.location = vm.address;
     //add array of day with 1st day = startDate of trip
     vm.newTrip.days[0] = {
-      date: start,
+      date: vm.newTrip.startDate,
       places: []
     };
 
@@ -117,7 +115,7 @@ function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce) {
     Trip.seeAllTrips()
       .then(res => {
         vm.allUsersTrips = res.data;
-      //  Trip.allUsersTrips = res.data;
+        //Trip.allUsersTrips = res.data;
         $rootScope.$broadcast('All trips sent', res.data);
       });
   }
@@ -139,8 +137,9 @@ function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce) {
   });
 
   $scope.$on('All search results updated', (e, data) => {
-    console.log('received data for updated search:', data);
-    vm.searchResult = data;
+    console.log('Controller received data for updated search:', data);
+    $timeout(() => vm.searchResult = data, 200);//temporary fix to render search results on category change
+    console.log('search results', vm.searchResult);
   });
 
 
