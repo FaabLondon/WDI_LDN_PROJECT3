@@ -1,6 +1,6 @@
-TripsIndexCtrl.$inject = ['$auth','Trip', '$state', '$scope', '$rootScope', '$sce'];
+TripsIndexCtrl.$inject = ['$auth','Trip', '$state', '$scope', '$rootScope', '$sce', '$timeout'];
 
-function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce) {
+function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce, $timeout) {
   const vm = this; //ViewModel - allows us to use this in function
   vm.isActive = true;
   vm.searchResult = [];
@@ -117,15 +117,11 @@ function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce) {
     Trip.seeAllTrips()
       .then(res => {
         vm.allUsersTrips = res.data;
-      //  Trip.allUsersTrips = res.data;
+        //  Trip.allUsersTrips = res.data;
         $rootScope.$broadcast('All trips sent', res.data);
       });
   }
 
-  // Hide nearby Places - not working
-  function hideNearbyPlaces() {
-    vm.showMe = !vm.showMe;
-  }
 
   //logs the user out
   function logout(){
@@ -143,14 +139,37 @@ function TripsIndexCtrl($auth, Trip, $state, $scope, $rootScope, $sce) {
     vm.searchResult = data;
   });
 
+  // listening for backToIndex click event
+  $scope.$on('Toggle modal off on page change', (e, data) => {
+    $timeout(() => console.log('received toggle change message'), 200);
+    // Temporary timeout fix!!
+    vm.isActive = !vm.isActive;
+    vm.currentTrip = Trip.currentTrip;
+    vm.searchResult = Trip.searchResult;
+  });
+
+  // listening for viewSpecificTrip click event
+  $scope.$on('Modal off, bring back specific trip', (e, tripId) => {
+    $timeout(() => console.log('received modal off and specific trip change message', tripId), 200);
+    // Temporary timeout fix!!
+    vm.isActive = !vm.isActive;
+
+    console.log(tripId);
+    Trip.showTrip(tripId) //returns a promise
+      .then(trip => {
+        vm.currentTrip = trip.data;
+        console.log(vm.currentTrip);
+      });
+
+
+  });
+
 
   vm.createTrip = createTrip;
   vm.logout = logout;
-  //not working
   vm.changeCat = changeCat;
   vm.addPlaceTrip = addPlaceTrip;
   vm.removePlaceTrip = removePlaceTrip;
-  vm.hideNearbyPlaces = hideNearbyPlaces;
   vm.displayDirections = displayDirections;
   vm.seeAllTrips = seeAllTrips;
 

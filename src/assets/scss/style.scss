@@ -23,7 +23,12 @@
 #modal-input-2 {
   width: 600px;
 }
-
+#modal-container {
+  max-width: 600px;
+  .create-trip-button {
+    margin-top: 15px;
+  }
+}
 
 // Index Page
 .google-map {
@@ -125,3 +130,5 @@ button:hover .word {
   max-width: 80px;
   margin-left: 40px;
 }
+
+// All trips Page
