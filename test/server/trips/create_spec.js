@@ -35,6 +35,7 @@ describe('POST /trips', () => {
       })
       .then(done);
   });
+
   it('should return a 401 response without a token', done => {
     api
       .post('/api/trips')
