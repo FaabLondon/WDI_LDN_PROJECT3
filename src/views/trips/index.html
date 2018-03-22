@@ -12,7 +12,7 @@
             </div>
             <div class="card-content">
               <h3 class="title">{{ trip.location }}</h3>
-              <h4 class="subtitle">{{ trip.startDate}}</h4>
+              <h4 class="subtitle">{{ trip.startDate| date:"EEE dd-MMM yyyy "}}</h4>
               <button class="button is-primary" ng-click="tripsIndex.deleteTrip(trip._id)">Delete Trip</button>
             </div>
           </div>
