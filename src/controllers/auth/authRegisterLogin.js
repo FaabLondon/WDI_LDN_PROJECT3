@@ -18,7 +18,7 @@ function AuthRegisterLoginCtrl($auth, Trip, $state, $rootScope,$timeout){
       .catch(res => {
         if(res.data.message === 'Unprocessable Entity'){
           vm.message = 'Passwords do not match';
-        }
+        } else vm.message = '';
       });
   }
 
@@ -41,7 +41,7 @@ function AuthRegisterLoginCtrl($auth, Trip, $state, $rootScope,$timeout){
       .catch(res => {
         if(res.data.message === 'Unauthorized'){
           vm.message = 'Invalid credentials - Please try again';
-        }
+        } else vm.message = '';
       });
   }
 
