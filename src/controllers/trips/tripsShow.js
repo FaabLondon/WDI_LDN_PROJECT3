@@ -1,6 +1,6 @@
-TripsShowCtrl.$inject = ['$auth','Trip', '$scope', '$state', 'searchService', '$rootScope', 'directionsService'];
+TripsShowCtrl.$inject = ['$auth','Trip', '$scope', '$state', 'searchService', '$rootScope', 'directionsService', 'currentTripService'];
 
-function TripsShowCtrl($auth, Trip, $scope, $state, searchService, $rootScope, directionsService) {
+function TripsShowCtrl($auth, Trip, $scope, $state, searchService, $rootScope, directionsService, currentTripService) {
   const vm = this; //ViewModel - allows us to use this in function
   vm.currentTrip = {};
   vm.searchCat = 'museum';
@@ -17,6 +17,9 @@ function TripsShowCtrl($auth, Trip, $scope, $state, searchService, $rootScope, d
         vm.currentTrip = trip.data;
         search(); //run a search
         directions(); //draw directions
+        currentTripService.set(vm.currentTrip);
+        $rootScope.$broadcast('trip:set');
+        search();
       });
   });
 
@@ -25,7 +28,6 @@ function TripsShowCtrl($auth, Trip, $scope, $state, searchService, $rootScope, d
   let waypts = [];
   let origin = {location: {lat: 0,lng: 0}};
   let destination = {location: {lat: 0,lng: 0}};
-
 
 
   function search() {
@@ -51,7 +53,7 @@ function TripsShowCtrl($auth, Trip, $scope, $state, searchService, $rootScope, d
         };
       });
     }
-    
+
     directionsService.drawDirections({
       origin: origin,
       destination: destination,

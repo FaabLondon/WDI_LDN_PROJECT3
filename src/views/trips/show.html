@@ -13,39 +13,39 @@
 
 <section class="main-content columns is-fullheight">
   <aside class="column is-one-quarter is-sidebar-menu is-fullheight section is-hidden-mobile">
-    <ul class="nearby-places-list">
-      <!-- {{tripsShow.searchResult}} -->
-      <li ng-repeat="place in tripsShow.searchResults">
-        <div class="card">
-          <div class="card-image">
-            <a class="">
-              <img class="place-image" ng-src="{{ place.pictures }}" alt="" ng-click="tripsShow.hideNearbyPlaces()" >
-              <button class="addButton" ng-if="!tripsShow.tripContains(place)" ng-click="tripsShow.addPlaceTrip(place)">
-                <span class="word"> + </span>
-              </button>
-              <button class="removeButton" ng-if="tripsShow.tripContains(place)" ng-click="tripsShow.removePlaceTrip(place)">
-                <span class="word"> - </span>
-              </button>
-            </a>
-            <div class="card-content">
-              <h1 class="has-text-weight-bold">{{ place.name }}</h1>
-              <p>{{ place.formatted_address}}</p>
+    <div ng-if="!tripsShow.showDailyPlan">
+      <ul class="nearby-places-list">
+        <!-- {{tripsShow.searchResult}} -->
+        <li ng-repeat="place in tripsShow.searchResults">
+          <div class="card">
+            <div class="card-image">
+              <a class="">
+                <img class="place-image" ng-src="{{ place.pictures }}" alt="" ng-click="tripsShow.hideNearbyPlaces()" >
+                <button class="addButton" ng-if="!tripsShow.tripContains(place)" ng-click="tripsShow.addPlaceTrip(place)">
+                  <span class="word"> + </span>
+                </button>
+                <button class="removeButton" ng-if="tripsShow.tripContains(place)" ng-click="tripsShow.removePlaceTrip(place)">
+                  <span class="word"> - </span>
+                </button>
+              </a>
+              <div class="card-content">
+                <h1 class="has-text-weight-bold">{{ place.name }}</h1>
+                <p>{{ place.formatted_address}}</p>
+              </div>
             </div>
           </div>
-        </div>
-      </li>
-    </ul>
+        </li>
+      </ul>
+  </div>
 
 <!-- SIDEBAR - DAILY PLAN VIEW -->
     <div ng-if="tripsShow.showDailyPlan">
-      <a ui-sref="tripsShow({ showDailyPlan: false })" class="button is-primary" name="button">Back to trip planning</a>
       <br>
       <br>
       <h2 class="subtitle is-bold"> Directions for today's trip </h2>
       <div ng-bind-html="tripsShow.instructionsDay"></div>
       <h2 class="subtitle is-bold"> Places you are visiting today </h2>
       <br>
-    </div>
     <ul class="daily-plan-view" >
       <li ng-repeat="place in tripsShow.currentTrip.days[0].places">
         <div class="card">
@@ -61,6 +61,8 @@
         </div>
       </li>
     </ul>
+    <a ui-sref="tripsShow({ showDailyPlan: false })" class="button is-primary" name="button">Back to trip planning</a>
+  </div>
 
   </aside>
 

@@ -10,15 +10,17 @@
 </head>
 <body ng-controller="MainCtrl as main">
 
-  <nav class="navbar">
+  <nav class="navbar" ng-if="main.navIsVisible">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
         <img src="https://images.vexels.com/media/users/3/145136/isolated/preview/94a70b169da2d2f32dc34ead9122ef2d-sun-sharp-rays-big-icon-by-vexels.png" alt="holidayPlanner">
         &nbsp;
         Holiday Planner
       </a>
-        <a class="navbar-item">City: {{main.currentTrip.address}}</a>
-        <a class="navbar-item">{{main.currentTrip.startDate | date:"EEE dd-MMM yyyy "}}
+        <a class="navbar-item">City: {{main.currentTrip.location}}</a>
+        <a class="navbar-item">Date: {{main.currentTrip.startDate | date:"EEE dd-MMM yyyy "}}
+        <!-- <a class="navbar-item">City: {{main.currentTrip.address}}</a>
+        <a class="navbar-item">Date: {{main.currentTrip.startDate | date:"EEE dd-MMM yyyy "}} -->
         </a>
       <div class="navbar-burger ng-class:clicked ? 'is-active' : 'is-not-active'" data-target="#mobile-menu" ng-click="clicked = !clicked" >
           <span></span>
