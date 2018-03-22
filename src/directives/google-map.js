@@ -68,7 +68,7 @@ function googleMap(mapService, currentTripService) {
 
         marker.addListener('mouseover', () => {
           const html = `<div class="infowindow">
-            <h4 class="title is-5">${place.name}</h4>
+            <h4 class="title is-5">${place.name.substr(0, 25)}</h4>
             <div class="image" style="background-image: url(${url})"></div>
             <h5 class="title is-6">${place.vicinity || place.address}</h5>
             Rating:${'🤩'.repeat(Math.floor(place.rating))}

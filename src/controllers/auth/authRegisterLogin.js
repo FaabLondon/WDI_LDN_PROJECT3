@@ -13,12 +13,13 @@ function AuthRegisterLoginCtrl($auth, Trip, $state, $rootScope,$timeout){
     $auth.signup(vm.user)
       .then(() => {
         vm.registered = !vm.registered;
+        vm.message = '';
         $state.go('homepage');
       })
       .catch(res => {
         if(res.data.message === 'Unprocessable Entity'){
           vm.message = 'Passwords do not match';
-        } else vm.message = '';
+        }
       });
   }
 
@@ -36,12 +37,13 @@ function AuthRegisterLoginCtrl($auth, Trip, $state, $rootScope,$timeout){
       .then(res => {
         //console.log(res.data.message);
         Trip.userName = res.data.message;
+        vm.message = '';
         $state.go('tripsNew');
       })
       .catch(res => {
         if(res.data.message === 'Unauthorized'){
           vm.message = 'Invalid credentials - Please try again';
-        } else vm.message = '';
+        }
       });
   }
 
