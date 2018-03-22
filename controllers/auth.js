@@ -11,6 +11,7 @@ function register(req, res, next){
         message: 'Thank you for registering',
         user,
         token  //shorthand for token: token
+        //could also send back user data
       });
     })
     .catch(next);
