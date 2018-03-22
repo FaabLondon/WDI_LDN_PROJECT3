@@ -3,25 +3,26 @@
 <head>
   <base href="/">
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WDI32 Group Project</title>
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrW_0of4T2sbSZJx40sP4hNfOa1ZwbKWw&libraries=places"></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZy_QQhDlUhsIrjWpGkrdYc11xGFTyw58&libraries=places"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
   <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
 
 </head>
-<body ng-controller="MainCtrl as main">
+<body id="body" ng-controller="MainCtrl as main">
 
-  <nav class="navbar" ng-if="main.navIsVisible">
+  <nav id="top-navbar" class="navbar" ng-if="main.navIsVisible">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
         <img src="https://images.vexels.com/media/users/3/145136/isolated/preview/94a70b169da2d2f32dc34ead9122ef2d-sun-sharp-rays-big-icon-by-vexels.png" alt="holidayPlanner">
         &nbsp;
-        Holiday Planner
+        Make My Day
       </a>
-        <a class="navbar-item">City: {{main.currentTrip.location}}</a>
-        <a class="navbar-item">Date: {{main.currentTrip.startDate | date:"EEE dd-MMM yyyy "}}
-        <!-- <a class="navbar-item">City: {{main.currentTrip.address}}</a>
-        <a class="navbar-item">Date: {{main.currentTrip.startDate | date:"EEE dd-MMM yyyy "}} -->
-        </a>
+        <p class="navbar-item">City: {{main.currentTrip.location}}</p>
+        <p class="navbar-item">Date: {{main.currentTrip.startDate | date:"EEE dd-MMM yyyy "}}
+        </p>
       <div class="navbar-burger ng-class:clicked ? 'is-active' : 'is-not-active'" data-target="#mobile-menu" ng-click="clicked = !clicked" >
           <span></span>
           <span></span>
