@@ -10,7 +10,7 @@
 <!-- SIDEBAR - NEARBY / FILTERED PLACES VIEW -->
 
 <section class="main-content columns is-fullheight">
-  <aside class="column is-one-quarter is-sidebar-menu is-fullheight section is-hidden-mobile">
+  <aside class="aside column is-one-quarter is-sidebar-menu is-fullheight section is-hidden-mobile">
     <div ng-if="!tripsShow.showDailyPlan">
       <ul class="nearby-places-list">
         <li class="list-cards" ng-repeat="place in tripsShow.searchResults">
@@ -37,11 +37,11 @@
   </div>
 
 <!-- SIDEBAR - DAILY PLAN VIEW -->
-<a ui-sref="tripsShow({ showDailyPlan: false })" class="button is-primary" name="button">Back to planning your trip</a>
+<a ui-sref="tripsShow({ showDailyPlan: false })" class="button is-outlined" name="button">Back to planning your trip</a>
     <div ng-if="tripsShow.showDailyPlan">
       <br>
       <br>
-      <h2 class="subtitle is-bold"> Directions for today's trip </h2>
+      <h2 class="subtitle is-bold"> Directions for today's trip:</h2>
       <div>
           <li ng-repeat="leg in tripsShow.directionInstructions.routes[0].legs">
             <strong> Step: {{$index + 1}} of your trip</strong><br>
@@ -50,8 +50,7 @@
             <strong> Duration: </strong> {{leg.duration.text}} <img class="walking" src="https://cdn0.iconfinder.com/data/icons/ui-14/100/ui14-39-512.png"> <br><br>
           </li>
       </div>
-      <h2 class="subtitle is-bold"> Places you are visiting today </h2>
-      <br>
+      <h2 class="subtitle is-bold"> Today's trip:</h2>
     <ul class="daily-plan-view" >
       <li ng-repeat="place in tripsShow.currentTrip.days[0].places">
         <div class="card">

@@ -3,12 +3,19 @@
   font-family: 'PT Sans', sans-serif;
   background-color: #F8F8F8;
   height: 100vh;
+  overflow: auto;
 }
 
 // Homepage
 .hero.homepage {
-  background-image: url(https://www.freshdesignpedia.com/wp-content/uploads/holidays-in-sardinia-you-should-visit-these-cities-and-beaches/holiday-sardinia-beach-holiday-destinations.jpg);
+  background-image: url(https://wallpapertag.com/wallpaper/full/3/5/9/12536-city-background-1920x1200-hd-for-mobile.jpg);
   background-size: cover;
+    height: 100vh;
+}
+
+.hero-body {
+    height: 100vh;
+    overflow: hidden;
 }
 
 .container.homepageForm{
@@ -26,6 +33,10 @@ img.walking{
   width: 15px;
   height: auto;
   display: inline;
+}
+
+.has-text-centered .button {
+    border-color: #EE3B00;
 }
 
 // Modal
@@ -60,6 +71,18 @@ img.walking{
   .button:disabled {
   border-color: #EE3B00;
   }
+}
+
+.text {
+  margin:auto;
+  text-align: center;
+.button {
+  border-color: #EE3B00;
+  }
+}
+
+.login-register {
+  text-align: center;
 }
 // navbar
 
@@ -177,6 +200,9 @@ img.walking{
     h2 {
       font-size: 18px;
     }
+    button {
+      border-color: #EE3B00;
+    }
 }
 
 .addButton, .removeButton {
@@ -207,6 +233,13 @@ img.walking{
   outline:0;
 }
 
+// daily plan view
+.aside {
+  .button {
+  margin-top: 10px;
+  border-color: #EE3B00;
+  }
+}
 
 
 // All trips Page
@@ -215,4 +248,9 @@ img.walking{
   color: black;
   margin: 10px;
   padding: 10px;
+}
+
+.back {
+  margin-bottom: 20px;
+  border-color: #EE3B00;
 }

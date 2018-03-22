@@ -1,9 +1,9 @@
-<section class="hero is-medium homepage">
+<section class="hero homepage">
   <div class="hero-body">
     <div ng-if="AuthRegisterLogin.flashMessage" class="notification is-{{AuthRegisterLogin.flashMessage.type}}">{{ AuthRegisterLogin.flashMessage.content}}
     </div>
     <div class="container">
-      <h1 class="title is-size-1-desktop is-size-4-touch has-text-white has-text-centered">The new way to plan your next trip</h1>
+      <h1 class="title is-size-1-desktop is-size-4-touch has-text-white has-text-centered">Make My Day</h1>
       <h2 class="subtitle is-size-3-desktop is-size-4-touch has-text-white has-text-centered">Create a fully customized day itinerary for free</h2>
 
       <!-- registration form  -->
@@ -55,9 +55,9 @@
               </div>
             </form>
             <br>
-            <div class"has-text-centered">Already have an account? Please
-              <a ng-click="AuthRegisterLogin.registered = !AuthRegisterLogin.registered">login here </a>
-            </div>
+            <p class="login-register">Already have an account? Please
+              <a ng-click="AuthRegisterLogin.registered = !AuthRegisterLogin.registered">login here. </a></p>
+
           </div>
         </section>
       </div>
@@ -94,9 +94,9 @@
               </div>
             </form>
             <br>
-            <div class"has-text-centered">Not registered yet ? Go back to
-              <a ng-click="AuthRegisterLogin.registered = !AuthRegisterLogin.registered">registration</a>
-            </div>
+            <p class="login-register">Not registered yet? Go back to
+              <a ng-click="AuthRegisterLogin.registered = !AuthRegisterLogin.registered">registration.</a>
+            </p>
           </div>
         </section>
       </div>
