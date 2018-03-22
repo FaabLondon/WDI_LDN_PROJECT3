@@ -1,6 +1,6 @@
-TripsNewCtrl.$inject = ['$auth','Trip', '$state'];
+TripsNewCtrl.$inject = ['$auth','Trip', '$state', '$rootScope'];
 
-function TripsNewCtrl($auth, Trip, $state) {
+function TripsNewCtrl($auth, Trip, $state, $rootScope) {
   const vm = this; //ViewModel - allows us to use this in function
   vm.newTrip = { coordinates: {} };
 
@@ -19,8 +19,11 @@ function TripsNewCtrl($auth, Trip, $state) {
     //user will be added to trip on server side
     //function returns trip and we store tripId to be able to send Ajax requests
     Trip.create(vm.newTrip)
-      .then(res => $state.go('tripsShow', { id: res.data._id }));
-
+      .then(res => {
+        // Trip.address = vm.address;
+        $rootScope.$broadcast('address:set', vm.address);
+        $state.go('tripsShow', { id: res.data._id });
+      });
   }
 
   vm.createTrip = createTrip;

@@ -22,6 +22,16 @@ function Trip($http) {
     return $http.delete(`/api/trips/${trip._id}/places/${place._id}`);
   }
 
+  this.address;
+  this.date;
+
+  function keepAddress(address){
+    this.address=address;
+  }
+  function keepDate(date){
+    this.date=date;
+  }
+
 
   function convertGooglePlace(place) {
     const converted = {};
@@ -43,6 +53,8 @@ function Trip($http) {
   this.create = create;
   this.createPlace = createPlace;
   this.deletePlace = deletePlace;
+  this.keepDate=keepDate;
+  this.keepAddress=keepAddress;
 
 
 

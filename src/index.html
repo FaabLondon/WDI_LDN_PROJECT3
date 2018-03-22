@@ -17,8 +17,10 @@
         &nbsp;
         Holiday Planner
       </a>
-        <a class="navbar-item">City: {{main.currentTrip.address}}</a>
-        <a class="navbar-item">{{main.currentTrip.startDate | date:"EEE dd-MMM yyyy "}}
+        <a class="navbar-item">City: {{main.address}}</a>
+        <a class="navbar-item">Date: {{main.date | date:"EEE dd-MMM yyyy "}}
+        <!-- <a class="navbar-item">City: {{main.currentTrip.address}}</a>
+        <a class="navbar-item">Date: {{main.currentTrip.startDate | date:"EEE dd-MMM yyyy "}} -->
         </a>
       <div class="navbar-burger ng-class:clicked ? 'is-active' : 'is-not-active'" data-target="#mobile-menu" ng-click="clicked = !clicked" >
           <span></span>
