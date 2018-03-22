@@ -44,8 +44,11 @@
 //   height: 60px !important;
 //   border-radius: 50px;
 // }
+
+//to remove the X on the displaywindow on google map
 .gm-style-iw + div {display: none;}
 .gm-style-iw {text-align:center;}
+
 .infowindow {
   position: relative;
   text-align: center;

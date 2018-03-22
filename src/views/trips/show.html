@@ -31,10 +31,7 @@
               <div class="card-content">
                 <h1 class="has-text-weight-bold">{{ place.name }}</h1>
                 <p>{{ place.vicinity}}</p><br>
-                <p>Rating:{{place.rating}}🤩</p>
-                <li ng-repeat="n in [] | range:20">
-                    <span>🤩</span>
-                </li>
+                <p>Rating:{{place.rating}}</p>
               </div>
             </div>
           </div>
@@ -49,10 +46,10 @@
       <h2 class="subtitle is-bold"> Directions for today's trip </h2>
       <div>
           <li ng-repeat="leg in tripsShow.directionInstructions.routes[0].legs">
-            <b> Step: {{$index + 1}} of your trip</b><br>
-            {{leg.start_address}}<b> to </b> {{leg.end_address}}</br>
-            <b> Distance: </b> {{leg.distance.text}} <br>
-            <b> Duration: </b> {{leg.duration.text}} <br> <br>
+            <strong> Step: {{$index + 1}} of your trip</strong><br>
+            {{leg.start_address}}<strong> to </strong> {{leg.end_address}}</br>
+            <strong> Distance: </strong> {{leg.distance.text}} <br>
+            <strong> Duration: </strong> {{leg.duration.text}} <br> <br>
           </li>
       </div>
       <h2 class="subtitle is-bold"> Places you are visiting today </h2>

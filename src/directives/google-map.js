@@ -44,6 +44,7 @@ function googleMap(mapService, currentTripService) {
           return marker;
         });
         console.log(currentTripService.get());
+
         //sets all markers from current trip so that markers still shows on route in different filter
         if (!currentTripService.get()) return false; //if trip not defined yet
         //should be appending to markers
@@ -62,7 +63,9 @@ function googleMap(mapService, currentTripService) {
       }
 
       function addInfoWindows(marker, place) {
-        const url = place.photos ? place.photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100}) : 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/house-icon.png';
+        let url = place.photos ? place.photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100}) : 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/house-icon.png';
+        url = place.image ? place.image : url; //in case of DB place , not google place
+
         marker.addListener('mouseover', () => {
           const html = `<div class="infowindow">
             <h4 class="title is-5">${place.name}</h4>
