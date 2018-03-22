@@ -10,6 +10,7 @@ function register(req, res, next){
       res.json({
         message: 'Thank you for registering',
         token  //shorthand for token: token
+        //could also send back user data
       });
     })
     .catch(next);

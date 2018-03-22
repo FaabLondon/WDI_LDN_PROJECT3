@@ -28,8 +28,10 @@ function googleMap(mapService) {
         markers.forEach(marker => marker.setMap(null));
 
         console.log('scope results', $scope.results);
+
         markers = $scope.results.map(place => {
           const url = place.photos ? place.photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100}) : 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/house-icon.png';
+
           const marker = new google.maps.Marker({
             map: map,
             position: place.geometry.location,
@@ -41,13 +43,15 @@ function googleMap(mapService) {
             title: place.name,
             optimized: false
           });
+
           // add mouseover event to each marker to display info window
-          infoWindows(marker, place);
+          addInfoWindows(marker, place);
+
           return marker;
         });
       }
 
-      function infoWindows(marker, place) {
+      function addInfoWindows(marker, place) {
         google.maps.event.addListener(marker, 'mouseover', function() {
           const html = `<b>${place.name}</b> <br/>${place.vicinity}<br/>Rating:${'🤩'.repeat(Math.floor(place.rating))}`;
           infoWindow.setContent(html);
