@@ -10,13 +10,12 @@ function TripsShowCtrl($auth, Trip, $scope, $state, searchService, $rootScope, d
   vm.isAuthenticated = $auth.isAuthenticated;
   vm.searchResults = [];
   vm.showDailyPlan = $state.params.showDailyPlan;
+  console.log('showdaily', vm.showDailyPlan);
 
   $rootScope.$on('map:set', () => {
     Trip.findById($state.params.id)
       .then(trip => {
         vm.currentTrip = trip.data;
-        search(); //run a search
-        directions(); //draw directions
         currentTripService.set(vm.currentTrip);
         $rootScope.$broadcast('trip:set');
         search();
@@ -25,9 +24,10 @@ function TripsShowCtrl($auth, Trip, $scope, $state, searchService, $rootScope, d
 
   // directions variables
   vm.directions = {};
-  let waypts = [];
+  const waypts = [];
   let origin = {location: {lat: 0,lng: 0}};
   let destination = {location: {lat: 0,lng: 0}};
+
 
 
   function search() {
@@ -46,13 +46,13 @@ function TripsShowCtrl($auth, Trip, $scope, $state, searchService, $rootScope, d
 
     //Add each place to waypoints except for origin (1st element in array) and destination (last element of array)
     if(nbPlaces > 2){
-      waypts = vm.currentTrip.days[0].places.map(place => {
-        return {
-          location: place.location,
+      for (let i = 1; i < nbPlaces - 1; i++){
+        waypts.push({
+          location: vm.currentTrip.days[0].places[i].location,
           stopover: true
-        };
-      });
-    }
+        });
+      }
+    } //else waypts stays [];
 
     directionsService.drawDirections({
       origin: origin,

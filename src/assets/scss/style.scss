@@ -1,3 +1,8 @@
+
+#body {
+  font-family: 'Lora', serif;
+}
+
 // Homepage
 .hero.homepage {
   background-image: url(https://www.freshdesignpedia.com/wp-content/uploads/holidays-in-sardinia-you-should-visit-these-cities-and-beaches/holiday-sardinia-beach-holiday-destinations.jpg);
@@ -29,6 +34,13 @@
     margin-top: 15px;
   }
 }
+
+// navbar
+
+.navbar a {
+  font-family: 'Istok Web', sans-serif;
+}
+
 
 // Index Page
 .google-map {
