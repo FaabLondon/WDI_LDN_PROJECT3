@@ -9,6 +9,7 @@ function register(req, res, next){
       const token = jwt.sign({sub: user._id}, secret , {expiresIn: '6h'});
       res.json({
         message: 'Thank you for registering',
+        user,
         token  //shorthand for token: token
       });
     })
