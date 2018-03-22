@@ -37,7 +37,7 @@
   </div>
 
 <!-- SIDEBAR - DAILY PLAN VIEW -->
-<a ui-sref="tripsShow({ showDailyPlan: false })" class="button is-outlined" name="button">Back to planning your trip</a>
+<a ng-if="tripsShow.showDailyPlan" ui-sref="tripsShow({ showDailyPlan: false })" class="button is-outlined" name="button">Back to planning your trip</a>
     <div ng-if="tripsShow.showDailyPlan">
       <br>
       <br>
