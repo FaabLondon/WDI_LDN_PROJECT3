@@ -1,6 +1,6 @@
-MainCtrl.$inject = ['$auth','Trip', '$state', '$transitions', '$scope', 'currentTripService'];
+MainCtrl.$inject = ['$auth','Trip', '$state', '$transitions', '$scope', 'currentTripService', 'mapService'];
 
-function MainCtrl($auth, Trip, $state, $transitions, $scope, currentTripService) {
+function MainCtrl($auth, Trip, $state, $transitions, $scope, currentTripService, mapService) {
   const vm = this; //ViewModel - allows us to use this in function
   vm.currentTrip = {};
 
@@ -20,6 +20,7 @@ function MainCtrl($auth, Trip, $state, $transitions, $scope, currentTripService)
 
   function logout(){
     $auth.logout(); //removes token from local storage
+    mapService.destroy();
     $state.go('homepage');
   }
   vm.logout = logout;

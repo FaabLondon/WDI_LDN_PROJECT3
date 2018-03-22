@@ -23,8 +23,8 @@ function TripsShowCtrl($auth, Trip, $scope, $state, searchService, $rootScope, d
   });
 
   // directions variables
-  vm.directions = {};
-  const waypts = [];
+  vm.directionInstructions = {};
+  let waypts = [];
   let origin = {location: {lat: 0,lng: 0}};
   let destination = {location: {lat: 0,lng: 0}};
 
@@ -41,12 +41,16 @@ function TripsShowCtrl($auth, Trip, $scope, $state, searchService, $rootScope, d
 
   function directions() {
     const nbPlaces = vm.currentTrip.days[0].places.length;
+    if (nbPlaces < 2) {
+      directionsService.clearMap();
+      return false;
+    }
     origin.location = vm.currentTrip.days[0].places[0].location;
     destination.location = vm.currentTrip.days[0].places[nbPlaces - 1].location;
 
-    //Add each place to waypoints except for origin (1st element in array) and destination (last element of array)
+    //Cannot do a map as I only want to start at index 1 until n -2
     if(nbPlaces > 2){
-      for (let i = 1; i < nbPlaces - 1; i++){
+      for (let i = 1; i < nbPlaces - 1 ; i++){
         waypts.push({
           location: vm.currentTrip.days[0].places[i].location,
           stopover: true
@@ -63,13 +67,12 @@ function TripsShowCtrl($auth, Trip, $scope, $state, searchService, $rootScope, d
     })
       .then(directions => {
         console.log('direction',directions); //used for walking directions
-        vm.directions = directions;
+        vm.directionInstructions = directions;
       });
   }
 
   //changes the search category on google places
   function changeCat(category){
-    console.log('changeCat', category);
     vm.searchCat = category;
     search();
   }
@@ -81,19 +84,30 @@ function TripsShowCtrl($auth, Trip, $scope, $state, searchService, $rootScope, d
   //function to add a place to the trip -
   function addPlaceTrip(place){
     Trip.createPlace(vm.currentTrip, place)
-      .then(trip => vm.currentTrip = trip.data)
-      .then(() => directions());
+      .then(trip => {
+        vm.currentTrip = trip.data;
+        currentTripService.set(vm.currentTrip);
+      })
+      .then(() => {
+        directions();
+      });
   }
 
 
   //function to remove a place from the trip
   function removePlaceTrip(place){
     Trip.deletePlace(vm.currentTrip, place)
-      .then(trip => vm.currentTrip = trip.data) //currentTrip is also updated through a broadcast...
-      .then(() => directions());
+      .then(trip => {
+        vm.currentTrip = trip.data;
+        currentTripService.set(vm.currentTrip);
+      }) //currentTrip is also updated through a broadcast...
+      .then(() => {
+        directions();
+      });
   }
 
   $scope.$watch(() => $state.params, () => vm.showDailyPlan = $state.params.showDailyPlan === 'true', true);
+
 
   // vm.createTrip = createTrip;
   vm.changeCat = changeCat;

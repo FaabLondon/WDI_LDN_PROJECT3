@@ -1,9 +1,8 @@
-<h1>My Trips</h1>
 
 <div class="container">
   <div class="columns is-multiline">
       <div class="column is-one-quarter-desktop is-half-tablet" ng-repeat="trip in tripsIndex.trips">
-        <a ui-sref="tripsShow({ id: trip._id })">
+        <a class="list-cards" ui-sref="tripsShow({ id: trip._id })">
           <div class="card">
             <div class="card-image">
               <figure class="image">
@@ -11,8 +10,8 @@
               </figure>
             </div>
             <div class="card-content">
-              <h3 class="title">{{ trip.location }}</h3>
-              <h4 class="subtitle">{{ trip.startDate | date:"EEE dd-MMM yyyy"}}</h4>
+              <h1 class="title">{{ trip.location }}</h1>
+              <h2 class="subtitle">{{ trip.startDate | date:"EEE dd-MMM yyyy"}}</h2>
             </div>
           </div>
         </a>

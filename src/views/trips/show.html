@@ -1,4 +1,4 @@
-<nav class="navbar">
+<nav id="bottom-navbar"class="navbar">
   <div class="navbar-menu">
     <div class="navbar-start">
       <a class="navbar-item" ng-click="tripsShow.changeCat('museum')">Museums</a>
@@ -15,23 +15,23 @@
   <aside class="column is-one-quarter is-sidebar-menu is-fullheight section is-hidden-mobile">
     <div ng-if="!tripsShow.showDailyPlan">
       <ul class="nearby-places-list">
-        <!-- {{tripsShow.searchResult}} -->
-        <li ng-repeat="place in tripsShow.searchResults">
+        <li class="list-cards" ng-repeat="place in tripsShow.searchResults">
           <div class="card">
-            <div class="card-image">
-              <a class="">
-                <img class="place-image" ng-src="{{ place.pictures }}" alt="" ng-click="tripsShow.hideNearbyPlaces()" >
-                <button class="addButton" ng-if="!tripsShow.tripContains(place)" ng-click="tripsShow.addPlaceTrip(place)">
-                  <span class="word"> + </span>
-                </button>
-                <button class="removeButton" ng-if="tripsShow.tripContains(place)" ng-click="tripsShow.removePlaceTrip(place)">
-                  <span class="word"> - </span>
-                </button>
-              </a>
-              <div class="card-content">
-                <h1 class="has-text-weight-bold">{{ place.name }}</h1>
-                <p>{{ place.formatted_address}}</p>
-              </div>
+            <div class="card-image" style="background-image: url({{ place.photos[0].getUrl({'maxWidth': 800, 'maxHeight': 800}) }})">
+              <button class="addButton" ng-if="!tripsShow.tripContains(place)" ng-click="tripsShow.addPlaceTrip(place)">
+                <span class="word"> + </span>
+              </button>
+              <button class="removeButton" ng-if="tripsShow.tripContains(place)" ng-click="tripsShow.removePlaceTrip(place)">
+                <span class="word"> - </span>
+              </button>
+            </div>
+            <div id="card-content" class="card-content">
+              <h1 class="has-text-weight-bold">{{ place.name }}</h1>
+              <p>{{ place.vicinity}}</p><br>
+              <p>Rating:{{place.rating}}🤩</p>
+              <li ng-repeat="n in [] | range:20">
+                  <span>🤩</span>
+              </li>
             </div>
           </div>
         </li>
@@ -43,20 +43,26 @@
       <br>
       <br>
       <h2 class="subtitle is-bold"> Directions for today's trip </h2>
-      <div ng-bind-html="tripsShow.instructionsDay"></div>
+      <div>
+        <ul>
+          <li class="list-cards" ng-repeat="leg in directionInstructions.route.legs">
+            <b> Step: {{$index}} of your trip</b><br>
+            {{leg.start_address}} to {{leg.end_address}}</br>
+            <b> Distance: </b> {{leg.distance.text}} <br>
+            <b> Duration: </b> {{leg.duration.text}}
+          </li>
+        </ul>
+      </div>
       <h2 class="subtitle is-bold"> Places you are visiting today </h2>
       <br>
     <ul class="daily-plan-view" >
       <li ng-repeat="place in tripsShow.currentTrip.days[0].places">
         <div class="card">
-          <div class="card-image">
-            <a class="">
-              <img ng-src="{{ place.image }}" alt="">
-            </a>
-            <div class="card-content">
-              <h1 class="has-text-weight-bold">{{ place.name }}</h1>
-              <p>{{ place.address}}</p>
-            </div>
+            <div class="card-image" style="background-image: url({{ place.image }})">
+          </div>
+          <div class="card-content">
+            <h1 class="has-text-weight-bold">{{ place.name }}</h1>
+            <p>{{ place.address}}</p>
           </div>
         </div>
       </li>

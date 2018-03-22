@@ -25,19 +25,22 @@ let token;
 let tripId;
 
 
-xdescribe('DELETE /trips/:id', () => {
+describe('DELETE /trips/:id', () => {
+
   beforeEach(done => {
-    Trip.remove({})
-      .then(() => Trip.create(tripData))
-      .then(trip => {
-        tripId = trip._id;
-      });
-    User.remove({})
+    Promise.props([     // promise all takes an array and runs them in parallel like promise.props
+      User.remove({}),
+      Trip.remove({})
+    ])
       .then(() => User.create(userData))
       .then(user => {
         token = jwt.sign({ sub: user._id }, secret, { expiresIn: '6h' }); // .sign creates a token. sub is the payload.
       })
-      .then(() => done());
+      .then(() => Trip.create(tripData))
+      .then(trip => {
+        tripId = trip._id;
+      })
+      .then(done);
   });
 
 

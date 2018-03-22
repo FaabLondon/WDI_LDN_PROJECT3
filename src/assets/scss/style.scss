@@ -1,6 +1,7 @@
 
 #body {
-font-family: 'Roboto', sans-serif;
+  font-family: 'PT Sans', sans-serif;
+  background-color: #F8F8F8;
 }
 
 // Homepage
@@ -21,7 +22,15 @@ font-family: 'Roboto', sans-serif;
 }
 
 // Modal
-
+.modal-card .modal-card-head {
+  background-color: #F8F8F8;
+  border-bottom: 5px solid #EE3B00;
+  p {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    color: #FF6A44;
+  }
+}
 #modal-input-1 {
   width: 600px;
 }
@@ -30,6 +39,7 @@ font-family: 'Roboto', sans-serif;
 }
 #modal-container {
   max-width: 600px;
+  font-family: 'Roboto', sans-serif;
   .create-trip-button {
     margin-top: 15px;
   }
@@ -38,8 +48,34 @@ font-family: 'Roboto', sans-serif;
 // navbar
 
 .navbar a {
-font-family: 'PT Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
 }
+
+#top-navbar {
+  background-color: #F8F8F8;
+  .navbar-brand p {
+    color: #828282;
+    font-weight: 700;
+    font-size: 17px;
+  }
+}
+#top-navbar a {
+  color: #FF6A44;
+  font-weight: 500;
+  font-size: 20px;
+}
+#bottom-navbar {
+  background-color: #F8F8F8;
+  border-bottom: 5px solid #EE3B00;
+  a {
+    color: #FF6A44;
+    font-weight: 500;
+    font-size: 20px;
+  }
+}
+
+
 
 
 // Index Page
@@ -51,22 +87,32 @@ font-family: 'PT Sans', sans-serif;
 //to style images in map
 
 #markerLayer img {
-        border: 3px solid #444444 !important;
-        width: 60px !important;
-        height: 60px !important;
-        border-radius: 50px;
-      }
+  border: 3px solid #444444 !important;
+  width: 60px !important;
+  height: 60px !important;
+  border-radius: 50px;
+}
 
 
 .is-sidebar-menu {
-    min-height: calc(100vh - .75rem );
-    max-height: calc(100vh - .75rem );
-    display: flex;
-    flex-direction: row;
-    justify-content: stretch;
+  min-height: calc(100vh - .75rem );
+  max-height: calc(100vh - .75rem );
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+
+  .card {
+    .card-image {
+      height: 150px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
   }
-    .column {
-      overflow-y: auto;
+}
+
+.column {
+  overflow-y: auto;
 }
 
 .places-card {
@@ -78,69 +124,50 @@ font-family: 'PT Sans', sans-serif;
 }
 .card {
   position: relative;
+  box-shadow: none;
 }
 
-.addButton {
-    position:absolute;
-    top:0px;
-    right:0px;
+.list-cards .card {
+  box-shadow: none;
 }
-.removeButton {
-    position:absolute;
-    top:0px;
-    right:0px;
+.card-content {
+    border-top: 10px solid #EE3B00;
+    h1 {
+      font-size: 20px;
+    }
+    h2 {
+      font-size: 18px;  
+    }
 }
 
-.addButton {
+.addButton, .removeButton {
+  position:absolute;
+  top:0px;
+  right:0px;
   display: inline-block;
   border-radius: 4px;
-  background-color: #FFFFFF;
-  border: 1px solid grey;
-  color: #f4511e;
+  background-color: transparent;
+  border: 0;
+  color: #EE3B00;
+  line-height: 21px;
   text-align: center;
-  font-size: 28px;
+  font-size: 40px;
+  font-weight: 800;
   transition: all 0.5s;
   cursor: pointer;
+  -webkit-text-stroke: 1px white;
   margin: 5px;
-  padding:0 0 0 0;
+  padding: 0 0 0 0;
 }
+
 .addButton:focus {
   outline:0;
 }
-.removeButton {
-  display: inline-block;
-  border-radius: 4px;
-  background-color: #FFFFFF;
-  border: 1px solid grey;
-  color: #f4511e;
-  text-align: center;
-  font-size: 28px;
-  transition: all 0.5s;
-  cursor: pointer;
-  margin: 5px;
-  padding:2px;
-}
+
 .removeButton:focus {
   outline:0;
 }
 
 
-/*  */
-
-button .word {
-  max-width: 40px;
-  -webkit-transition: max-width 5s;
-  transition: max-width 5s;
-  display: inline-block;
-  vertical-align: top;
-  white-space: nowrap;
-  overflow: hidden;
-  padding: 0 0 0 0;
-  // margin-left: 10px;
-}
-button:hover .word {
-  max-width: 80px;
-  margin-left: 40px;
-}
 
 // All trips Page
