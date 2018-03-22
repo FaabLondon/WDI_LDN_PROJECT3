@@ -14,6 +14,10 @@ function Trip($http) {
     return $http.post('/api/trips', trip);
   }
 
+  function removeTrip(tripId){
+    return $http.delete(`/api/trips/${tripId}`);
+  }
+
   //function to add a place to a trip - returns the updated trip
   function createPlace(trip, place){
     return $http.post(`/api/trips/${trip._id}/places`, convertGooglePlace(place));
@@ -57,6 +61,7 @@ function Trip($http) {
   this.create = create;
   this.createPlace = createPlace;
   this.deletePlace = deletePlace;
+  this.removeTrip = removeTrip;
   // this.keepDate=keepDate;
   // this.keepAddress=keepAddress;
 

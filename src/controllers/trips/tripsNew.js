@@ -4,11 +4,14 @@ function TripsNewCtrl($auth, Trip, $state, $rootScope) {
   const vm = this; //ViewModel - allows us to use this in function
   vm.newTrip = { coordinates: {} };
 
-  vm.today = new Date().toISOString();
+  vm.today = new Date();
+
+  function canCreateTrip() {
+    return vm.newTrip.startDate && vm.newTrip.startDate > vm.today && vm.newTrip.location;
+  }
 
   //create trip function
   function createTrip() {
-    if(vm.form.$invalid) return false;
 
     //add array of day with 1st day = startDate of trip
     vm.newTrip.days = [{
@@ -24,6 +27,7 @@ function TripsNewCtrl($auth, Trip, $state, $rootScope) {
       });
   }
 
+  vm.canCreateTrip = canCreateTrip;
   vm.createTrip = createTrip;
 
 }
