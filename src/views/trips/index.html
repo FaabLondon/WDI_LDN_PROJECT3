@@ -4,7 +4,6 @@
   <div class="columns is-multiline">
       <div class="column is-one-quarter-desktop is-half-tablet" ng-repeat="trip in tripsIndex.trips">
         <a ui-sref="tripsShow({ id: trip._id })">
-          <!-- needs an ng-repeat to go to the index page and displays the corresponding daily plan on the left -->
           <div class="card">
             <div class="card-image">
               <figure class="image">
@@ -20,4 +19,4 @@
       </div>
   </div>
 </div>
-<a ui-sref="tripsIndex">Back TODO</a>
+<a ng-if="tripsIndex.currentTrip" ui-sref="tripsShow({ id: tripsIndex.currentTrip._id })">Back</a>
