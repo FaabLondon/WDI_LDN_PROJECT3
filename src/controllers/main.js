@@ -1,12 +1,17 @@
-MainCtrl.$inject = ['$auth','Trip', '$state', '$transitions', '$scope', 'currentTripService', 'mapService'];
+MainCtrl.$inject = ['$auth','Trip', '$state', '$transitions', '$scope', 'currentTripService', 'mapService', '$timeout'];
 
-function MainCtrl($auth, Trip, $state, $transitions, $scope, currentTripService, mapService) {
+function MainCtrl($auth, Trip, $state, $transitions, $scope, currentTripService, mapService, $timeout) {
   const vm = this; //ViewModel - allows us to use this in function
   vm.currentTrip = {};
 
   //rootscope listen
   $scope.$on('trip:set', (e) => {
     vm.currentTrip = currentTripService.get();
+  });
+
+  $scope.$on('flashMessage', (e, data) => {
+    vm.flashMessage = data;
+    $timeout(() => vm.flashMessage = null, 2000);
   });
 
   vm.navIsVisible = true;
@@ -18,11 +23,13 @@ function MainCtrl($auth, Trip, $state, $transitions, $scope, currentTripService,
     vm.navIsVisible = !['homepage', 'tripsNew'].includes($state.$current.name);
   });
 
+
   function logout(){
     $auth.logout(); //removes token from local storage
     mapService.destroy();
     $state.go('homepage');
   }
+
   vm.logout = logout;
 }
 export default MainCtrl;

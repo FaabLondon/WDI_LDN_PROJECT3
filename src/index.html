@@ -45,6 +45,9 @@
     </div>
   </nav>
 
+  <div ng-if="main.flashMessage" class="notification is-{{main.flashMessage.type}}">{{ main.flashMessage.content}}</div>
+
+
   <ui-view></ui-view>
 
 </body>
