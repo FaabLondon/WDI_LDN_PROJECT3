@@ -13,6 +13,8 @@ app.use(bodyParser.json());
 
 app.use('/api', router);
 
+app.use('/*', (req, res) => res.sendFile(`${__dirname}/public/index.html`));
+
 //create global error catcher
 app.use((err, req, res, next) => {
   //mongoose sends back a err with message in it

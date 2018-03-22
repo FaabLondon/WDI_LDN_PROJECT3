@@ -19,6 +19,9 @@ function directionsService(mapService, $q) {
           resolve(results);
         });
       });
+    },
+    clearMap() {
+      directionsDisplay.setMap(null);
     }
   };
 }

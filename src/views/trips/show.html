@@ -20,7 +20,7 @@
           <div class="card">
             <div class="card-image">
               <a class="">
-                <img class="place-image" ng-src="{{ place.pictures }}" alt="" ng-click="tripsShow.hideNearbyPlaces()" >
+                <img class="place-image" ng-src="{{ place.photos[0].getUrl({'maxWidth': 800, 'maxHeight': 800}) }}" alt="" ng-click="tripsShow.hideNearbyPlaces()" >
                 <button class="addButton" ng-if="!tripsShow.tripContains(place)" ng-click="tripsShow.addPlaceTrip(place)">
                   <span class="word"> + </span>
                 </button>
@@ -30,7 +30,11 @@
               </a>
               <div class="card-content">
                 <h1 class="has-text-weight-bold">{{ place.name }}</h1>
-                <p>{{ place.formatted_address}}</p>
+                <p>{{ place.vicinity}}</p><br>
+                <p>Rating:{{place.rating}}🤩</p>
+                <li ng-repeat="n in [] | range:20">
+                    <span>🤩</span>
+                </li>
               </div>
             </div>
           </div>
@@ -43,7 +47,16 @@
       <br>
       <br>
       <h2 class="subtitle is-bold"> Directions for today's trip </h2>
-      <div ng-bind-html="tripsShow.instructionsDay"></div>
+      <div>
+        <ul>
+          <li ng-repeat="leg in directionInstructions.route.legs">
+            <b> Step: {{$index}} of your trip</b><br>
+            {{leg.start_address}} to {{leg.end_address}}</br>
+            <b> Distance: </b> {{leg.distance.text}} <br>
+            <b> Duration: </b> {{leg.duration.text}}
+          </li>
+        </ul>
+      </div>
       <h2 class="subtitle is-bold"> Places you are visiting today </h2>
       <br>
     <ul class="daily-plan-view" >
