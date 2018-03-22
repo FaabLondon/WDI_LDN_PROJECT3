@@ -49,4 +49,4 @@ angular
   .controller('TripsNewCtrl', TripsNewCtrl)
   .directive('googleMap',googleMap)
   .directive('googleAutocomplete',googleAutocomplete);
-  // .directive('googleDirections', googleDirections);
+// .directive('googleDirections', googleDirections);

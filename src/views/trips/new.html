@@ -14,7 +14,7 @@
           <div class="modal-field">
             <label for="location">Where are you going?</label>
             <p class="control has-icons-left">
-              <input coordinates="tripsNew.newTrip.coordinates" address="tripsNew.newTrip.location" image="tripsNew.newTrip.image" class="input googleAutocomplete" id="modal-input-1" placeholder="e.g. London, New York, Paris" name="location" required />
+              <input ng-model="tripsNew.newTrip.location" coordinates="tripsNew.newTrip.coordinates" address="tripsNew.newTrip.location" image="tripsNew.newTrip.image" class="input googleAutocomplete" id="modal-input-1" placeholder="e.g. London, New York, Paris" name="location" required />
               <span class="icon is-left">
                 <i class="fas fa-map-marker-alt"></i>
               </span>
@@ -37,10 +37,7 @@
           <div ng-messages="tripsNew.form.startDate.$error" ng-if="tripsNew.form.startDate.$dirty || tripsNew.form.$submitted">
             <div class="has-text-danger" ng-message="required">This field is required</div>
           </div>
-          <!-- <button class="button is-primary">Create Trip</button> -->
-          <!-- <button class="button is-primary" ng-disabled="(!(tripsNew.newTrip.startDate.toISOString() >= tripsNew.today) || !(tripsNew.form.location.$dirty))">Create Trip</button> -->
-          <!-- <button class="button is-primary" ng-disabled="(!(tripsNew.newTrip.startDate.toISOString() >= tripsNew.today))">Create Trip</button> -->
-          <button class="button is-primary">Create Trip</button>
+          <button class="button is-primary" ng-disabled="!tripsNew.canCreateTrip()">Create Trip</button>
         </form>
       </div>
 

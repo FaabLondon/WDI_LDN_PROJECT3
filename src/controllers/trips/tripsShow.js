@@ -5,29 +5,28 @@ function TripsShowCtrl($auth, Trip, $scope, $state, searchService, $rootScope, d
   vm.currentTrip = {};
   vm.searchCat = 'museum';
   vm.today = new Date().toISOString();
-
-  //need to store wether user is authenticated or not in order to test it in view and hide/show buttons accordingly.
-  vm.isAuthenticated = $auth.isAuthenticated;
-  vm.searchResults = [];
-  vm.showDailyPlan = $state.params.showDailyPlan;
-  console.log('showdaily', vm.showDailyPlan);
-
-  $rootScope.$on('map:set', () => {
-    Trip.findById($state.params.id)
-      .then(trip => {
-        vm.currentTrip = trip.data;
-        currentTripService.set(vm.currentTrip);
-        $rootScope.$broadcast('trip:set');
-        search();
-      });
-  });
-
   // directions variables
   vm.directionInstructions = {};
   let waypts = [];
   let origin = {location: {lat: 0,lng: 0}};
   let destination = {location: {lat: 0,lng: 0}};
 
+  //need to store wether user is authenticated or not in order to test it in view and hide/show buttons accordingly.
+  vm.isAuthenticated = $auth.isAuthenticated;
+  vm.searchResults = [];
+  vm.showDailyPlan = $state.params.showDailyPlan;
+
+  $rootScope.$on('map:set', () => {
+    Trip.findById($state.params.id)
+      .then(trip => {
+        vm.currentTrip = trip.data;
+        search(); //run a search
+        directions(); //draw directions
+        currentTripService.set(vm.currentTrip);
+        $rootScope.$broadcast('trip:set');
+        search();
+      });
+  });
 
 
   function search() {
@@ -40,6 +39,8 @@ function TripsShowCtrl($auth, Trip, $scope, $state, searchService, $rootScope, d
   }
 
   function directions() {
+    //vm.currentTrip = currentTripService.get();
+    waypts = [];
     const nbPlaces = vm.currentTrip.days[0].places.length;
     if (nbPlaces < 2) {
       directionsService.clearMap();
@@ -56,7 +57,7 @@ function TripsShowCtrl($auth, Trip, $scope, $state, searchService, $rootScope, d
           stopover: true
         });
       }
-    } //else waypts stays [];
+    }
 
     directionsService.drawDirections({
       origin: origin,
@@ -89,6 +90,7 @@ function TripsShowCtrl($auth, Trip, $scope, $state, searchService, $rootScope, d
         currentTripService.set(vm.currentTrip);
       })
       .then(() => {
+        console.log(vm.currentTrip);
         directions();
       });
   }
@@ -102,6 +104,7 @@ function TripsShowCtrl($auth, Trip, $scope, $state, searchService, $rootScope, d
         currentTripService.set(vm.currentTrip);
       }) //currentTrip is also updated through a broadcast...
       .then(() => {
+        console.log(vm.currentTrip);
         directions();
       });
   }

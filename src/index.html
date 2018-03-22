@@ -39,7 +39,7 @@
         <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link" href=""> <span class="icon is-small"><i class="fas fa-user"></i></span>&nbsp {{main.currentTrip.user.username}}</a>
             <div class="navbar-dropdown is-boxed is-right" ng-if="main.isAuthenticated()">
-              <a class="navbar-item" ng-click="main.logout()">Logout</a>
+              <a class="navbar-item" ui-sref="homepage" ng-click="main.logout()">Logout</a>
             </div>
         </div>
       </div>
