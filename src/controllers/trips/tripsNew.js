@@ -20,8 +20,6 @@ function TripsNewCtrl($auth, Trip, $state, $rootScope) {
     //function returns trip and we store tripId to be able to send Ajax requests
     Trip.create(vm.newTrip)
       .then(res => {
-        // Trip.address = vm.address;
-        $rootScope.$broadcast('address:set', vm.address);
         $state.go('tripsShow', { id: res.data._id });
       });
   }

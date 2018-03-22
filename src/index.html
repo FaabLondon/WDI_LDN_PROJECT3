@@ -17,8 +17,8 @@
         &nbsp;
         Holiday Planner
       </a>
-        <a class="navbar-item">City: {{main.address}}</a>
-        <a class="navbar-item">Date: {{main.date | date:"EEE dd-MMM yyyy "}}
+        <a class="navbar-item">City: {{main.currentTrip.location}}</a>
+        <a class="navbar-item">Date: {{main.currentTrip.startDate | date:"EEE dd-MMM yyyy "}}
         <!-- <a class="navbar-item">City: {{main.currentTrip.address}}</a>
         <a class="navbar-item">Date: {{main.currentTrip.startDate | date:"EEE dd-MMM yyyy "}} -->
         </a>

@@ -17,6 +17,7 @@ function TripsShowCtrl($auth, Trip, $scope, $state, searchService, $rootScope, d
       .then(trip => {
         vm.currentTrip = trip.data;
         currentTripService.set(vm.currentTrip);
+        $rootScope.$broadcast('trip:set');
         search();
       });
   });

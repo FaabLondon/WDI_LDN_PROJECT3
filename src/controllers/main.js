@@ -1,13 +1,12 @@
-MainCtrl.$inject = ['$auth','Trip', '$state', '$transitions', '$scope'];
+MainCtrl.$inject = ['$auth','Trip', '$state', '$transitions', '$scope', 'currentTripService'];
 
-function MainCtrl($auth, Trip, $state, $transitions, $scope) {
+function MainCtrl($auth, Trip, $state, $transitions, $scope, currentTripService) {
   const vm = this; //ViewModel - allows us to use this in function
   vm.currentTrip = {};
-  vm.address = '';
 
   //rootscope listen
-  $scope.$on('address:set', (e, address) => {
-    vm.address = address;
+  $scope.$on('trip:set', (e) => {
+    vm.currentTrip = currentTripService.get();
   });
 
   vm.navIsVisible = true;

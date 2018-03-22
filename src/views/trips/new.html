@@ -14,7 +14,7 @@
           <div class="modal-field">
             <label for="location">Where are you going?</label>
             <p class="control has-icons-left">
-              <input ng-model="tripsNew.address" coordinates="tripsNew.newTrip.coordinates" address="tripsNew.newTrip.location" image="tripsNew.newTrip.image" class="input googleAutocomplete" id="modal-input-1" placeholder="e.g. London, New York, Paris" name="location" required />
+              <input coordinates="tripsNew.newTrip.coordinates" address="tripsNew.newTrip.location" image="tripsNew.newTrip.image" class="input googleAutocomplete" id="modal-input-1" placeholder="e.g. London, New York, Paris" name="location" required />
               <span class="icon is-left">
                 <i class="fas fa-map-marker-alt"></i>
               </span>
@@ -28,7 +28,7 @@
           <div class="modal-field">
             <label for="startDate">When?</label>
             <p class="control has-icons-left">
-              <input class="input" type="date" id="modal-input-2" placeholder="" name="startDate" ng-model="Trip.date" required min="{{ tripsNew.today }}" />
+              <input class="input" type="date" id="modal-input-2" placeholder="" name="startDate" ng-model="tripsNew.newTrip.startDate" required min="{{ tripsNew.today }}" />
               <span class="icon is-left">
                 <i class="far fa-calendar-alt"></i>
               </span>
