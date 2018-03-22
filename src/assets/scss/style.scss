@@ -2,6 +2,7 @@
 #body {
   font-family: 'PT Sans', sans-serif;
   background-color: #F8F8F8;
+  height: 100vh;
 }
 
 // Homepage
@@ -51,6 +52,15 @@ img.walking{
   }
 }
 
+.modal-form {
+  .button {
+  margin-top: 10px;
+  border-color: #EE3B00;
+  }
+  .button:disabled {
+  border-color: #EE3B00;
+  }
+}
 // navbar
 
 .navbar a {
@@ -71,9 +81,10 @@ img.walking{
   font-weight: 500;
   font-size: 20px;
 }
-#bottom-navbar {
+.secondary-navbar {
   background-color: #F8F8F8;
   border-bottom: 5px solid #EE3B00;
+  margin: 4px;
   a {
     color: #FF6A44;
     font-weight: 500;
@@ -164,7 +175,7 @@ img.walking{
       font-size: 20px;
     }
     h2 {
-      font-size: 18px;  
+      font-size: 18px;
     }
 }
 

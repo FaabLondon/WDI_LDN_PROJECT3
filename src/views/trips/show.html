@@ -1,5 +1,5 @@
 
-    <div>
+    <div class="secondary-navbar">
       <a class="sub-nav" ng-click="tripsShow.changeCat('museum')">Museums</a>
       <a class="sub-nav" ng-click="tripsShow.changeCat('art_gallery')">Art galleries</a>
       <a class="sub-nav" ng-click="tripsShow.changeCat('restaurant')">Restaurants</a>
@@ -37,6 +37,7 @@
   </div>
 
 <!-- SIDEBAR - DAILY PLAN VIEW -->
+<a ui-sref="tripsShow({ showDailyPlan: false })" class="button is-primary" name="button">Back to planning your trip</a>
     <div ng-if="tripsShow.showDailyPlan">
       <br>
       <br>
@@ -48,7 +49,7 @@
             <strong> Distance: </strong> {{leg.distance.text}} <br>
             <strong> Duration: </strong> {{leg.duration.text}} <img class="walking" src="https://cdn0.iconfinder.com/data/icons/ui-14/100/ui14-39-512.png"> <br><br>
           </li>
-      </div>img
+      </div>
       <h2 class="subtitle is-bold"> Places you are visiting today </h2>
       <br>
     <ul class="daily-plan-view" >
@@ -63,7 +64,6 @@
         </div>
       </li>
     </ul>
-    <a ui-sref="tripsShow({ showDailyPlan: false })" class="button is-primary" name="button">Back to trip planning</a>
   </div>
 
   </aside>

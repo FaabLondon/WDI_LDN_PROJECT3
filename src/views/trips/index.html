@@ -12,11 +12,11 @@
             <div class="card-content">
               <h1 class="title">{{ trip.location }}</h1>
               <h2 class="subtitle">{{ trip.startDate | date:"EEE dd-MMM yyyy"}}</h2>
-              <button class="button is-primary" ng-click="tripsIndex.deleteTrip(trip._id)">Delete Trip</button>
+              <button class="button is-outlined" ng-click="tripsIndex.deleteTrip(trip._id)">Delete Trip</button>
             </div>
           </div>
         </a>
       </div>
   </div>
+  <a class="button" ng-if="tripsIndex.currentTrip" ui-sref="tripsShow({ id: tripsIndex.currentTrip._id })">Back</a>
 </div>
-<a ng-if="tripsIndex.currentTrip" ui-sref="tripsShow({ id: tripsIndex.currentTrip._id })">Back</a>
