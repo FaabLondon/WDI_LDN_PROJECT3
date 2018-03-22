@@ -1,6 +1,6 @@
-TripsShowCtrl.$inject = ['$auth','Trip', '$scope', '$state', 'searchService', '$rootScope', 'directionsService'];
+TripsShowCtrl.$inject = ['$auth','Trip', '$scope', '$state', 'searchService', '$rootScope', 'directionsService', 'currentTripService'];
 
-function TripsShowCtrl($auth, Trip, $scope, $state, searchService, $rootScope, directionsService) {
+function TripsShowCtrl($auth, Trip, $scope, $state, searchService, $rootScope, directionsService, currentTripService) {
   const vm = this; //ViewModel - allows us to use this in function
   vm.currentTrip = {};
   vm.searchCat = 'museum';
@@ -16,6 +16,7 @@ function TripsShowCtrl($auth, Trip, $scope, $state, searchService, $rootScope, d
     Trip.findById($state.params.id)
       .then(trip => {
         vm.currentTrip = trip.data;
+        currentTripService.set(vm.currentTrip);
         search();
       });
   });

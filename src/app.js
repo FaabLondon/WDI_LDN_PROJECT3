@@ -21,6 +21,7 @@ import Trip from './services/trip';
 import mapService from './services/map';
 import searchService from './services/search';
 import directionsService from './services/directions';
+import currentTripService from './services/currentTrip';
 
 //directives
 import googleMap from './directives/google-map';
@@ -40,6 +41,7 @@ angular
   .service('mapService', mapService)
   .service('searchService', searchService)
   .service('directionsService', directionsService)
+  .service('currentTripService', currentTripService)
   .controller('AuthRegisterLoginCtrl', AuthRegisterLoginCtrl)
   .controller('TripsIndexCtrl', TripsIndexCtrl)
   .controller('MainCtrl', MainCtrl)
