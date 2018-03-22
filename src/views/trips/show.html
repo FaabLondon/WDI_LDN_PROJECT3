@@ -48,14 +48,12 @@
       <br>
       <h2 class="subtitle is-bold"> Directions for today's trip </h2>
       <div>
-        <ul>
-          <li ng-repeat="leg in directionInstructions.route.legs">
-            <b> Step: {{$index}} of your trip</b><br>
-            {{leg.start_address}} to {{leg.end_address}}</br>
+          <li ng-repeat="leg in tripsShow.directionInstructions.routes[0].legs">
+            <b> Step: {{$index + 1}} of your trip</b><br>
+            {{leg.start_address}}<b> to </b> {{leg.end_address}}</br>
             <b> Distance: </b> {{leg.distance.text}} <br>
-            <b> Duration: </b> {{leg.duration.text}}
+            <b> Duration: </b> {{leg.duration.text}} <br> <br>
           </li>
-        </ul>
       </div>
       <h2 class="subtitle is-bold"> Places you are visiting today </h2>
       <br>
