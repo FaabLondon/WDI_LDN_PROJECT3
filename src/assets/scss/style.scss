@@ -21,6 +21,12 @@
   background-color: white;
 }
 
+img.walking{
+  width: 15px;
+  height: auto;
+  display: inline;
+}
+
 // Modal
 .modal-card .modal-card-head {
   background-color: #F8F8F8;
@@ -193,3 +199,9 @@
 
 
 // All trips Page
+
+.sub-nav {
+  color: black;
+  margin: 10px;
+  padding: 10px;
+}

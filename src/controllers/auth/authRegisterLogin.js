@@ -13,6 +13,7 @@ function AuthRegisterLoginCtrl($auth, Trip, $state, $rootScope,$timeout){
     $auth.signup(vm.user)
       .then(() => {
         vm.registered = !vm.registered;
+        vm.message = '';
         $state.go('homepage');
       })
       .catch(res => {
@@ -36,6 +37,7 @@ function AuthRegisterLoginCtrl($auth, Trip, $state, $rootScope,$timeout){
       .then(res => {
         //console.log(res.data.message);
         Trip.userName = res.data.message;
+        vm.message = '';
         $state.go('tripsNew');
       })
       .catch(res => {
