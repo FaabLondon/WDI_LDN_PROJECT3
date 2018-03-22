@@ -10,13 +10,13 @@ function TripsShowCtrl($auth, Trip, $scope, $state, searchService, $rootScope, d
   vm.isAuthenticated = $auth.isAuthenticated;
   vm.searchResults = [];
   vm.showDailyPlan = $state.params.showDailyPlan;
-  console.log('showdaily', vm.showDailyPlan);
 
   $rootScope.$on('map:set', () => {
     Trip.findById($state.params.id)
       .then(trip => {
         vm.currentTrip = trip.data;
-        search();
+        search(); //run a search
+        directions(); //draw directions
       });
   });
 
