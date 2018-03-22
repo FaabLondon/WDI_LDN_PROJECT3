@@ -31,12 +31,14 @@ function Router($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('tripsNew',{
       url: '/trips/new',
       templateUrl: 'views/trips/new.html',
-      controller: 'TripsNewCtrl as tripsNew'
+      controller: 'TripsNewCtrl as tripsNew',
+      resolve: {secureState}
     })
     .state('tripsShow',{
       url: '/trips/:id?showDailyPlan',
       templateUrl: 'views/trips/show.html',
-      controller: 'TripsShowCtrl as tripsShow'
+      controller: 'TripsShowCtrl as tripsShow',
+      resolve: {secureState}
     })
     .state('tripsIndex', {
       url: '/trips',

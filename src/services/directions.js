@@ -4,7 +4,7 @@ directionsService.$inject = ['mapService', '$q'];
 
 function directionsService(mapService, $q) {
   const directionsService = new google.maps.DirectionsService;
-  const directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
+  const directionsDisplay = new google.maps.DirectionsRenderer(); //removed {suppressMarkers: true}
 
   return {
     drawDirections(params) {
