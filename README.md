@@ -2,17 +2,22 @@
 
 ### Overview
 
-For our third project we were instructed to build a full-stack MEAN application. This was required to use Mongo, Node, Angular and Express. This needed to have an API with at least 2 related models, RESTFUL actions for at least one of the models, automated tests and Bulma.
+For our third project we were instructed to build a full-stack MEAN application. This was required to use Mongo, Node, Angular and Express. This incorporated an API with 2 related models, RESTFUL actions, automated tests using Mocha and Chai and was styled using Bulma.
 
 
 
-###
+### Make my day
+
+Our application is a day trip planner which allows users to create a customised itinerary based on the location of their trip. Users can create a new trip with the date and city location and the app returns a results based on their search. The in-built map displays markers with locations of points of interest, which can then be filtered by search category. The user adds places to their day trip which then allows them to view a route with directions and timings. They can also make multiple day trips for different locations which they can refer to at any time.
+
+#### Planning
 
 
+We used agile methodology during the planning phase of the project. We created a Trello board, specifying our MVP requirements, nice-to-have features and stretch goals. Tasks were assigned to members of the group throughout the project using this system. We used Github to collaborate making use of branches and checking for merge conflicts.
 
-#### Server-side
+We then wireframed our website design.
 
-Your app must:
+The user is directed to a registration/login page on page load which upon completion takes them to the create a trip page. This requests the user to enter their trip location which uses Google autocomplete to store their 
 
 #### Client-side
 
