@@ -10,6 +10,7 @@ function createPlaceDayRoute(req, res, next) {
     .then(trip => res.json(trip))
     .catch(next);
 }
+// retrieve specific trip pushes into the array of days
 
 //delete place
 function deletePlaceDayRoute(req, res, next){
@@ -17,7 +18,6 @@ function deletePlaceDayRoute(req, res, next){
     .then(trip => {
       // const place = trip.days[0].places.id(req.params.placeId);
       const place = trip.days[0].places.id(req.params.placeId);
-
       place.remove();
       return trip.save();
     })

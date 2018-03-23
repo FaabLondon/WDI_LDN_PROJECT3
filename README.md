@@ -1,39 +1,18 @@
-# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Project #3: A MEAN Stack App
+# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Project #3: Group Project - Make My Day
 
 ### Overview
 
-Your instructors will partner you with other classmates to design and collaboratively build a MEAN stack app of your own design.
+For our third project we were instructed to build a full-stack MEAN application. This was required to use Mongo, Node, Angular and Express. This needed to have an API with at least 2 related models, RESTFUL actions for at least one of the models, automated tests and Bulma.
 
-- **M**ongo - For the database
-- **E**xpress - For the web-framework
-- **A**ngular - Angular(1) for the client-side framework
-- **N**ode - For the server-side language
 
-This is the _most realistic_ stack that you have worked on during the course and will prepare you for working in the industry where the MEAN stack setup is still very popular.
 
-**This is meant to push you both technically and collaboratively.** It is a lot harder to work in a team than to work by yourself. However, it is very likely thank you are going to find yourself working in a teams throughout your development careers so **it's important to learn how to work together.**
+###
 
-Make it work, and make it awesome.
 
----
-
-### Technical Requirements
-
-* **Carefully plan wireframes** as a team _before starting to code_
-* **Carefully plan Model schemas*** as a team _before starting to code_
-* **Manage team contributions and collaboration** using a Git on Github
-* **Deploy your application online** so it's publicly accessible
 
 #### Server-side
 
 Your app must:
-
-* **Use Mongo, Node & Express** to build a server-side API
-* **Your API must have at least 2 related models**, one of which should be a user
-* Your API should include **all RESTFUL actions** for at least one of those models
-* Include **authentication** to restrict access to appropriate users
-* **Include at least one referenced or embedded sub-document**, however don't go crazy! You need to manage your time effectively...
-* **Include automated tests** for at least one resource
 
 #### Client-side
 

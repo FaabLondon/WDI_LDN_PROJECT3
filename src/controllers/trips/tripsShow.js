@@ -82,11 +82,11 @@ function TripsShowCtrl($auth, Trip, $scope, $state, searchService, $rootScope, d
     return vm.currentTrip.days[0].places.find(element => element.googleId === place.place_id);
   }
 
-  //function to add a place to the trip -
+  //function to add a place to the trip - returns a promise with a trip from the server
   function addPlaceTrip(place){
     Trip.createPlace(vm.currentTrip, place)
-      .then(trip => {
-        vm.currentTrip = trip.data;
+      .then(res => {
+        vm.currentTrip = res.data;
         currentTripService.set(vm.currentTrip);
       })
       .then(() => {

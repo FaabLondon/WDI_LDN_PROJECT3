@@ -1,44 +1,36 @@
 Trip.$inject = ['$http'];
 function Trip($http) {
+  // ALL FUNCTIONS RETURN PROMISES. $http AJAX requests.
 
-  //function to create a new trip - the user id is added on the server side
   function find(){
     return $http.get('/api/trips');
   }
+  // Index page - get all trips for a specific user. The filtering by user is done on the server side.
 
   function findById(tripId) {
     return $http.get(`/api/trips/${tripId}`);
   }
-  // function show specific trip
+  // Show page - add places and daily plan - sending back one specific trip
+
   function create(trip) {
     return $http.post('/api/trips', trip);
   }
-
+  // New page
   function removeTrip(tripId){
     return $http.delete(`/api/trips/${tripId}`);
   }
+  // Index page - delete button
 
-  //function to add a place to a trip - returns the updated trip
   function createPlace(trip, place){
     return $http.post(`/api/trips/${trip._id}/places`, convertGooglePlace(place));
   }
+  // On show page you can add and delete places. When you do it it's a google place with their own key value pairs. Before you add to the database it needs to be converted into a place that matches our model. Runs the convertGooglePlace function and then posts to the database. Only for add.
 
-  //delete Google Place from the trip - returns the updated trip
   function deletePlace(trip, place){
     place = trip.days[0].places.find(_place => _place.googleId === place.place_id);
     return $http.delete(`/api/trips/${trip._id}/places/${place._id}`);
   }
-
-  // this.address;
-  // this.date;
-  //
-  // function keepAddress(address){
-  //   this.address=address;
-  // }
-  // function keepDate(date){
-  //   this.date=date;
-  // }
-
+  // On the minus button, it is a google place so it only had a googleId. Before you ask server to delete the place you need to find the place that has that googleId. Google place has a field called place_id, we are looking in our database for the place which has a googleId equal to the google place. Returns a place in our database and we then use the normal database id to delete it.
 
   function convertGooglePlace(place) {
     const converted = {};

@@ -2,6 +2,7 @@ const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const {secret} = require('../config/environment');
 
+// sends back the user and a token
 function register(req, res, next){
   User.create(req.body)
     .then(user => {
