@@ -20,9 +20,6 @@
         &nbsp;
         Make My Day
       </a>
-        <p class="navbar-item">City: {{main.currentTrip.location}}</p>
-        <p class="navbar-item">Date: {{main.currentTrip.startDate | date:"EEE dd-MMM yyyy "}}
-        </p>
       <div class="navbar-burger ng-class:clicked ? 'is-active' : 'is-not-active'" data-target="#mobile-menu" ng-click="clicked = !clicked" >
           <span></span>
           <span></span>
@@ -31,6 +28,11 @@
     </div>
 
     <div id="mobile-menu" class="navbar-menu ng-class:clicked ? 'is-active' : 'is-not-active'">
+      <div class="navbar-start">
+        <p class="navbar-item">City: {{main.currentTrip.location}}</p>
+        <p class="navbar-item">Date: {{main.currentTrip.startDate | date:"EEE dd-MMM yyyy "}}
+        </p>
+      </div>
       <div class="navbar-end">
         <a class="navbar-item" ui-sref="tripsNew">Add new trip</a>
         <a class="navbar-item" ui-sref="tripsShow({ showDailyPlan: true })">Daily Plan</a>
