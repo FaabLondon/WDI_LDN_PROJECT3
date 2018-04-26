@@ -6,14 +6,15 @@ function TripsNewCtrl($auth, Trip, $state, $rootScope) {
 
   vm.today = new Date();
 
+
+  // validation for the date. Makes the button available to you if there is a location and the date is in the future. ng-disable in the view.
   function canCreateTrip() {
     return vm.newTrip.startDate && vm.newTrip.startDate > vm.today && vm.newTrip.location;
   }
-  // validation for the date. Makes the button available to you if there is a location and the date is in the future. ng-disable in the view.
+
 
   //create trip function
   function createTrip() {
-
     //add array of day with 1st day = startDate of trip
     vm.newTrip.days = [{
       date: vm.newTrip.startDate,

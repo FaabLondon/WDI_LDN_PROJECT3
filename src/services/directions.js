@@ -2,6 +2,9 @@
 
 directionsService.$inject = ['mapService', '$q'];
 
+//We build our own promise
+//we return an object that has a method drawDirections that returns a promise wich we can then handle with then or catch
+
 function directionsService(mapService, $q) {
   const directionsService = new google.maps.DirectionsService;
   const directionsDisplay = new google.maps.DirectionsRenderer(); //removed {suppressMarkers: true}

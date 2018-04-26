@@ -1,4 +1,5 @@
 Trip.$inject = ['$http'];
+
 function Trip($http) {
   // ALL FUNCTIONS RETURN PROMISES. $http AJAX requests.
 

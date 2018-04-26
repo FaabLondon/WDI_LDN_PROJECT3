@@ -69,7 +69,7 @@ Finally, we still need to make this app fully responsive as it can not be used o
 ## Setup instructions
 
 - Clone or download the repo
-- Install dependencies with `yarn install`
+- Install dependencies with `yarn install` or `npm install`
 - Start the local MongoDB server in Node.js with `mongod`
 - Start the client with `yarn start:client` (same as `webpack-dev-server`)
 - Start the server with `yarn start:server` (same as `nodemon`)

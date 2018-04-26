@@ -1,6 +1,7 @@
 TripsShowCtrl.$inject = ['$auth','Trip', '$scope', '$state', 'searchService', '$rootScope', 'directionsService', 'currentTripService'];
 
 function TripsShowCtrl($auth, Trip, $scope, $state, searchService, $rootScope, directionsService, currentTripService) {
+
   const vm = this; //ViewModel - allows us to use this in function
   vm.currentTrip = {};
   vm.searchCat = 'museum';
@@ -16,11 +17,12 @@ function TripsShowCtrl($auth, Trip, $scope, $state, searchService, $rootScope, d
   vm.searchResults = [];
   vm.showDailyPlan = $state.params.showDailyPlan;
 
+  //once message received from the map service we can load the trip
   $rootScope.$on('map:set', () => {
     Trip.findById($state.params.id)
       .then(trip => {
         vm.currentTrip = trip.data;
-        search(); //run a search
+        search(); //run a search for location
         directions(); //draw directions
         currentTripService.set(vm.currentTrip);
         $rootScope.$broadcast('trip:set');
@@ -28,8 +30,9 @@ function TripsShowCtrl($auth, Trip, $scope, $state, searchService, $rootScope, d
       });
   });
 
-
+  //function to search for specific location on map and place category
   function search() {
+    //call this function nearby in service search and it returns a promise
     searchService.nearby({
       location: vm.currentTrip.coordinates,
       radius: '1000',
@@ -38,6 +41,7 @@ function TripsShowCtrl($auth, Trip, $scope, $state, searchService, $rootScope, d
       .then(results => vm.searchResults = results);
   }
 
+  //function to draw directions on map
   function directions() {
     //vm.currentTrip = currentTripService.get();
     waypts = [];
@@ -49,7 +53,7 @@ function TripsShowCtrl($auth, Trip, $scope, $state, searchService, $rootScope, d
     origin.location = vm.currentTrip.days[0].places[0].location;
     destination.location = vm.currentTrip.days[0].places[nbPlaces - 1].location;
 
-    //Cannot do a map as I only want to start at index 1 until n -2
+    //Cannot do a map() as I only want to start at index 1 until n -2
     if(nbPlaces > 2){
       for (let i = 1; i < nbPlaces - 1 ; i++){
         waypts.push({
@@ -59,6 +63,7 @@ function TripsShowCtrl($auth, Trip, $scope, $state, searchService, $rootScope, d
       }
     }
 
+    //call this function in service directions and it returns a promise
     directionsService.drawDirections({
       origin: origin,
       destination: destination,
