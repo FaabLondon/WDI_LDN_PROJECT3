@@ -1,3 +1,5 @@
+//helper function singleton to be able to get one instance of the currentTrip in the whole app
+
 function currentTrip() {
   let _currentTrip;
 

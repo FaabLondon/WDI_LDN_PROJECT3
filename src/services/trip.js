@@ -47,19 +47,12 @@ function Trip($http) {
   }
 
 
-
-  // vm.createPlaceTrip = createPlaceTrip;
   this.find = find;
   this.findById = findById;
   this.create = create;
   this.createPlace = createPlace;
   this.deletePlace = deletePlace;
   this.removeTrip = removeTrip;
-  // this.keepDate=keepDate;
-  // this.keepAddress=keepAddress;
-
-
-
 }
 
 export default Trip;
