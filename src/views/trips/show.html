@@ -9,8 +9,8 @@
 
 <!-- SIDEBAR - NEARBY / FILTERED PLACES VIEW -->
 
-<section class="main-content columns is-fullheight">
-  <aside class="aside column is-one-quarter is-sidebar-menu is-fullheight section is-hidden-mobile">
+<section class="main-content columns is-fullheight is-mobile">
+  <aside class="aside column is-one-quarter-desktop is-half-touch is-sidebar-menu is-fullheight section">
     <div ng-if="!tripsShow.showDailyPlan">
       <ul class="nearby-places-list">
         <li class="list-cards" ng-repeat="place in tripsShow.searchResults">
@@ -69,7 +69,7 @@
 
   <!-- GOOGLE MAPS -->
 
-  <div class="column is-three-quarters googleMap">
+  <div class="column is-three-quarters-desktop is-half-touch googleMap">
     <google-map zoom="15" center="tripsShow.currentTrip.coordinates" search-cat="tripsShow.searchCat" results="tripsShow.searchResults">
     </google-map>
   </div>

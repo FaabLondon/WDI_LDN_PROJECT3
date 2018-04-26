@@ -116,12 +116,19 @@ img.walking{
 }
 
 
-
-
-// Index Page
-.google-map {
-  width: 73vw;
+// Show Page
+div.google-map {
+  width: 72vw;
   height: 85vh;
+}
+
+div.column{
+  padding-top: 3rem;
+}
+
+aside.aside.column {
+  margin-top: 3rem;
+  padding-top: 0;
 }
 
 //to style images in map
@@ -233,8 +240,12 @@ img.walking{
   outline:0;
 }
 
+
+
 // daily plan view
 .aside {
+  overflow: scroll;
+
   .button {
   margin-top: 10px;
   border-color: #EE3B00;
@@ -272,6 +283,11 @@ img.walking{
 
   div.container.registrationForm{
     width: 250px;
+  }
+
+  /* show page with map */
+  div.google-map {
+    width: 48vw;
   }
 
 }
