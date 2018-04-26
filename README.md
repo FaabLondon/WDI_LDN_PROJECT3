@@ -2,13 +2,13 @@
 
 ### Overview
 
-For our third project we were instructed to build a full-stack MEAN application. This was required to use Mongo, Node, Angular and Express. This incorporated an API with 2 related models, RESTFUL actions, automated tests using Mocha and Chai and was styled using Bulma.
+For our third project we were instructed to build a full-stack MEAN application. This was required to use Mongo, Node, Angular and Express. This incorporated an API with 2 related models, RESTFUL actions, automated tests using Mocha and Chai and was styled using Bulma. We also did authentication with encrypted passwords (bcrypt) and used Satellizer, a token-based authentication module for AngularJS.
 
 ### The Application
 
 Our application is a day trip planner which allows users to create a customised itinerary based on the location of their trip. Users can create a new trip with the date and city location and the app returns a results based on their search. The in-built map displays markers with locations of points of interest, which can then be filtered by search category. The user adds places to their day trip which then allows them to view a route with directions and timings. They can also make multiple day trips for different locations which they can refer to at any time.
 
-##### [Please visit website](https://make-my-day-project.herokuapp.com/)
+##### [Please visit website](https://make-my-days.herokuapp.com/)
 
 ### Planning
 
@@ -32,13 +32,15 @@ This requests the user to enter their trip location which uses Google autocomple
 
 Users are then directed to the main page where they can view the map which displays their search parameters. They are able to filter for what type of search they want - restaurants, art galleries, museums and hotels.
 
+The user can then add Museums, Art Galleries, restaurants etc to his/her itinerary which will be shown on the map directly with the optimised route between each place.
+
 <p align="center"><img src="https://i.imgur.com/BEJPWBz.png" width="700"></p>
 
 The user can then view all their directions and daily plan summarised in 'Daily Plan'.
 
 <p align="center"><img src="https://i.imgur.com/sSN4mxi.png" width="700"></p>
 
-The user can see all his trips in 'See all my trips' and click on a specific trip to amend it or review the daily plan.
+The user can also see all his trips in 'See all my trips' and click on a specific trip to amend it or review the daily plan.
 The user can also select 'Create new trip' in order to add another trip to his profile.
 
 <p align="center"><img src="https://i.imgur.com/526tJPc.png" width="700"></p>
@@ -59,3 +61,16 @@ To simplify the use of the API, we created services and promises for the search 
 Midway through the project we decided to have a big refactoring session which helped a lot with the overall structure of the code. It meant we could compartmentalise and structure it in a more straightforward way which helped us a lot in terms of making the code adaptable if we wanted to extend the project.
 
 If we had extra time we would like to add functionality for multiple days, which we have set the models up for. Additionally we would like to incorporate the Dark Sky API to show the weather in the location of your trip. We could further extend our directions to include public transport as well as the walking route, and add descriptions to each of the locations.
+Finally, we still need to make this app fully responsive as it can not be used on mobile yet. This will be done in due time.
+
+
+---
+
+## Setup instructions
+
+- Clone or download the repo
+- Install dependencies with `yarn install`
+- Start the local MongoDB server in Node.js with `mongod`
+- Start the client with `yarn start:client` (same as `webpack-dev-server`)
+- Start the server with `yarn start:server` (same as `nodemon`)
+- To run tests, type `test`
