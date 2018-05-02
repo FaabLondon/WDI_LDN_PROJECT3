@@ -61,7 +61,7 @@ To simplify the use of the API, we created services and promises for the search 
 Midway through the project we decided to have a big refactoring session which helped a lot with the overall structure of the code. It meant we could compartmentalise and structure it in a more straightforward way which helped us a lot in terms of making the code adaptable if we wanted to extend the project.
 
 If we had extra time we would like to add functionality for multiple days, which we have set the models up for. Additionally we would like to incorporate the Dark Sky API to show the weather in the location of your trip. We could further extend our directions to include public transport as well as the walking route, and add descriptions to each of the locations.
-Finally, we still need to make this app fully responsive as it can not be used on mobile yet. This will be done in due time.
+Finally, we still need to make this app more responsive for tablet and mobile. This will be done in due time.
 
 
 ---
