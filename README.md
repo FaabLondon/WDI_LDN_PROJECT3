@@ -8,7 +8,7 @@ For our third project we were instructed to build a full-stack MEAN application.
 
 Our application is a day trip planner which allows users to create a customised itinerary based on the location of their trip. Users can create a new trip with the date and city location and the app returns a results based on their search. The in-built map displays markers with locations of points of interest, which can then be filtered by search category. The user adds places to their day trip which then allows them to view a route with directions and timings. They can also make multiple day trips for different locations which they can refer to at any time.
 
-##### [Please visit website](https://make-my-days.herokuapp.com/)
+##### [Please visit the website](https://make-my-days.herokuapp.com/)
 
 ### Planning
 
