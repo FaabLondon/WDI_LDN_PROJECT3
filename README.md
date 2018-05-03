@@ -52,14 +52,18 @@ We created 15 tests on the login and register routes as well as all the Trip rou
 <p align="center"><img src="https://i.imgur.com/yRxHW3n.png" width="700"></p>
 
 ### Google Maps API
-
 The map, pointers, directions, search results were all from the Google maps API.
 To simplify the use of the API, we created services and promises for the search and direction features. The promises were easier to handle in the controller and avoided a callback hell. We also created 2 directives for google map and google autocomplete in order to use them in our new Trip and show trip views.
 
 
-### Wins and additional features
+## Wins
 Midway through the project we decided to have a big refactoring session which helped a lot with the overall structure of the code. It meant we could compartmentalise and structure it in a more straightforward way which helped us a lot in terms of making the code adaptable if we wanted to extend the project.
 
+## Challenges
+The code started being unstable before our big refactoring session which made it hard to progress. For example some events would happen before or after another one dpeending on when the code was run. Using promises for the search directions features solved that issue.
+Also, we did not use RESTful routes initially as our whole app was based on one page. This made it much harder. Lesson learnt though ;) 
+
+## Additional features
 If we had extra time we would like to add functionality for multiple days, which we have set the models up for. Additionally we would like to incorporate the Dark Sky API to show the weather in the location of your trip. We could further extend our directions to include public transport as well as the walking route, and add descriptions to each of the locations.
 Finally, we still need to make this app more responsive for tablet and mobile. This will be done in due time.
 
